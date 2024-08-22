@@ -40,5 +40,9 @@ const scoolCartegoriesEntries = ["name", "description"];
 const officerAuthEntries = ["service_number", "password"];
 const newSchoolEntries = ["name"];
 const newSchoolStudentEntries = ["student_number"];
-const reportEntries = ["who_was_affected", "suspect", "description"];
+const reportEntries = [
+  "who_was_affected",
+  "suspect",
+  "description",
+];
 const newSchoolTeacherEntries = ["teachers_count"];

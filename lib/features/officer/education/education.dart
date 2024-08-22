@@ -49,7 +49,7 @@ class _OfficerDashState extends State<OfficerEducation> {
               if (snap.hasError) {
                 return Text("${snap.error}");
               }
-              if ( !snap.hasData ) {
+              if (!snap.hasData) {
                 return const CircularProgressIndicator();
               }
               AuthUserOfficerModel user =
@@ -125,7 +125,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
-                                "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolTeachers!.isEmpty) ? 0 : (element).schoolTeachers!.fold(0, (previousValue, element) => previousValue + element.male!+ element.female!+element.other!)))}",
+                                "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolTeachers!.isEmpty) ? 0 : (element).schoolTeachers!.fold(0, (previousValue, element) => previousValue + element.male! + element.female! + element.other!)))}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -152,7 +152,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
-                                "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolStudents!.isEmpty) ? 0 : (element).schoolStudents!.fold(0, (previousValue, element) => previousValue! + element.male!+ element.female!+element.other!)!))}",
+                                "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolStudents!.isEmpty) ? 0 : (element).schoolStudents!.fold(0, (previousValue, element) => previousValue! + element.male! + element.female! + element.other!)!))}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -179,8 +179,37 @@ class _OfficerDashState extends State<OfficerEducation> {
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
-                              (context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolStudents!.isEmpty) ? 0 : (element).schoolStudents!.fold(0, (previousValue, element) => previousValue! + element.male!+ element.female!+element.other!)!))/   context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element as SchoolResponseModel).schoolTeachers!.isEmpty) ? 0 : (element).schoolTeachers!.fold(0, (previousValue, element) => previousValue! + element.male!+ element.female!+element.other!)!))
-                             ).toStringAsFixed(1),
+                                (context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(
+                                            0,
+                                            (value, element) =>
+                                                value +
+                                                (((element as SchoolResponseModel)
+                                                        .schoolStudents!
+                                                        .isEmpty)
+                                                    ? 0
+                                                    : (element).schoolStudents!.fold(
+                                                        0,
+                                                        (previousValue, element) =>
+                                                            previousValue! +
+                                                            element.male! +
+                                                            element.female! +
+                                                            element.other!)!)) /
+                                        context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(
+                                            0,
+                                            (value, element) =>
+                                                value +
+                                                (((element as SchoolResponseModel)
+                                                        .schoolTeachers!
+                                                        .isEmpty)
+                                                    ? 0
+                                                    : (element).schoolTeachers!.fold(
+                                                        0,
+                                                        (previousValue, element) =>
+                                                            previousValue! +
+                                                            element.male! +
+                                                            element.female! +
+                                                            element.other!)!)))
+                                    .toStringAsFixed(1),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall

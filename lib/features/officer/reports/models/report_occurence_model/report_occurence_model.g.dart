@@ -24,6 +24,7 @@ _$ReportOccurenceModelImpl _$$ReportOccurenceModelImplFromJson(
       village: json['village'] == null
           ? null
           : Village.fromJson(json['village'] as Map<String, dynamic>),
+      details: json['details'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$ReportOccurenceModelImplToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$ReportOccurenceModelImplToJson(
       'created_at': instance.createdAt?.toIso8601String(),
       'report': instance.report,
       'village': instance.village,
+      'details': instance.details,
     };

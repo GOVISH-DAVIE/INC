@@ -153,12 +153,11 @@ class _CreateCountiesState extends State<MakeDisasterForm> {
                               "Disaster Reported successfully");
 
                           Navigator.of(widget.cxn).pop();
-                        })
-                        .catchError((onError){
-                            context.showCustomSnackBar(
-                              "[Disaster] An Error Occured",isError: true);
-                        })
-                        ;
+                        }).catchError((onError) {
+                          context.showCustomSnackBar(
+                              "[Disaster] An Error Occured",
+                              isError: true);
+                        });
                       },
                       child: context.watch<DisasterNotifier>().isBusy
                           ? const CircularProgressIndicator(

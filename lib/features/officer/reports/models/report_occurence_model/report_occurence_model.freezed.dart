@@ -31,6 +31,7 @@ mixin _$ReportOccurenceModel {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   Report? get report => throw _privateConstructorUsedError;
   Village? get village => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic>? get details => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,8 @@ abstract class $ReportOccurenceModelCopyWith<$Res> {
       int? villageId,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       Report? report,
-      Village? village});
+      Village? village,
+      Map<dynamic, dynamic>? details});
 
   $ReportCopyWith<$Res>? get report;
   $VillageCopyWith<$Res>? get village;
@@ -82,6 +84,7 @@ class _$ReportOccurenceModelCopyWithImpl<$Res,
     Object? createdAt = freezed,
     Object? report = freezed,
     Object? village = freezed,
+    Object? details = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -120,6 +123,10 @@ class _$ReportOccurenceModelCopyWithImpl<$Res,
           ? _value.village
           : village // ignore: cast_nullable_to_non_nullable
               as Village?,
+      details: freezed == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>?,
     ) as $Val);
   }
 
@@ -165,7 +172,8 @@ abstract class _$$ReportOccurenceModelImplCopyWith<$Res>
       int? villageId,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       Report? report,
-      Village? village});
+      Village? village,
+      Map<dynamic, dynamic>? details});
 
   @override
   $ReportCopyWith<$Res>? get report;
@@ -193,6 +201,7 @@ class __$$ReportOccurenceModelImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? report = freezed,
     Object? village = freezed,
+    Object? details = freezed,
   }) {
     return _then(_$ReportOccurenceModelImpl(
       id: freezed == id
@@ -231,6 +240,10 @@ class __$$ReportOccurenceModelImplCopyWithImpl<$Res>
           ? _value.village
           : village // ignore: cast_nullable_to_non_nullable
               as Village?,
+      details: freezed == details
+          ? _value._details
+          : details // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>?,
     ));
   }
 }
@@ -247,7 +260,9 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
       this.villageId,
       @JsonKey(name: 'created_at') this.createdAt,
       this.report,
-      this.village});
+      this.village,
+      final Map<dynamic, dynamic>? details})
+      : _details = details;
 
   factory _$ReportOccurenceModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportOccurenceModelImplFromJson(json);
@@ -272,10 +287,19 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
   final Report? report;
   @override
   final Village? village;
+  final Map<dynamic, dynamic>? _details;
+  @override
+  Map<dynamic, dynamic>? get details {
+    final value = _details;
+    if (value == null) return null;
+    if (_details is EqualUnmodifiableMapView) return _details;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'ReportOccurenceModel(id: $id, reportsId: $reportsId, description: $description, whoWasAffected: $whoWasAffected, suspect: $suspect, villageId: $villageId, createdAt: $createdAt, report: $report, village: $village)';
+    return 'ReportOccurenceModel(id: $id, reportsId: $reportsId, description: $description, whoWasAffected: $whoWasAffected, suspect: $suspect, villageId: $villageId, createdAt: $createdAt, report: $report, village: $village, details: $details)';
   }
 
   @override
@@ -296,13 +320,24 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.report, report) || other.report == report) &&
-            (identical(other.village, village) || other.village == village));
+            (identical(other.village, village) || other.village == village) &&
+            const DeepCollectionEquality().equals(other._details, _details));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, reportsId, description,
-      whoWasAffected, suspect, villageId, createdAt, report, village);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      reportsId,
+      description,
+      whoWasAffected,
+      suspect,
+      villageId,
+      createdAt,
+      report,
+      village,
+      const DeepCollectionEquality().hash(_details));
 
   @JsonKey(ignore: true)
   @override
@@ -330,7 +365,8 @@ abstract class _ReportOccurenceModel implements ReportOccurenceModel {
       final int? villageId,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       final Report? report,
-      final Village? village}) = _$ReportOccurenceModelImpl;
+      final Village? village,
+      final Map<dynamic, dynamic>? details}) = _$ReportOccurenceModelImpl;
 
   factory _ReportOccurenceModel.fromJson(Map<String, dynamic> json) =
       _$ReportOccurenceModelImpl.fromJson;
@@ -355,6 +391,8 @@ abstract class _ReportOccurenceModel implements ReportOccurenceModel {
   Report? get report;
   @override
   Village? get village;
+  @override
+  Map<dynamic, dynamic>? get details;
   @override
   @JsonKey(ignore: true)
   _$$ReportOccurenceModelImplCopyWith<_$ReportOccurenceModelImpl>

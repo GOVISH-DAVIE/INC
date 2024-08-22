@@ -8,7 +8,8 @@ class Report with _$Report {
   factory Report({
     int? id,
     String? name,
-    String? description,
+    String? description, 
+    Map? details,
     @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _Report;
 

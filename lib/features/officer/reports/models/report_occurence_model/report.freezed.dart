@@ -23,6 +23,7 @@ mixin _$Report {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  Map<dynamic, dynamic>? get details => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -40,6 +41,7 @@ abstract class $ReportCopyWith<$Res> {
       {int? id,
       String? name,
       String? description,
+      Map<dynamic, dynamic>? details,
       @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
@@ -59,6 +61,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? details = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      details: freezed == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -93,6 +100,7 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
       {int? id,
       String? name,
       String? description,
+      Map<dynamic, dynamic>? details,
       @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
@@ -110,6 +118,7 @@ class __$$ReportImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? details = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$ReportImpl(
@@ -125,6 +134,10 @@ class __$$ReportImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      details: freezed == details
+          ? _value._details
+          : details // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -140,7 +153,9 @@ class _$ReportImpl implements _Report {
       {this.id,
       this.name,
       this.description,
-      @JsonKey(name: 'created_at') this.createdAt});
+      final Map<dynamic, dynamic>? details,
+      @JsonKey(name: 'created_at') this.createdAt})
+      : _details = details;
 
   factory _$ReportImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportImplFromJson(json);
@@ -151,13 +166,23 @@ class _$ReportImpl implements _Report {
   final String? name;
   @override
   final String? description;
+  final Map<dynamic, dynamic>? _details;
+  @override
+  Map<dynamic, dynamic>? get details {
+    final value = _details;
+    if (value == null) return null;
+    if (_details is EqualUnmodifiableMapView) return _details;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Report(id: $id, name: $name, description: $description, createdAt: $createdAt)';
+    return 'Report(id: $id, name: $name, description: $description, details: $details, createdAt: $createdAt)';
   }
 
   @override
@@ -169,14 +194,15 @@ class _$ReportImpl implements _Report {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality().equals(other._details, _details) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, description, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, name, description,
+      const DeepCollectionEquality().hash(_details), createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -197,6 +223,7 @@ abstract class _Report implements Report {
       {final int? id,
       final String? name,
       final String? description,
+      final Map<dynamic, dynamic>? details,
       @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$ReportImpl;
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$ReportImpl.fromJson;
@@ -207,6 +234,8 @@ abstract class _Report implements Report {
   String? get name;
   @override
   String? get description;
+  @override
+  Map<dynamic, dynamic>? get details;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

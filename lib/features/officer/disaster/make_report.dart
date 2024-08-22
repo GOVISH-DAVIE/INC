@@ -128,7 +128,9 @@ class _MakeReportState extends State<MakeDisaster> {
                 children: [
                   ...context
                       .watch<DisasterNotifier>()
-                      .disasterOccurence.where((element) => element.disasterId == widget.disaster.id)
+                      .disasterOccurence
+                      .where(
+                          (element) => element.disasterId == widget.disaster.id)
                       .map((e) => Card(
                             color: mainColorCard,
                             child: Padding(
@@ -139,6 +141,9 @@ class _MakeReportState extends State<MakeDisaster> {
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    
+
+
                                     Text(" Deaths: ${e.deaths}"),
                                     Text(" Description: ${e.description}"),
                                   ],

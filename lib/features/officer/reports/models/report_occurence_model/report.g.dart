@@ -10,6 +10,7 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => _$ReportImpl(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
+      details: json['details'] as Map<String, dynamic>?,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -20,5 +21,6 @@ Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'details': instance.details,
       'created_at': instance.createdAt?.toIso8601String(),
     };

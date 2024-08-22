@@ -105,10 +105,10 @@ class _AddStudentsState extends State<AddStudents> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                  const  Text(
+                                    const Text(
                                       "Other",
                                       textAlign: TextAlign.left,
-                                      style:  TextStyle(
+                                      style: TextStyle(
                                           color: mainColor, fontSize: 17),
                                     ),
                                     const SizedBox(
@@ -140,7 +140,7 @@ class _AddStudentsState extends State<AddStudents> {
                                     _formKey.currentState?.validate();
                                     var payload =
                                         Map.from(_formKey.currentState!.value);
-                                    payload["schoolId"] = (widget.school.id); 
+                                    payload["schoolId"] = (widget.school.id);
                                     print(payload);
                                     context
                                         .read<EducationNotifier>()

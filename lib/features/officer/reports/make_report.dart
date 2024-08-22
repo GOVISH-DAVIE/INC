@@ -80,7 +80,7 @@ class _MakeReportState extends State<MakeReport> {
                   ),
                 ),
                 Text(
-                  "Add New Ward",
+                  "Add Security Report",
                   style: TextStyle(color: white),
                 ),
               ],
@@ -122,26 +122,25 @@ class _MakeReportState extends State<MakeReport> {
                 child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ...context
-                      .watch<ReportsNotifier>()
-                      .reportOccurence
-                      .map((e) => Card(
-                            color: mainColorCard,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                title: Text(
-                                    " Who was affected: ${e.whoWasAffected}"),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(" Suspect: ${e.suspect}"),
-                                    Text(" Description: ${e.description}"),
-                                  ],
-                                ),
-                              ),
+                  ...context.watch<ReportsNotifier>().reportOccurence.map((e) =>
+                      Card(
+                        color: mainColorCard,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            title:
+                                Text(" Who was affected: ${e.whoWasAffected}"),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (e.details != null)
+                                  ...e.details!.keys.map(
+                                      (f) => f=="villageId"?SizedBox():f=="reportsId"?SizedBox():  Text(" ${f}: ${e.details![f]}")),
+                              ],
                             ),
-                          ))
+                          ),
+                        ),
+                      ))
                 ],
               ),
             ))

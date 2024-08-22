@@ -23,6 +23,7 @@ mixin _$ReportsCategoryModel {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  List<Field>? get fields => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'ReportOccurrence')
@@ -44,6 +45,7 @@ abstract class $ReportsCategoryModelCopyWith<$Res> {
       {int? id,
       String? name,
       String? description,
+      List<Field>? fields,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence') List<dynamic>? reportOccurrence});
 }
@@ -65,6 +67,7 @@ class _$ReportsCategoryModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? fields = freezed,
     Object? createdAt = freezed,
     Object? reportOccurrence = freezed,
   }) {
@@ -81,6 +84,10 @@ class _$ReportsCategoryModelCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      fields: freezed == fields
+          ? _value.fields
+          : fields // ignore: cast_nullable_to_non_nullable
+              as List<Field>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -105,6 +112,7 @@ abstract class _$$ReportsCategoryModelImplCopyWith<$Res>
       {int? id,
       String? name,
       String? description,
+      List<Field>? fields,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence') List<dynamic>? reportOccurrence});
 }
@@ -123,6 +131,7 @@ class __$$ReportsCategoryModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? fields = freezed,
     Object? createdAt = freezed,
     Object? reportOccurrence = freezed,
   }) {
@@ -139,6 +148,10 @@ class __$$ReportsCategoryModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      fields: freezed == fields
+          ? _value._fields
+          : fields // ignore: cast_nullable_to_non_nullable
+              as List<Field>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -158,9 +171,11 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
       {this.id,
       this.name,
       this.description,
+      final List<Field>? fields,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'ReportOccurrence') final List<dynamic>? reportOccurrence})
-      : _reportOccurrence = reportOccurrence;
+      : _fields = fields,
+        _reportOccurrence = reportOccurrence;
 
   factory _$ReportsCategoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportsCategoryModelImplFromJson(json);
@@ -171,6 +186,16 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
   final String? name;
   @override
   final String? description;
+  final List<Field>? _fields;
+  @override
+  List<Field>? get fields {
+    final value = _fields;
+    if (value == null) return null;
+    if (_fields is EqualUnmodifiableListView) return _fields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -188,7 +213,7 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
 
   @override
   String toString() {
-    return 'ReportsCategoryModel(id: $id, name: $name, description: $description, createdAt: $createdAt, reportOccurrence: $reportOccurrence)';
+    return 'ReportsCategoryModel(id: $id, name: $name, description: $description, fields: $fields, createdAt: $createdAt, reportOccurrence: $reportOccurrence)';
   }
 
   @override
@@ -200,6 +225,7 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality().equals(other._fields, _fields) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             const DeepCollectionEquality()
@@ -208,7 +234,13 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, createdAt,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      const DeepCollectionEquality().hash(_fields),
+      createdAt,
       const DeepCollectionEquality().hash(_reportOccurrence));
 
   @JsonKey(ignore: true)
@@ -232,6 +264,7 @@ abstract class _ReportsCategoryModel implements ReportsCategoryModel {
       {final int? id,
       final String? name,
       final String? description,
+      final List<Field>? fields,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence')
       final List<dynamic>? reportOccurrence}) = _$ReportsCategoryModelImpl;
@@ -245,6 +278,8 @@ abstract class _ReportsCategoryModel implements ReportsCategoryModel {
   String? get name;
   @override
   String? get description;
+  @override
+  List<Field>? get fields;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

@@ -219,7 +219,7 @@ class _GendersState extends State<OfficerSchools> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "${context.watch<EducationNotifier>().schools[index].schoolStudents!.last.male! +    context.watch<EducationNotifier>().schools[index].schoolStudents!.last.female! +context.watch<EducationNotifier>().schools[index].schoolStudents!.last.other!}",
+                                              "${context.watch<EducationNotifier>().schools[index].schoolStudents!.isEmpty?0: context.watch<EducationNotifier>().schools[index].schoolStudents!.last.male! + context.watch<EducationNotifier>().schools[index].schoolStudents!.last.female! + context.watch<EducationNotifier>().schools[index].schoolStudents!.last.other!}",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineMedium,
@@ -246,7 +246,7 @@ class _GendersState extends State<OfficerSchools> {
                                                     .isEmpty
                                                 ? Text("")
                                                 : Text(
-                                              "${context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.male! +    context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.female! +context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.other!}",
+                                                    "${context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.male! + context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.female! + context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.other!}",
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .headlineMedium,

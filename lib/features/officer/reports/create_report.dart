@@ -9,6 +9,7 @@ import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class MakeReportForm extends StatefulWidget {
@@ -22,6 +23,9 @@ class MakeReportForm extends StatefulWidget {
 
 class _CreateCountiesState extends State<MakeReportForm> {
   final _formKey = GlobalKey<FormBuilderState>();
+  List<String> genderOptions = ['Adult', 'Minor'];
+
+  DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -47,23 +51,102 @@ class _CreateCountiesState extends State<MakeReportForm> {
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const Divider(),
-                    const SizedBox(
-                      height: 10,
+                    
+                const SizedBox(
+                      height: 30,
                     ),
-                    ...reportEntries.map((e) => Column(
+                   
+                    ...widget.report.fields!.map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              e.replaceAll("_", " ").capitalizeFirstofEach,
+                              e.name!
+                                  .replaceAll("_", " ")
+                                  .capitalizeFirstofEach,
                               textAlign: TextAlign.left,
                               style: const TextStyle(
                                   color: mainColor, fontSize: 17),
                             ),
-                            FormBuilderTextField(
+                          e.type =="select"?        FormBuilderDropdown<String>(
+                      name: e.name!,
+                      initialValue: e.options!.first,
+                      decoration: InputDecoration(
+                        suffix: IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () {
+                            _formKey.currentState!.fields[e.name]?.reset();
+                          },
+                        ),
+                        hintText: 'Select ${e.name!
+                                  .replaceAll("_", " ")
+                                  .capitalizeFirstofEach}',
+                      ),
+                      items: e.options!
+                          .map((gender) => DropdownMenuItem(
+                                alignment: AlignmentDirectional.center,
+                                value: gender,
+                                child: Text(gender),
+                              ))
+                          .toList(),
+                    )  : 
+                    e.type =='date'? 
+                      FormBuilderDateTimePicker(
+                name: e.name!,
+                format: dateFormat,
+                lastDate: DateTime.now(),
+                
+
+                // controller: dateFormat,
+                initialEntryMode:
+                    DatePickerEntryMode.calendar,
+                // initialValue: DateTime.now(),
+                inputType: InputType.both,
+
+                onChanged: (value) {
+                  if(value == null) {
+                    return;
+                  }
+                  // value?.toIso8601String();
+                  String string =
+                      dateFormat.format(value);
+
+                  print(string);
+                  // return string;
+
+                  // value = string; // print(string);
+                  // print(
+                  //     _formKey.currentState!.value);
+                  // _formKey.currentState!
+                  //     .fields['date']?.value
+                  //     .toString();
+                },
+                // controller: string,
+                decoration: InputDecoration(
+                  border:
+                      const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      // print(_formKey
+                      //     .currentState!.value);
+                      // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                      _formKey.currentState!
+                          .fields[e.name]
+                          ?.didChange(null);
+                    },
+                  ),
+                ),
+                // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                // locale: const Locale.fromSubtags(languageCode: 'fr'),
+              )
+            
+                     :
+                    
+                     FormBuilderTextField(
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
-                              name: e,
+                              name: e.name!,
                               onChanged: (val) {
                                 print(
                                     val); // Print the text value write into TextField
@@ -77,6 +160,9 @@ class _CreateCountiesState extends State<MakeReportForm> {
                             ),
                           ],
                         )),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),

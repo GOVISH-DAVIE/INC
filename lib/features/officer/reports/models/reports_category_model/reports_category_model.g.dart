@@ -12,6 +12,9 @@ _$ReportsCategoryModelImpl _$$ReportsCategoryModelImplFromJson(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
+      fields: (json['fields'] as List<dynamic>?)
+          ?.map((e) => Field.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -24,6 +27,7 @@ Map<String, dynamic> _$$ReportsCategoryModelImplToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'fields': instance.fields,
       'created_at': instance.createdAt?.toIso8601String(),
       'ReportOccurrence': instance.reportOccurrence,
     };

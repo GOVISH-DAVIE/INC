@@ -26,6 +26,7 @@ class _ReportsOfficerState extends State<ReportsOfficer> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: white,
+        title: Text("Security "),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 18.0, right: 18, top: 20),
