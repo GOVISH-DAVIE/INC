@@ -19,7 +19,7 @@ Widget dashCard(
             color: isactive ? mainColor : mainColorCard,
             child: Center(
                 child: Text(
-              "$name",
+              name,
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -45,7 +45,7 @@ Widget dashCardFeature(
             color: isactive ? mainColor : mainColorCard,
             child: Center(
                 child: Text(
-              "$name",
+              name,
               style: Theme.of(context)
                   .textTheme
                   .labelLarge

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/network/http_client.dart';
-import 'package:cais/features/admin/counties/data/models/county/county.dart';
 import 'package:cais/features/admin/ward/models/wards_model/wards_model.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/utils/constants.dart';

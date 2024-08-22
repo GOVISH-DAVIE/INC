@@ -1,10 +1,6 @@
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/counties/data/models/county/county.dart';
 import 'package:cais/features/admin/dashboard/list.dart';
-import 'package:cais/features/admin/ethnicity/state/ethnicity_notifier.dart';
 import 'package:cais/features/admin/schools_cartegories/models/school_cartegories_model/school_cartegories_model.dart';
-import 'package:cais/features/admin/sub_counties/models/sub_county_model/sub_county_model.dart';
-import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/ward/state_ward.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
 import 'package:cais/utils/colors.dart';

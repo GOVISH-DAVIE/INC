@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cais/core/network/http_client.dart';
-import 'package:cais/features/admin/ethnicity/models/ethnicity/ethnicity.dart';
 import 'package:cais/features/admin/schools_cartegories/models/school_cartegories_model/school_cartegories_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';

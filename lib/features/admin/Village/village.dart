@@ -54,7 +54,7 @@ class _SubCountiesState extends State<Village> {
             Expanded(
                 child: context.watch<CountiesNotifier>().isBusy
                     ? const Center(child: CircularProgressIndicator())
-                    : searchValue.length > 0
+                    : searchValue.isNotEmpty
                         ? ListView.builder(
                             itemCount: context
                                 .watch<CountiesNotifier>()
@@ -150,8 +150,8 @@ class _SubCountiesState extends State<Village> {
                                               .code
                                               .toString() ??
                                           ''),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Divider(),
                                       ),
                                       Row(

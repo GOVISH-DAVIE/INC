@@ -1,6 +1,4 @@
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/ethnicity/create_ethnicity_form.dart';
-import 'package:cais/features/admin/ethnicity/state/ethnicity_notifier.dart';
 import 'package:cais/features/admin/schools_cartegories/state/school_cartegories_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';

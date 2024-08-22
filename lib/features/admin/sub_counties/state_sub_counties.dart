@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cais/core/network/http_client.dart';
-import 'package:cais/features/admin/counties/data/models/county/county.dart';
 import 'package:cais/features/admin/sub_counties/models/sub_county_model/sub_county_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';

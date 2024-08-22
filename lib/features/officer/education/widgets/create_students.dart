@@ -1,8 +1,4 @@
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/dashboard/list.dart';
-import 'package:cais/features/admin/genders/models/gender_model/gender_model.dart';
-import 'package:cais/features/admin/schools_cartegories/models/school_cartegories_model/school_cartegories_model.dart';
-import 'package:cais/features/officer/education/create_school.dart';
 import 'package:cais/features/officer/education/models/school_response_model/school_response_model.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
 import 'package:cais/utils/colors.dart';
@@ -61,10 +57,10 @@ class _AddStudentsState extends State<AddStudents> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Male",
                                       textAlign: TextAlign.left,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           color: mainColor, fontSize: 17),
                                     ),
                                     const SizedBox(
@@ -83,10 +79,10 @@ class _AddStudentsState extends State<AddStudents> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Female",
                                       textAlign: TextAlign.left,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           color: mainColor, fontSize: 17),
                                     ),
                                     const SizedBox(

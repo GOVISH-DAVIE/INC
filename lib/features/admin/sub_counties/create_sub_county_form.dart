@@ -1,7 +1,6 @@
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/counties/data/models/county/county.dart';
 import 'package:cais/features/admin/dashboard/list.dart';
-import 'package:cais/features/admin/ethnicity/state/ethnicity_notifier.dart';
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';

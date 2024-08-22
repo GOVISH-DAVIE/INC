@@ -66,7 +66,7 @@ class _MakeReportState extends State<MakeReport> {
             label: const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                  padding: EdgeInsets.only(right: 8.0),
                   child: Icon(
                     Icons.add,
                     color: white,

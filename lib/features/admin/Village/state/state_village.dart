@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:cais/core/network/http_client.dart';
 import 'package:cais/features/admin/Village/models/village_model/village_model.dart';
-import 'package:cais/features/admin/counties/data/models/county/county.dart';
-import 'package:cais/features/admin/ward/models/wards_model/wards_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
 

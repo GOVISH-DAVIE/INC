@@ -1,16 +1,11 @@
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/counties/create_couties_form.dart';
 import 'package:cais/features/admin/counties/data/models/county/county.dart';
-import 'package:cais/features/admin/counties/state/counties_state.dart';
-import 'package:cais/features/admin/dashboard/list.dart';
 import 'package:cais/features/admin/sub_counties/create_sub_county_form.dart';
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/sub_counties/sub_counties_ward.dart';
-import 'package:cais/features/admin/ward/create_ward_form.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class CountySubcounty extends StatefulWidget {
   final County county;
@@ -73,7 +68,7 @@ class _CountySubcountyState extends State<CountySubcounty> {
           label: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.add,
                   color: white,
@@ -140,7 +135,7 @@ class _CountySubcountyState extends State<CountySubcounty> {
             Expanded(
                 child: context.watch<SubCountiesNotifier>().isBusy
                     ? const Center(child: CircularProgressIndicator())
-                    : searchValue.length > 0
+                    : searchValue.isNotEmpty
                         ? ListView.builder(
                             itemCount: context
                                 .watch<SubCountiesNotifier>()
@@ -175,11 +170,11 @@ class _CountySubcountyState extends State<CountySubcounty> {
                                         children: [
                                           IconButton(
                                               onPressed: () {},
-                                              icon: Icon(Icons.edit)),
+                                              icon: const Icon(Icons.edit)),
                                           IconButton(
                                               color: Colors.redAccent,
                                               onPressed: () {},
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.delete,
                                                 color: Colors.redAccent,
                                               )),
@@ -187,7 +182,7 @@ class _CountySubcountyState extends State<CountySubcounty> {
                                               child: Center(
                                             child: TextButton(
                                               onPressed: () {},
-                                              child: Text(
+                                              child: const Text(
                                                 "Sub Counties",
                                                 style: TextStyle(color: white),
                                               ),
@@ -224,19 +219,19 @@ class _CountySubcountyState extends State<CountySubcounty> {
                                               .subCounties[index]
                                               .description ??
                                           ''),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Divider(),
                                       ),
                                       Row(
                                         children: [
                                           IconButton(
                                               onPressed: () {},
-                                              icon: Icon(Icons.edit)),
+                                              icon: const Icon(Icons.edit)),
                                           IconButton(
                                               color: Colors.redAccent,
                                               onPressed: () {},
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.delete,
                                                 color: Colors.redAccent,
                                               )),

@@ -2,12 +2,9 @@ import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/dashboard/list.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/disaster/model/disaster_model/disaster_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
-import 'package:cais/features/officer/reports/models/reports_category_model/reports_category_model.dart';
-import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -55,11 +52,11 @@ class _CreateCountiesState extends State<MakeDisasterForm> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Description",
                           textAlign: TextAlign.left,
                           style:
-                              const TextStyle(color: mainColor, fontSize: 17),
+                              TextStyle(color: mainColor, fontSize: 17),
                         ),
                         FormBuilderTextField(
                           decoration: const InputDecoration(
@@ -82,11 +79,11 @@ class _CreateCountiesState extends State<MakeDisasterForm> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Affected Homesteads",
                           textAlign: TextAlign.left,
                           style:
-                              const TextStyle(color: mainColor, fontSize: 17),
+                              TextStyle(color: mainColor, fontSize: 17),
                         ),
                         FormBuilderTextField(
                           decoration: const InputDecoration(
@@ -109,11 +106,11 @@ class _CreateCountiesState extends State<MakeDisasterForm> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Deaths",
                           textAlign: TextAlign.left,
                           style:
-                              const TextStyle(color: mainColor, fontSize: 17),
+                              TextStyle(color: mainColor, fontSize: 17),
                         ),
                         FormBuilderTextField(
                           decoration: const InputDecoration(

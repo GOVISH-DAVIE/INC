@@ -1,5 +1,4 @@
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/genders/create_gender_form.dart';
 import 'package:cais/features/admin/genders/state/gender_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/education/create_school.dart';
@@ -211,7 +210,7 @@ class _GendersState extends State<OfficerSchools> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Divider(),
+                                      const Divider(),
                                       ListTile(
                                         title: const Text("Number of Students"),
                                         subtitle: Row(
@@ -232,7 +231,7 @@ class _GendersState extends State<OfficerSchools> {
                                           ],
                                         ),
                                       ),
-                                      Divider(),
+                                      const Divider(),
                                       ListTile(
                                         title: const Text("Number of Teachers"),
                                         subtitle: Row(
@@ -244,7 +243,7 @@ class _GendersState extends State<OfficerSchools> {
                                                     .schools[index]
                                                     .schoolTeachers!
                                                     .isEmpty
-                                                ? Text("")
+                                                ? const Text("")
                                                 : Text(
                                                     "${context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.male! + context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.female! + context.watch<EducationNotifier>().schools[index].schoolTeachers!.last.other!}",
                                                     style: Theme.of(context)

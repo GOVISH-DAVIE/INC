@@ -1,12 +1,9 @@
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/counties/county_subcounties.dart';
-import 'package:cais/features/admin/counties/create_couties_form.dart';
 import 'package:cais/features/admin/counties/state/counties_state.dart';
-import 'package:cais/features/admin/dashboard/list.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SubCounties extends StatefulWidget {
   const SubCounties({super.key});
@@ -57,7 +54,7 @@ class _SubCountiesState extends State<SubCounties> {
             Expanded(
                 child: context.watch<CountiesNotifier>().isBusy
                     ? const Center(child: CircularProgressIndicator())
-                    : searchValue.length > 0
+                    : searchValue.isNotEmpty
                         ? ListView.builder(
                             itemCount: context
                                 .watch<CountiesNotifier>()
@@ -154,8 +151,8 @@ class _SubCountiesState extends State<SubCounties> {
                                               .code
                                               .toString() ??
                                           ''),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Divider(),
                                       ),
                                       Row(

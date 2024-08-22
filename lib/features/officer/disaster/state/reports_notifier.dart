@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 class DisasterNotifier extends ChangeNotifier {
   bool _isBusy = false;
   bool get isBusy => _isBusy;
-  List<ReportsCategoryModel> _reportsCategoryModel = [];
+  final List<ReportsCategoryModel> _reportsCategoryModel = [];
   List<ReportsCategoryModel> get reports => _reportsCategoryModel;
   List<ReportOccurenceModel> _reportOccurence = [];
   List<ReportOccurenceModel> get reportOccurence => _reportOccurence;
