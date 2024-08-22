@@ -1,11 +1,4 @@
-import 'dart:convert';
 
-import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/dashboard/list.dart';
-import 'package:cais/features/admin/genders/models/gender_model/gender_model.dart';
-import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/education/state/education_notifier.dart';
 import 'package:cais/features/officer/reports/create_report.dart';
 import 'package:cais/features/officer/reports/models/reports_category_model/reports_category_model.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
@@ -122,25 +115,35 @@ class _MakeReportState extends State<MakeReport> {
                 child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ...context.watch<ReportsNotifier>().reportOccurence.map((e) =>
-                      Card(
-                        color: mainColorCard,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            title:
-                                Text(" Who was affected: ${e.whoWasAffected}"),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (e.details != null)
-                                  ...e.details!.keys.map(
-                                      (f) => f=="villageId"?SizedBox():f=="reportsId"?SizedBox():  Text(" ${f}: ${e.details![f]}")),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ))
+                  ...context
+                      .watch<ReportsNotifier>()
+                      .reportOccurence
+                      .where((element) => element.reportsId == widget.report.id)
+                      .toList()
+                      .map((e) => e.details == null
+                          ? const SizedBox()
+                          : Card(
+                              color: mainColorCard,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      if (e.details != null)
+                                        ...e.details!.keys.map((f) => f ==
+                                                "villageId"
+                                            ? const SizedBox()
+                                            : f == "reportsId"
+                                                ? const SizedBox()
+                                                : Text(
+                                                    "  ${f.replaceAll("_", " ")}: ${e.details![f]}")),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ))
                 ],
               ),
             ))
