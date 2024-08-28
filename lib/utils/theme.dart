@@ -26,10 +26,10 @@ FloatingActionButtonThemeData _floatingActionButtonThemeData() {
 OutlinedButtonThemeData _outlinedButtonTheme() {
   return OutlinedButtonThemeData(
       style: ButtonStyle(
-        side:  MaterialStateProperty.all<BorderSide>(BorderSide(color: themePrimary)),
+        side:  MaterialStateProperty.all<BorderSide>(BorderSide(color: black)),
       shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
       ),
-          foregroundColor: MaterialStateProperty.all<Color>(themePrimary),
+          foregroundColor: MaterialStateProperty.all<Color>(black),
           backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)));
 }
 
