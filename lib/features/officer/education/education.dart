@@ -35,7 +35,10 @@ class _OfficerDashState extends State<OfficerEducation> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        foregroundColor: white,
+        title: Text("Update School Data", style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.bold
+        ),),
+        // foregroundColor: white,
       ),
       body: SafeArea(
         child: FutureBuilder(

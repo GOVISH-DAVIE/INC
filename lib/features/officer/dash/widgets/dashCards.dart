@@ -16,14 +16,14 @@ Widget dashCard(
         },
         child: Card(
             borderOnForeground: true,
-            color: isactive ? mainColor : mainColorCard,
+            color: isactive ? mainColor : mainColorCard.withOpacity(.2),
             child: Center(
                 child: Text(
               name,
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
-                  ?.copyWith(color: Colors.white),
+                  ?.copyWith(color:isactive? Colors.white : Colors.black),
             ))),
       ));
 }

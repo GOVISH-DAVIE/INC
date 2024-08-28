@@ -33,7 +33,7 @@ class _GendersState extends State<OfficerSchools> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: white,
+        // foregroundColor: white,
         title: Text(
             "Schools  in ${widget.user.village?.name.toString().capitalizeFirstofEach}",
             style: Theme.of(context)
@@ -95,7 +95,7 @@ class _GendersState extends State<OfficerSchools> {
               height: MediaQuery.of(context).size.height * .2,
               width: MediaQuery.of(context).size.height,
               child: Card(
-                color: mainColor.withOpacity(.3),
+                color: mainColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

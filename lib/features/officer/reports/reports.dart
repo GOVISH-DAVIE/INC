@@ -25,8 +25,10 @@ class _ReportsOfficerState extends State<ReportsOfficer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: white,
-        title: const Text("Security "),
+        // foregroundColor: white,
+        title:   Text("Security ", style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.bold
+        ),),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 18.0, right: 18, top: 20),

@@ -109,7 +109,7 @@ class _CreateCountiesState extends State<CreateSchool> {
                     .read<EducationNotifier>()
                     .createSchool(payload: payload)
                     .then((value) {
-                  context.showCustomSnackBar("Ward Created successfully");
+                  context.showCustomSnackBar("School Data Updated Successfully");
 
                   Navigator.of(widget.cxn).pop();
                 });

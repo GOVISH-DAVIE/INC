@@ -36,7 +36,8 @@ class _CreateCountiesState extends State<MakeReportForm> {
           AuthUserOfficerModel user =
               AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
 
-          return Padding(
+          return
+           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 10, right: 20),
             child: FormBuilder(
               key: _formKey,
@@ -50,11 +51,9 @@ class _CreateCountiesState extends State<MakeReportForm> {
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const Divider(),
-                    
-                const SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                   
                     ...widget.report.fields!.map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -66,91 +65,97 @@ class _CreateCountiesState extends State<MakeReportForm> {
                               style: const TextStyle(
                                   color: mainColor, fontSize: 17),
                             ),
-                          e.type =="select"?        FormBuilderDropdown<String>(
-                      name: e.name!,
-                      initialValue: e.options!.first,
-                      decoration: InputDecoration(
-                        suffix: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            _formKey.currentState!.fields[e.name]?.reset();
-                          },
-                        ),
-                        hintText: 'Select ${e.name!
-                                  .replaceAll("_", " ")
-                                  .capitalizeFirstofEach}',
-                      ),
-                      items: e.options!
-                          .map((gender) => DropdownMenuItem(
-                                alignment: AlignmentDirectional.center,
-                                value: gender,
-                                child: Text(gender),
-                              ))
-                          .toList(),
-                    )  : 
-                    e.type =='date'? 
-                      FormBuilderDateTimePicker(
-                name: e.name!,
-                format: dateFormat,
-                lastDate: DateTime.now(),
-                
+                            e.type == "select"
+                                ? FormBuilderDropdown<String>(
+                                    name: e.name!,
+                                    decoration: InputDecoration(
+                                      suffix: IconButton(
+                                        icon: const Icon(Icons.close),
+                                        onPressed: () {
+                                          _formKey.currentState!.fields[e.name]
+                                              ?.reset();
+                                        },
+                                      ),
+                                      hintText:
+                                          'Select ${e.name!.replaceAll("_", " ").capitalizeFirstofEach}',
+                                    ),
+                                    items: e.options!
+                                        .map((gender) => DropdownMenuItem(
+                                              alignment:
+                                                  AlignmentDirectional.center,
+                                              value: gender,
+                                              child: Text(gender),
+                                            ))
+                                        .toList(),
+                                  )
+                                : e.type == 'date'
+                                    ? FormBuilderDateTimePicker(
+                                        name: e.name!,
+                                        format: dateFormat,
+                                        lastDate: DateTime.now(),
 
-                // controller: dateFormat,
-                initialEntryMode:
-                    DatePickerEntryMode.calendar,
-                // initialValue: DateTime.now(),
-                inputType: InputType.both,
+                                        // controller: dateFormat,
 
-                onChanged: (value) {
-                  if(value == null) {
-                    return;
-                  }
-                  // value?.toIso8601String();
-                  String string =
-                      dateFormat.format(value);
+                                        valueTransformer: (value) {
+                                          if (value == null) {
+                                            return null;
+                                          } else {
+                                            return DateFormat(
+                                                    'yyyy-MM-dd HH:mm')
+                                                .format(value);
+                                          }
+                                        },
+                                        initialEntryMode:
+                                            DatePickerEntryMode.calendar,
+                                        // initialValue: DateTime.now(),
+                                        inputType: InputType.both,
 
-                  print(string);
-                  // return string;
+                                        onChanged: (value) {
+                                          if (value == null) {
+                                            return;
+                                          }
+                                          // value?.toIso8601String();
+                                          String string =
+                                              dateFormat.format(value);
 
-                  // value = string; // print(string);
-                  // print(
-                  //     _formKey.currentState!.value);
-                  // _formKey.currentState!
-                  //     .fields['date']?.value
-                  //     .toString();
-                },
-                // controller: string,
-                decoration: InputDecoration(
-                  border:
-                      const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      // print(_formKey
-                      //     .currentState!.value);
-                      // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
-                      _formKey.currentState!
-                          .fields[e.name]
-                          ?.didChange(null);
-                    },
-                  ),
-                ),
-                // initialTime: const TimeOfDay(hour: 8, minute: 0),
-                // locale: const Locale.fromSubtags(languageCode: 'fr'),
-              )
-            
-                     :
-                    
-                     FormBuilderTextField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: e.name!,
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
-                            ),
+                                          print(string);
+                                          // return string;
+
+                                          // value = string; // print(string);
+                                          // print(
+                                          //     _formKey.currentState!.value);
+                                          // _formKey.currentState!
+                                          //     .fields['date']?.value
+                                          //     .toString();
+                                        },
+                                        // controller: string,
+                                        decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(Icons.close),
+                                            onPressed: () {
+                                              // print(_formKey
+                                              //     .currentState!.value);
+                                              // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                                              _formKey
+                                                  .currentState!.fields[e.name]
+                                                  ?.didChange(null);
+                                            },
+                                          ),
+                                        ),
+                                        // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                                        // locale: const Locale.fromSubtags(languageCode: 'fr'),
+                                      )
+                                    : FormBuilderTextField(
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        name: e.name!,
+                                        onChanged: (val) {
+                                          print(
+                                              val); // Print the text value write into TextField
+                                        },
+                                      ),
                             const SizedBox(
                               height: 10,
                             ),
@@ -182,9 +187,9 @@ class _CreateCountiesState extends State<MakeReportForm> {
                             .createReport(payload: payload)
                             .then((value) {
                           context
-                              .showCustomSnackBar("Ward Created successfully");
+                              .showCustomSnackBar("Report Created successfully");
 
-                          // Navigator.of(widget.cxn).pop();
+                          Navigator.of(widget.cxn).pop();
                         });
                       },
                       child: context.watch<ReportsNotifier>().isBusy

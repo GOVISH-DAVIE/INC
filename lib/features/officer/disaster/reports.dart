@@ -43,7 +43,7 @@ class _ReportsOfficerState extends State<DisasterOfficer> {
                     subtitle: Text("${e.description}"),
                   ),
                 ))
-          ],
+          ],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         ),
       ),
     );

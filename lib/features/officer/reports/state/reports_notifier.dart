@@ -62,15 +62,16 @@ class ReportsNotifier extends ChangeNotifier {
         Uri.parse('${SERVERURL}report_occurrences'),
         body: jsonEncode(payload));
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 ||response.statusCode == 200) {
       getReportOccurences();
       _isBusy = false;
       notifyListeners();
     } else {
       _reportOccurence = [];
       _isBusy = false;
-      notifyListeners();
-      throw Exception('Failed to load Disaster');
+      notifyListeners();  
+      getReportOccurences();
+      // throw Exception('Failed to load Disaster');
     }
   }
 }

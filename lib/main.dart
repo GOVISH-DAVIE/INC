@@ -1,10 +1,14 @@
 import 'package:cais/features/auth/login.dart';
+import 'package:cais/features/officer/dash/officer.dart';
 import 'package:cais/providers/locator.dart';
 import 'package:cais/providers/providers.dart';
 import 'package:cais/utils/theme.dart';
 import 'package:cais/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'core/data/datasources/local_storage_data_source.dart';
+import 'features/officer/auth/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,17 +28,25 @@ class MyApp extends StatelessWidget {
     //TextTheme textTheme = Theme.of(context).textTheme;
 
     // Use with Google Fonts package to use downloadable fonts
-    TextTheme textTheme = createTextTheme(context, "ABeeZee", "Acme");
-
-    MaterialTheme theme = MaterialTheme(
-      textTheme,
-    );
+    // TextTheme textTheme = createTextTheme(context, "ABeeZee", "Acme");
 
     return MaterialApp(
       title: 'Cais',
-      theme: brightness == Brightness.light ? theme.light() : theme.light(),
+      theme: themeData(),
       themeMode: ThemeMode.system,
-      home: const Login(),
+      home:  FutureBuilder(
+            future: getData("auth"),
+        builder: (context,snap) {
+            if (snap.hasError) {
+                return Text("${snap.error}");
+              }
+              if (!snap.hasData) {
+                 return const OfficerAuth();
+              }
+          return const  OfficerDash();
+          //
+        }
+      ),
     );
   }
 }
