@@ -26,8 +26,12 @@ class _ReportsOfficerState extends State<DisasterOfficer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: white,
-        title: const Text("Report a Disaster"),
+        // foregroundColor: white,
+        title:  Text("Report a Disaster", style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.bold
+        ),),
+
+
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 18.0, right: 18, top: 20),

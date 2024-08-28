@@ -1,4 +1,10 @@
+import 'dart:convert';
 
+import 'package:cais/core/data/datasources/local_storage_data_source.dart';
+import 'package:cais/core/utilities/app_common_extentions.dart';
+import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
+import 'package:cais/features/officer/disaster/disaster_list.dart';
 import 'package:cais/features/officer/disaster/model/disaster_model/disaster_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
@@ -31,120 +37,169 @@ class _MakeReportState extends State<MakeDisaster> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          foregroundColor: white,
-          title: Text("${widget.disaster.name} Details"),
+          // foregroundColor: white,
+          title: Text(
+            "${widget.disaster.name} Details",
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            IconButton(onPressed: () {
+              context.appNavigatorPush(DisasterList(disaster: widget.disaster,));
+            }, icon: const Icon(Icons.list_outlined))
+          ],
         ),
-        floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: mainColor,
-            onPressed: () {
-              // we display showModalBottomSheet
-              showDialog<void>(
-                // context and builder are
-                // required properties in this widget
-                context: context,
-                builder: (BuildContext cxn) {
-                  // we set up a container inside which
-                  // we create center column and display text
+        body: FutureBuilder(
+            future: getData("auth"),
+            builder: (context, snap) {
+              if (snap.hasError) {
+                return Text("${snap.error}");
+              }
+              AuthUserOfficerModel user =
+                  AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
 
-                  // Returning SizedBox instead of a Container
-                  return Dialog(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * .6,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: MakeDisasterForm(
-                              cxn: cxn,
-                              report: widget.disaster,
-                            )),
-                      ),
+              return Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 10, right: 20),
+                child: FormBuilder(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Divider(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Description",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderTextField(
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                              name: "description",
+                              onChanged: (val) {
+                                print(
+                                    val); // Print the text value write into TextField
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Affected Homesteads",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderTextField(
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                              name: "homesteads",
+                              onChanged: (val) {
+                                print(
+                                    val); // Print the text value write into TextField
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Deaths",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderTextField(
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                              name: "deaths",
+                              onChanged: (val) {
+                                print(
+                                    val); // Print the text value write into TextField
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Validate and save the form values
+                              _formKey.currentState?.saveAndValidate();
+                              debugPrint(
+                                  _formKey.currentState?.value.toString());
+
+                              // On another side, can access all field values without saving form with instantValues
+                              _formKey.currentState?.validate();
+                              var payload =
+                                  Map.from(_formKey.currentState!.value);
+                              payload["villageId"] = (user.villageId);
+                              payload["disasterId"] = (widget.disaster.id);
+                              print(payload);
+                              context
+                                  .read<DisasterNotifier>()
+                                  .createReport(payload: payload)
+                                  .then((value) {
+                                context.showCustomSnackBar(
+                                    "Disaster Reported successfully");
+
+                                // Navigator.of(widget.cxn).pop();
+                              }).catchError((onError) {
+                                context.showCustomSnackBar(
+                                    "[Disaster] An Error Occured",
+                                    isError: true);
+                              });
+                            },
+                            child: context.watch<DisasterNotifier>().isBusy
+                                ? const CircularProgressIndicator(
+                                    color: white,
+                                  )
+                                : const Text(
+                                    'Submit',
+                                    style: TextStyle(color: white),
+                                  ),
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                },
-              );
-            },
-            label: const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(
-                    Icons.add,
-                    color: white,
                   ),
                 ),
-                Text(
-                  "Add Disaster",
-                  style: TextStyle(color: white),
-                ),
-              ],
-            )),
-        body: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .2,
-              width: MediaQuery.of(context).size.height,
-              child: Card(
-                color: mainColor.withOpacity(.3),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Total Reports",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(color: white),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Divider(),
-                    ),
-                    Text(
-                      "${context.watch<DisasterNotifier>().disasterOccurence.where((element) => element.disasterId == widget.disaster.id).length}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(color: white),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-                child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ...context
-                      .watch<DisasterNotifier>()
-                      .disasterOccurence
-                      .where(
-                          (element) => element.disasterId == widget.disaster.id)
-                      .map((e) => Card(
-                            color: mainColorCard,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                title: Text(
-                                    "Home Steads Affected: ${e.homesteads}"),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    
-
-
-                                    Text(" Deaths: ${e.deaths}"),
-                                    Text(" Description: ${e.description}"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ))
-                ],
-              ),
-            ))
-          ],
-        ));
+              );
+            }));
   }
+
+
+
 }
