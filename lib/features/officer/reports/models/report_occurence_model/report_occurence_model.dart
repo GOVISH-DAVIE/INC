@@ -18,7 +18,7 @@ class ReportOccurenceModel with _$ReportOccurenceModel {
     @JsonKey(name: 'created_at') DateTime? createdAt,
     Report? report,
     Village? village,
-     Map? details,
+    Map? details,
   }) = _ReportOccurenceModel;
 
   factory ReportOccurenceModel.fromJson(Map<String, dynamic> json) =>

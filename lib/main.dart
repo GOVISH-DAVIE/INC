@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             if (!snap.hasData) {
               return const OfficerAuth();
             }
-            if (snap.data == null || snap.data =="") {
+            if (snap.data == null || snap.data == "") {
               return const OfficerAuth();
             }
             return const OfficerDash();

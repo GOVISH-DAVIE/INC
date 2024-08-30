@@ -23,7 +23,7 @@ Widget dashCard(
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
-                  ?.copyWith(color:isactive? Colors.white : Colors.black),
+                  ?.copyWith(color: isactive ? Colors.white : Colors.black),
             ))),
       ));
 }

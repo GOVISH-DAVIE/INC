@@ -47,7 +47,7 @@ class _OfficerDashState extends State<OfficerDash> {
               if (!snap.hasData) {
                 return const Text("loading");
               }
-              if (snap.data == null|| snap.data =="") {
+              if (snap.data == null || snap.data == "") {
                 return const OfficerAuth();
               }
 
@@ -57,7 +57,10 @@ class _OfficerDashState extends State<OfficerDash> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset("assets/logo2.png", width: 300,),
+                    Image.asset(
+                      "assets/logo2.png",
+                      width: 300,
+                    ),
                     // Padding(
                     //   padding: const EdgeInsets.only(left: 18.0, top: 20),
                     //   child: Text(
@@ -69,11 +72,10 @@ class _OfficerDashState extends State<OfficerDash> {
                     //   ),
                     // ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 23.0, top:10),
+                      padding: const EdgeInsets.only(left: 23.0, top: 10),
                       child: SizedBox(
                         width: double.infinity,
                         child: Text(
-                          
                           "${user.name}",
                           textAlign: TextAlign.start,
                           style: Theme.of(context).textTheme.headlineSmall,

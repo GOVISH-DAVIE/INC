@@ -12,6 +12,8 @@ class DisasterOccurenceModel with _$DisasterOccurenceModel {
     int? id,
     int? disasterId,
     String? description,
+    @JsonKey(name: 'date_and_time') dynamic dateAndTime,
+    String? image,
     int? homesteads,
     int? deaths,
     int? villageId,

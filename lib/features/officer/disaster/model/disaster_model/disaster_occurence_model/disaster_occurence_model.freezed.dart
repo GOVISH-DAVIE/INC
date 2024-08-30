@@ -24,6 +24,9 @@ mixin _$DisasterOccurenceModel {
   int? get id => throw _privateConstructorUsedError;
   int? get disasterId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'date_and_time')
+  dynamic get dateAndTime => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   int? get homesteads => throw _privateConstructorUsedError;
   int? get deaths => throw _privateConstructorUsedError;
   int? get villageId => throw _privateConstructorUsedError;
@@ -48,6 +51,8 @@ abstract class $DisasterOccurenceModelCopyWith<$Res> {
       {int? id,
       int? disasterId,
       String? description,
+      @JsonKey(name: 'date_and_time') dynamic dateAndTime,
+      String? image,
       int? homesteads,
       int? deaths,
       int? villageId,
@@ -76,6 +81,8 @@ class _$DisasterOccurenceModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? disasterId = freezed,
     Object? description = freezed,
+    Object? dateAndTime = freezed,
+    Object? image = freezed,
     Object? homesteads = freezed,
     Object? deaths = freezed,
     Object? villageId = freezed,
@@ -95,6 +102,14 @@ class _$DisasterOccurenceModelCopyWithImpl<$Res,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateAndTime: freezed == dateAndTime
+          ? _value.dateAndTime
+          : dateAndTime // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       homesteads: freezed == homesteads
           ? _value.homesteads
@@ -161,6 +176,8 @@ abstract class _$$DisasterOccurenceModelImplCopyWith<$Res>
       {int? id,
       int? disasterId,
       String? description,
+      @JsonKey(name: 'date_and_time') dynamic dateAndTime,
+      String? image,
       int? homesteads,
       int? deaths,
       int? villageId,
@@ -190,6 +207,8 @@ class __$$DisasterOccurenceModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? disasterId = freezed,
     Object? description = freezed,
+    Object? dateAndTime = freezed,
+    Object? image = freezed,
     Object? homesteads = freezed,
     Object? deaths = freezed,
     Object? villageId = freezed,
@@ -209,6 +228,14 @@ class __$$DisasterOccurenceModelImplCopyWithImpl<$Res>
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateAndTime: freezed == dateAndTime
+          ? _value.dateAndTime
+          : dateAndTime // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       homesteads: freezed == homesteads
           ? _value.homesteads
@@ -245,6 +272,8 @@ class _$DisasterOccurenceModelImpl implements _DisasterOccurenceModel {
       {this.id,
       this.disasterId,
       this.description,
+      @JsonKey(name: 'date_and_time') this.dateAndTime,
+      this.image,
       this.homesteads,
       this.deaths,
       this.villageId,
@@ -262,6 +291,11 @@ class _$DisasterOccurenceModelImpl implements _DisasterOccurenceModel {
   @override
   final String? description;
   @override
+  @JsonKey(name: 'date_and_time')
+  final dynamic dateAndTime;
+  @override
+  final String? image;
+  @override
   final int? homesteads;
   @override
   final int? deaths;
@@ -277,7 +311,7 @@ class _$DisasterOccurenceModelImpl implements _DisasterOccurenceModel {
 
   @override
   String toString() {
-    return 'DisasterOccurenceModel(id: $id, disasterId: $disasterId, description: $description, homesteads: $homesteads, deaths: $deaths, villageId: $villageId, createdAt: $createdAt, disaster: $disaster, village: $village)';
+    return 'DisasterOccurenceModel(id: $id, disasterId: $disasterId, description: $description, dateAndTime: $dateAndTime, image: $image, homesteads: $homesteads, deaths: $deaths, villageId: $villageId, createdAt: $createdAt, disaster: $disaster, village: $village)';
   }
 
   @override
@@ -290,6 +324,9 @@ class _$DisasterOccurenceModelImpl implements _DisasterOccurenceModel {
                 other.disasterId == disasterId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other.dateAndTime, dateAndTime) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.homesteads, homesteads) ||
                 other.homesteads == homesteads) &&
             (identical(other.deaths, deaths) || other.deaths == deaths) &&
@@ -304,8 +341,19 @@ class _$DisasterOccurenceModelImpl implements _DisasterOccurenceModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, disasterId, description,
-      homesteads, deaths, villageId, createdAt, disaster, village);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      disasterId,
+      description,
+      const DeepCollectionEquality().hash(dateAndTime),
+      image,
+      homesteads,
+      deaths,
+      villageId,
+      createdAt,
+      disaster,
+      village);
 
   @JsonKey(ignore: true)
   @override
@@ -327,6 +375,8 @@ abstract class _DisasterOccurenceModel implements DisasterOccurenceModel {
       {final int? id,
       final int? disasterId,
       final String? description,
+      @JsonKey(name: 'date_and_time') final dynamic dateAndTime,
+      final String? image,
       final int? homesteads,
       final int? deaths,
       final int? villageId,
@@ -343,6 +393,11 @@ abstract class _DisasterOccurenceModel implements DisasterOccurenceModel {
   int? get disasterId;
   @override
   String? get description;
+  @override
+  @JsonKey(name: 'date_and_time')
+  dynamic get dateAndTime;
+  @override
+  String? get image;
   @override
   int? get homesteads;
   @override

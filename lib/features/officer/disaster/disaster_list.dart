@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cais/features/officer/disaster/model/disaster_model/disaster_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
+import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class DisasterList extends StatefulWidget {
-
   final DisasterModel disaster;
   const DisasterList({super.key, required this.disaster});
 
@@ -18,17 +21,19 @@ class _DisasterListState extends State<DisasterList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.disaster.name} reports", style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontWeight: FontWeight.bold
-        ),),
+        title: Text(
+          "${widget.disaster.name} reports",
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
       ),
       body: disasterList(context),
     );
   }
 
-
-
-    Column disasterList(BuildContext context) {
+  Column disasterList(BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -82,6 +87,79 @@ class _DisasterListState extends State<DisasterList> {
                               children: [
                                 Text(" Deaths: ${e.deaths}"),
                                 Text(" Description: ${e.description}"),
+                                Text(" Description: ${e.image}"),
+                                InkWell(
+                                  onTap: () {
+                                    e.image == null
+                                        ? ""
+                                        : showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Container(
+                                                padding: EdgeInsets.all(20),
+                                                child: Stack(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              .9,
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            "$SERVERImages${e.image}",
+                                                        height: 100,
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            Center(
+                                                                child:
+                                                                    const CircularProgressIndicator()),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            const Icon(
+                                                                Icons.error),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                        top: 10,
+                                                        right: 10,
+                                                        child: OutlinedButton(
+                                                            style: ButtonStyle(
+                                                              side: MaterialStateProperty.all<
+                                                                      BorderSide>(
+                                                                  const BorderSide(
+                                                                color:
+                                                                    Colors.red,
+                                                              )),
+                                                              shape: MaterialStateProperty.all<
+                                                                      OutlinedBorder>(
+                                                                  const CircleBorder()),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Icon(
+                                                              Icons.close,
+                                                              color: Colors.red,
+                                                            )))
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                  },
+                                  child: CachedNetworkImage(
+                                    imageUrl: "$SERVERImages${e.image}",
+                                    height: 100,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -93,7 +171,4 @@ class _DisasterListState extends State<DisasterList> {
       ],
     );
   }
-
-
-
 }

@@ -35,9 +35,13 @@ class _OfficerDashState extends State<OfficerEducation> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Update School Data", style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontWeight: FontWeight.bold
-        ),),
+        title: Text(
+          "Update School Data",
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
         // foregroundColor: white,
       ),
       body: SafeArea(
@@ -181,9 +185,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                                             0,
                                             (value, element) =>
                                                 value +
-                                                (((element)
-                                                        .schoolStudents!
-                                                        .isEmpty)
+                                                (((element).schoolStudents!.isEmpty)
                                                     ? 0
                                                     : (element).schoolStudents!.fold(
                                                         0,
@@ -192,21 +194,27 @@ class _OfficerDashState extends State<OfficerEducation> {
                                                             element.male! +
                                                             element.female! +
                                                             element.other!)!)) /
-                                        context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(
-                                            0,
-                                            (value, element) =>
-                                                value +
-                                                (((element)
-                                                        .schoolTeachers!
-                                                        .isEmpty)
-                                                    ? 0
-                                                    : (element).schoolTeachers!.fold(
-                                                        0,
-                                                        (previousValue, element) =>
-                                                            previousValue! +
-                                                            element.male! +
-                                                            element.female! +
-                                                            element.other!)!)))
+                                        context
+                                            .watch<EducationNotifier>()
+                                            .schools
+                                            .where((element) =>
+                                                element.wardId ==
+                                                user.village?.wardId)
+                                            .fold<int>(
+                                                0,
+                                                (value, element) =>
+                                                    value +
+                                                    (((element)
+                                                            .schoolTeachers!
+                                                            .isEmpty)
+                                                        ? 0
+                                                        : (element).schoolTeachers!.fold(
+                                                            0,
+                                                            (previousValue, element) =>
+                                                                previousValue! +
+                                                                element.male! +
+                                                                element.female! +
+                                                                element.other!)!)))
                                     .toStringAsFixed(1),
                                 style: Theme.of(context)
                                     .textTheme

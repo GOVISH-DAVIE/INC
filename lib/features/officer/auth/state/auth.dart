@@ -48,12 +48,9 @@ class OfficerAuthNotifier extends ChangeNotifier {
       storeData('auth', response.body);
       return AuthUserOfficerModel.fromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
-       _isBusy = false;
+      _isBusy = false;
       notifyListeners();
       throw Exception('Failed to load Disaster ${response.statusCode}');
-   
-    
-    
     } else {
       _isBusy = false;
       notifyListeners();

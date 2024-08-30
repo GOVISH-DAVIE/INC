@@ -132,15 +132,15 @@ class _MakeReportState extends State<MakeReport> {
                           height: 30,
                         ),
                         ...widget.report.fields!.map((e) => Column(
-
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
                                   child: Text(
                                     e.name!
-                                        .replaceAll("_", " ").trim().capitalize()
-                                        ,
+                                        .replaceAll("_", " ")
+                                        .trim()
+                                        .capitalize(),
                                     textAlign: TextAlign.left,
                                     style: const TextStyle(
                                         color: mainColor, fontSize: 17),
@@ -158,8 +158,7 @@ class _MakeReportState extends State<MakeReport> {
                                                   ?.reset();
                                             },
                                           ),
-                                          hintText:
-                                              'Choose an Option',
+                                          hintText: 'Choose an Option',
                                         ),
                                         items: e.options!
                                             .map((gender) => DropdownMenuItem(
@@ -247,9 +246,7 @@ class _MakeReportState extends State<MakeReport> {
                                   height: 20,
                                 ),
                               ],
-                            )
-                            
-                            ),
+                            )),
                         const SizedBox(
                           height: 20,
                         ),
@@ -275,6 +272,8 @@ class _MakeReportState extends State<MakeReport> {
                                   .read<ReportsNotifier>()
                                   .createReport(payload: payload)
                                   .then((value) {
+                                _formKey.currentState?.reset();
+                                Navigator.of(context).pop();
                                 context.showCustomSnackBar(
                                     "Report Created successfully");
 

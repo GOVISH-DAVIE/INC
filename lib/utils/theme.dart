@@ -1,4 +1,4 @@
-import 'package:logger/logger.dart'; 
+import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -26,11 +26,12 @@ FloatingActionButtonThemeData _floatingActionButtonThemeData() {
 OutlinedButtonThemeData _outlinedButtonTheme() {
   return OutlinedButtonThemeData(
       style: ButtonStyle(
-        side:  MaterialStateProperty.all<BorderSide>(BorderSide(color: black)),
-      shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
-      ),
+          side: MaterialStateProperty.all<BorderSide>(BorderSide(color: black)),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
           foregroundColor: MaterialStateProperty.all<Color>(black),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)));
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Colors.transparent)));
 }
 
 TextButtonThemeData _textButtonTheme() {
@@ -43,6 +44,7 @@ TextButtonThemeData _textButtonTheme() {
           foregroundColor: MaterialStateProperty.all<Color>(white),
           backgroundColor: MaterialStateProperty.all(themePrimary)));
 }
+
 ElevatedButtonThemeData _elevatedButton() {
   return ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -56,7 +58,6 @@ ElevatedButtonThemeData _elevatedButton() {
 
 TextTheme textTheme() {
   return const TextTheme(
-
     headline1: TextStyle(color: black),
     headline2: TextStyle(color: black),
     headline3: TextStyle(color: black),
@@ -69,17 +70,15 @@ TextTheme textTheme() {
 }
 
 InputDecorationTheme inputDecorationTheme() {
-  OutlineInputBorder outlineInputBorder =  OutlineInputBorder(
+  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: textThemeGrey.withOpacity(.6)),
-    borderRadius:const BorderRadius.all(Radius.circular(10.0)),
+    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
     gapPadding: 10,
-    
   );
-  OutlineInputBorder outlineInputBorderFocused =  OutlineInputBorder(
+  OutlineInputBorder outlineInputBorderFocused = OutlineInputBorder(
     borderSide: BorderSide(color: themePrimary.withOpacity(.6)),
-    borderRadius:const BorderRadius.all(Radius.circular(10.0)),
+    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
     gapPadding: 10,
-    
   );
   return InputDecorationTheme(
     // filled: true,
@@ -98,13 +97,12 @@ InputDecorationTheme inputDecorationTheme() {
 
 AppBarTheme _appBarTheme() {
   return const AppBarTheme(
-    backgroundColor: transparent,
-    elevation: 0,
-    foregroundColor: black,
-    shadowColor: transparent,
-    centerTitle: true,
-    surfaceTintColor: transparent
-  );
+      backgroundColor: transparent,
+      elevation: 0,
+      foregroundColor: black,
+      shadowColor: transparent,
+      centerTitle: true,
+      surfaceTintColor: transparent);
 }
 
 //*button themes

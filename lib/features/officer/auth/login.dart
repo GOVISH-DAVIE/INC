@@ -28,7 +28,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height/6,
+                  height: MediaQuery.of(context).size.height / 6,
                 ),
                 Image.asset("assets/logo.png"),
                 FormBuilder(
@@ -50,9 +50,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  e
-                                      .replaceAll("_", " ")
-                                      .capitalizeFirstofEach,
+                                  e.replaceAll("_", " ").capitalizeFirstofEach,
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                       color: mainColor, fontSize: 17),
@@ -83,13 +81,12 @@ class _OfficerAuthState extends State<OfficerAuth> {
                               _formKey.currentState?.saveAndValidate();
                               debugPrint(
                                   _formKey.currentState?.value.toString());
-                          
+
                               // On another side, can access all field values without saving form with instantValues
                               _formKey.currentState?.validate();
                               context
                                   .read<OfficerAuthNotifier>()
-                                  .login(
-                                      payload: _formKey.currentState!.value)
+                                  .login(payload: _formKey.currentState!.value)
                                   .then((value) {
                                 context.showCustomSnackBar("successfull");
                                 context.appNavigatorPush(const OfficerDash());
@@ -101,11 +98,11 @@ class _OfficerAuthState extends State<OfficerAuth> {
                             },
                             child: context.watch<OfficerAuthNotifier>().isBusy
                                 ? Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: const CircularProgressIndicator(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: const CircularProgressIndicator(
                                       color: white,
                                     ),
-                                )
+                                  )
                                 : const Text(
                                     'Login',
                                     style: TextStyle(color: white),

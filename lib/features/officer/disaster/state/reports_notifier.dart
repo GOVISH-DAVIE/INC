@@ -91,6 +91,8 @@ class DisasterNotifier extends ChangeNotifier {
 
     try {
       final response = await request.send();
+      var ll = await http.Response.fromStream(response);
+      logger.d(ll.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         // getReportOccurences();
@@ -104,7 +106,6 @@ class DisasterNotifier extends ChangeNotifier {
         throw Exception('Failed to load Disaster');
       }
     } catch (e) {
-
       _isBusy = false;
       notifyListeners();
       throw Exception('Failed to send request: $e');

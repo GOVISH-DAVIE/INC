@@ -36,8 +36,7 @@ class _CreateCountiesState extends State<MakeReportForm> {
           AuthUserOfficerModel user =
               AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
 
-          return
-           Padding(
+          return Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 10, right: 20),
             child: FormBuilder(
               key: _formKey,
@@ -186,8 +185,8 @@ class _CreateCountiesState extends State<MakeReportForm> {
                             .read<ReportsNotifier>()
                             .createReport(payload: payload)
                             .then((value) {
-                          context
-                              .showCustomSnackBar("Report Created successfully");
+                          context.showCustomSnackBar(
+                              "Report Created successfully");
 
                           Navigator.of(widget.cxn).pop();
                         });

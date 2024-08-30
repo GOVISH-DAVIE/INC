@@ -12,6 +12,7 @@ import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -230,7 +231,7 @@ class _MakeReportState extends State<MakeDisaster> {
                               image!,
                               height: 200,
                             ),
-                          ),             
+                          ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -250,11 +251,12 @@ class _MakeReportState extends State<MakeDisaster> {
                                   Map.from(_formKey.currentState!.value);
                               payload["villageId"] = (user.villageId);
                               payload["disasterId"] = (widget.disaster.id);
-                              print(payload);
                               context
                                   .read<DisasterNotifier>()
                                   .createReport(payload: payload, img: image!)
                                   .then((value) {
+                                _formKey.currentState?.reset();
+                                Navigator.of(context).pop();
                                 context.showCustomSnackBar(
                                     "Disaster Reported successfully");
 
