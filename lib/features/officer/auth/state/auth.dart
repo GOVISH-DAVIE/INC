@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/network/http_client.dart';
+import 'package:cais/core/utilities/logging_utils.dart';
 import 'package:cais/features/admin/ward/models/wards_model/wards_model.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/utils/constants.dart';
@@ -39,12 +40,20 @@ class OfficerAuthNotifier extends ChangeNotifier {
     final response = await intercepted_client.post(
         Uri.parse('${SERVERURL}officer_login'),
         body: jsonEncode(payload));
-
+    logger.d(response.body);
+    logger.d(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       _isBusy = false;
       notifyListeners();
       storeData('auth', response.body);
       return AuthUserOfficerModel.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401) {
+       _isBusy = false;
+      notifyListeners();
+      throw Exception('Failed to load Disaster ${response.statusCode}');
+   
+    
+    
     } else {
       _isBusy = false;
       notifyListeners();

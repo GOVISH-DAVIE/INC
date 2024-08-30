@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cais/core/network/http_client.dart';
 import 'package:cais/core/utilities/utilities.dart';
@@ -7,7 +8,9 @@ import 'package:cais/features/officer/disaster/model/disaster_model/disaster_occ
 import 'package:cais/features/officer/reports/models/report_occurence_model/report_occurence_model.dart';
 import 'package:cais/features/officer/reports/models/reports_category_model/reports_category_model.dart';
 import 'package:cais/utils/constants.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class DisasterNotifier extends ChangeNotifier {
   bool _isBusy = false;
@@ -62,24 +65,49 @@ class DisasterNotifier extends ChangeNotifier {
     }
   }
 
-  Future createReport({required Map payload}) async {
+  Future createReport({required Map payload, required File img}) async {
     _isBusy = true;
     notifyListeners();
+    final Map<String, dynamic> typedPayload =
+        Map<String, dynamic>.from(payload);
 
-    final response = await intercepted_client.post(
-        Uri.parse('${SERVERURL}disaster_occurrences'),
-        body: jsonEncode(payload));
-    logger.d(response);
-    logger.d(response.body);
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      getReportOccurences();
+    FormData fd = FormData.fromMap(typedPayload);
+    fd.files.add(
+      MapEntry("image", await MultipartFile.fromFile(img.path)),
+    );
+    // final response = await intercepted_client
+    //     .post(Uri.parse('${SERVERURL}disaster_occurrences'), body: fd);
+
+    var uri = Uri.parse('${SERVERURL}disaster_occurrences');
+
+    var request = http.MultipartRequest('POST', uri);
+
+    payload.forEach((key, value) {
+      request.fields[key] = value.toString();
+    });
+
+    // Add the image file
+    request.files.add(await http.MultipartFile.fromPath('image', img.path));
+
+    try {
+      final response = await request.send();
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // getReportOccurences();
+        _isBusy = false;
+        notifyListeners();
+      } else {
+        logger.w(response);
+        _reportOccurence = [];
+        _isBusy = false;
+        notifyListeners();
+        throw Exception('Failed to load Disaster');
+      }
+    } catch (e) {
+
       _isBusy = false;
       notifyListeners();
-    } else {
-      _reportOccurence = [];
-      _isBusy = false;
-      notifyListeners();
-      throw Exception('Failed to load Disaster');
+      throw Exception('Failed to send request: $e');
     }
   }
 }

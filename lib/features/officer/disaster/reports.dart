@@ -40,10 +40,11 @@ class _ReportsOfficerState extends State<DisasterOfficer> {
             ...context.watch<DisasterNotifier>().disaster.map((e) => Card(
                   color: mainColorCard,
                   child: ListTile(
+                    // contentPadding: EdgeInsets.only(top: ),
                     onTap: () {
                       context.appNavigatorPush(MakeDisaster(disaster: e));
                     },
-                    title: Text("${e.name}"),
+                    title: Text("${e.name}", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w400),),
                     subtitle: Text("${e.description}"),
                   ),
                 ))

@@ -34,19 +34,21 @@ class MyApp extends StatelessWidget {
       title: 'Cais',
       theme: themeData(),
       themeMode: ThemeMode.system,
-      home:  FutureBuilder(
-            future: getData("auth"),
-        builder: (context,snap) {
+      home: FutureBuilder(
+          future: getData("auth"),
+          builder: (context, snap) {
             if (snap.hasError) {
-                return Text("${snap.error}");
-              }
-              if (!snap.hasData) {
-                 return const OfficerAuth();
-              }
-          return const  OfficerDash();
-          //
-        }
-      ),
+              return Text("${snap.error}");
+            }
+            if (!snap.hasData) {
+              return const OfficerAuth();
+            }
+            if (snap.data == null || snap.data =="") {
+              return const OfficerAuth();
+            }
+            return const OfficerDash();
+            //
+          }),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
@@ -9,7 +10,9 @@ import 'package:cais/features/officer/disaster/model/disaster_model/disaster_mod
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../disaster/create_report.dart';
@@ -32,6 +35,38 @@ class _MakeReportState extends State<MakeDisaster> {
       ..getReportOccurences();
   }
 
+  File? image;
+
+  bool noFileError = false;
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+      setState(() {
+        noFileError = false;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future pickImageFromCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+      setState(() {
+        noFileError = false;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -39,16 +74,20 @@ class _MakeReportState extends State<MakeDisaster> {
         appBar: AppBar(
           // foregroundColor: white,
           title: Text(
-            "${widget.disaster.name} Details",
+            "${widget.disaster.name} ",
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           actions: [
-            IconButton(onPressed: () {
-              context.appNavigatorPush(DisasterList(disaster: widget.disaster,));
-            }, icon: const Icon(Icons.list_outlined))
+            IconButton(
+                onPressed: () {
+                  context.appNavigatorPush(DisasterList(
+                    disaster: widget.disaster,
+                  ));
+                },
+                icon: const Icon(Icons.list_outlined))
           ],
         ),
         body: FutureBuilder(
@@ -151,6 +190,50 @@ class _MakeReportState extends State<MakeDisaster> {
                         const SizedBox(
                           height: 20,
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  pickImageFromCamera();
+                                },
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.camera_alt,
+                                      size: 40,
+                                    ),
+                                    Text("Camera")
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  pickImage();
+                                },
+                                child: Column(
+                                  children: [
+                                    Icon(Icons.folder_open, size: 40),
+                                    Text("From gallery")
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (image != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28.0),
+                            child: Image.file(
+                              image!,
+                              height: 200,
+                            ),
+                          ),             
+                        const SizedBox(
+                          height: 20,
+                        ),
                         SizedBox(
                           height: 50,
                           width: double.infinity,
@@ -170,13 +253,14 @@ class _MakeReportState extends State<MakeDisaster> {
                               print(payload);
                               context
                                   .read<DisasterNotifier>()
-                                  .createReport(payload: payload)
+                                  .createReport(payload: payload, img: image!)
                                   .then((value) {
                                 context.showCustomSnackBar(
                                     "Disaster Reported successfully");
 
                                 // Navigator.of(widget.cxn).pop();
                               }).catchError((onError) {
+                                logger.wtf(onError);
                                 context.showCustomSnackBar(
                                     "[Disaster] An Error Occured",
                                     isError: true);
@@ -188,7 +272,8 @@ class _MakeReportState extends State<MakeDisaster> {
                                   )
                                 : const Text(
                                     'Submit',
-                                    style: TextStyle(color: white),
+                                    style:
+                                        TextStyle(color: white, fontSize: 30),
                                   ),
                           ),
                         )
@@ -199,7 +284,4 @@ class _MakeReportState extends State<MakeDisaster> {
               );
             }));
   }
-
-
-  
 }

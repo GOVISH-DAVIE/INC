@@ -43,7 +43,7 @@ class _MakeReportState extends State<MakeReport> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           // foregroundColor: white,
-          title: Text("${widget.report.name} Detail",
+          title: Text("${widget.report.name} ",
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium

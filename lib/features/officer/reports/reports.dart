@@ -40,7 +40,7 @@ class _ReportsOfficerState extends State<ReportsOfficer> {
                     onTap: () {
                       context.appNavigatorPush(MakeReport(report: e));
                     },
-                    title: Text("${e.name}"),
+                    title: Text("${e.name}", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w400)),
                     subtitle: Text("${e.description}"),
                   ),
                 ))

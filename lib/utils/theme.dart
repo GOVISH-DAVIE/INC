@@ -48,7 +48,7 @@ ElevatedButtonThemeData _elevatedButton() {
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.circular(8.0),
           )),
           foregroundColor: MaterialStateProperty.all<Color>(white),
           backgroundColor: MaterialStateProperty.all(mainColor)));

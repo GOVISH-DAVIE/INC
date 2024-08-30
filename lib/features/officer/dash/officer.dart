@@ -47,37 +47,47 @@ class _OfficerDashState extends State<OfficerDash> {
               if (!snap.hasData) {
                 return const Text("loading");
               }
+              if (snap.data == null|| snap.data =="") {
+                return const OfficerAuth();
+              }
+
               AuthUserOfficerModel user =
                   AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
               return SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Image.asset("assets/logo2.png", width: 300,),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 18.0, top: 20),
+                    //   child: Text(
+                    //     "Welcome Back",
+                    //     style: Theme.of(context)
+                    //         .textTheme
+                    //         .displaySmall
+                    //         ?.copyWith(fontWeight: FontWeight.w700),
+                    //   ),
+                    // ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 18.0, top: 20),
-                      child: Text(
-                        "Welcome Back",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displaySmall
-                            ?.copyWith(fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 98.0),
-                      child: Text(
-                        "${user.name}",
-                        style: Theme.of(context).textTheme.headlineSmall,
+                      padding: const EdgeInsets.only(left: 23.0, top:10),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          
+                          "${user.name}",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ),
                     ),
                     const Padding(
                       padding:
-                          EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
+                          EdgeInsets.only(left: 23.0, right: 30, bottom: 20),
                       child: Divider(),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 30.0, right: 30, bottom: 20),
+                          left: 23.0, right: 30, bottom: 20),
                       child: Container(
                         height: 40,
                         width: double.infinity,
