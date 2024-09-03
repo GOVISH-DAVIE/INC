@@ -2,34 +2,36 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
+import 'package:cais/core/utilities/app_common_extentions.dart';
+import 'package:cais/core/utilities/logging_utils.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/disaster/disaster_list.dart';
-import 'package:cais/features/officer/disaster/model/disaster_model/disaster_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
+import 'package:cais/features/officer/projects/state/project_list.dart';
+import 'package:cais/features/officer/projects/state/project_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class MakeDisaster extends StatefulWidget {
-  final DisasterModel disaster;
-  const MakeDisaster({super.key, required this.disaster});
+class Projects extends StatefulWidget {
+  const Projects({super.key});
 
   @override
-  State<MakeDisaster> createState() => _MakeReportState();
+  State<Projects> createState() => _ProjectsState();
 }
 
-class _MakeReportState extends State<MakeDisaster> {
+class _ProjectsState extends State<Projects> {
+  DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+  List<String> options = ["Competed", "Ongoing", "Stalled", "Not_Stated"];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<DisasterNotifier>()
-      ..getCategories()
-      ..getReportOccurences();
+    context.read<ProjectNotifier>().getProjects();
   }
 
   File? image;
@@ -71,7 +73,7 @@ class _MakeReportState extends State<MakeDisaster> {
         appBar: AppBar(
           // foregroundColor: white,
           title: Text(
-            "${widget.disaster.name} ",
+            " Projects",
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium
@@ -80,9 +82,7 @@ class _MakeReportState extends State<MakeDisaster> {
           actions: [
             IconButton(
                 onPressed: () {
-                  context.appNavigatorPush(DisasterList(
-                    disaster: widget.disaster,
-                  ));
+                  context.appNavigatorPush(const ProjectList());
                 },
                 icon: const Icon(Icons.list_outlined))
           ],
@@ -113,7 +113,7 @@ class _MakeReportState extends State<MakeDisaster> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Description",
+                              "Project Name",
                               textAlign: TextAlign.left,
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
@@ -121,7 +121,7 @@ class _MakeReportState extends State<MakeDisaster> {
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
-                              name: "description",
+                              name: "project_name",
                               onChanged: (val) {
                                 print(
                                     val); // Print the text value write into TextField
@@ -139,7 +139,145 @@ class _MakeReportState extends State<MakeDisaster> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Affected Homesteads",
+                              "Start Date",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderDateTimePicker(
+                              name: "start_date",
+                              format: dateFormat,
+                              lastDate: DateTime.now(),
+
+                              // controller: dateFormat,
+
+                              valueTransformer: (value) {
+                                if (value == null) {
+                                  return null;
+                                } else {
+                                  return DateFormat('yyyy-MM-dd HH:mm')
+                                      .format(value);
+                                }
+                              },
+                              initialEntryMode: DatePickerEntryMode.calendar,
+                              // initialValue: DateTime.now(),
+                              inputType: InputType.both,
+
+                              onChanged: (value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                // value?.toIso8601String();
+                                String string = dateFormat.format(value);
+
+                                print(string);
+                                // return string;
+
+                                // value = string; // print(string);
+                                // print(
+                                //     _formKey.currentState!.value);
+                                // _formKey.currentState!
+                                //     .fields['date']?.value
+                                //     .toString();
+                              },
+                              // controller: string,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  onPressed: () {
+                                    // print(_formKey
+                                    //     .currentState!.value);
+                                    // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                                    _formKey.currentState!.fields["start_date"]
+                                        ?.didChange(null);
+                                  },
+                                ),
+                              ),
+                              // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                              // locale: const Locale.fromSubtags(languageCode: 'fr'),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Proposed End Date",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderDateTimePicker(
+                              name: "proposed_date",
+                              format: dateFormat,
+                              lastDate: DateTime.now(),
+
+                              // controller: dateFormat,
+
+                              valueTransformer: (value) {
+                                if (value == null) {
+                                  return null;
+                                } else {
+                                  return DateFormat('yyyy-MM-dd HH:mm')
+                                      .format(value);
+                                }
+                              },
+                              initialEntryMode: DatePickerEntryMode.calendar,
+                              // initialValue: DateTime.now(),
+                              inputType: InputType.both,
+
+                              onChanged: (value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                // value?.toIso8601String();
+                                String string = dateFormat.format(value);
+
+                                print(string);
+                                // return string;
+
+                                // value = string; // print(string);
+                                // print(
+                                //     _formKey.currentState!.value);
+                                // _formKey.currentState!
+                                //     .fields['date']?.value
+                                //     .toString();
+                              },
+                              // controller: string,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  onPressed: () {
+                                    // print(_formKey
+                                    //     .currentState!.value);
+                                    // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                                    _formKey.currentState!.fields["start_date"]
+                                        ?.didChange(null);
+                                  },
+                                ),
+                              ),
+                              // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                              // locale: const Locale.fromSubtags(languageCode: 'fr'),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Contractor Name ",
                               textAlign: TextAlign.left,
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
@@ -147,7 +285,7 @@ class _MakeReportState extends State<MakeDisaster> {
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
-                              name: "homesteads",
+                              name: "contractor_name",
                               onChanged: (val) {
                                 print(
                                     val); // Print the text value write into TextField
@@ -165,19 +303,30 @@ class _MakeReportState extends State<MakeDisaster> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Deaths",
+                              "Project Status",
                               textAlign: TextAlign.left,
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
-                            FormBuilderTextField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                            FormBuilderDropdown<String>(
+                              name: "project_status",
+                              decoration: InputDecoration(
+                                suffix: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  onPressed: () {
+                                    _formKey
+                                        .currentState!.fields["project_status"]
+                                        ?.reset();
+                                  },
+                                ),
+                                hintText: 'Choose an Option',
                               ),
-                              name: "deaths",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
+                              items: options
+                                  .map((option) => DropdownMenuItem(
+                                        alignment: AlignmentDirectional.center,
+                                        value: option,
+                                        child: Text(option),
+                                      ))
+                                  .toList(),
                             ),
                             const SizedBox(
                               height: 10,
@@ -246,10 +395,9 @@ class _MakeReportState extends State<MakeDisaster> {
                               var payload =
                                   Map.from(_formKey.currentState!.value);
                               payload["villageId"] = (user.villageId);
-                              payload["disasterId"] = (widget.disaster.id);
                               context
-                                  .read<DisasterNotifier>()
-                                  .createReport(payload: payload, img: image!)
+                                  .read<ProjectNotifier>()
+                                  .createProject(payload: payload, img: image!)
                                   .then((value) {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();
@@ -264,7 +412,7 @@ class _MakeReportState extends State<MakeDisaster> {
                                     isError: true);
                               });
                             },
-                            child: context.watch<DisasterNotifier>().isBusy
+                            child: context.watch<ProjectNotifier>().isBusy
                                 ? const CircularProgressIndicator(
                                     color: white,
                                   )

@@ -8,6 +8,7 @@ import 'package:cais/features/admin/ward/state_ward.dart';
 import 'package:cais/features/officer/auth/state/auth.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
+import 'package:cais/features/officer/projects/state/project_notifier.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:get_it/get_it.dart';
 
@@ -25,4 +26,5 @@ void setupLocator() {
   locator.registerFactory<SchoolCartegoriesNotifier>(
       () => SchoolCartegoriesNotifier());
   locator.registerFactory<OfficerAuthNotifier>(() => OfficerAuthNotifier());
+  locator.registerFactory<ProjectNotifier>(() => ProjectNotifier());
 }

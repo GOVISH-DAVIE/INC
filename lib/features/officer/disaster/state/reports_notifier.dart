@@ -38,6 +38,9 @@ class DisasterNotifier extends ChangeNotifier {
           .toList();
       _isBusy = false;
       notifyListeners();
+      _disaster.sort(
+          (a, b) => a.name!.toLowerCase().compareTo(b.name!.toLowerCase()));
+      notifyListeners();
     } else {
       _isBusy = false;
       notifyListeners();

@@ -24,9 +24,17 @@ class ReportsNotifier extends ChangeNotifier {
     if (response.statusCode == 200) {
       _reportsCategoryModel = (jsonDecode(response.body)['data'] as List)
           .map((e) => ReportsCategoryModel.fromJson(e))
-          .toList();
+          .toList()
+      
+;
+          
       _isBusy = false;
       notifyListeners();
+
+       _reportsCategoryModel   .sort((a, b) => a.name!
+                .toLowerCase()
+                .compareTo(b.name!.toLowerCase()));
+                notifyListeners();
     } else {
       _isBusy = false;
       notifyListeners();

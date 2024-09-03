@@ -94,7 +94,8 @@ class _DisasterListState extends State<DisasterList> {
                                             context: context,
                                             builder: (context) {
                                               return Container(
-                                                padding: const EdgeInsets.all(20),
+                                                padding:
+                                                    const EdgeInsets.all(20),
                                                 child: Stack(
                                                   children: [
                                                     SizedBox(
@@ -163,6 +164,10 @@ class _DisasterListState extends State<DisasterList> {
                           ),
                         ),
                       ))
+            
+            
+            
+            
             ],
           ),
         ))

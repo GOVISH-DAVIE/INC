@@ -26,7 +26,8 @@ FloatingActionButtonThemeData _floatingActionButtonThemeData() {
 OutlinedButtonThemeData _outlinedButtonTheme() {
   return OutlinedButtonThemeData(
       style: ButtonStyle(
-          side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: black)),
+          side: MaterialStateProperty.all<BorderSide>(
+              const BorderSide(color: black)),
           shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
           foregroundColor: MaterialStateProperty.all<Color>(black),

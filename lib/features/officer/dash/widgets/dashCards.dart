@@ -8,7 +8,7 @@ Widget dashCard(
     required Widget to,
     required bool isactive}) {
   return SizedBox(
-      height: 150,
+      height: 80,
       width: 150,
       child: InkWell(
         onTap: () {

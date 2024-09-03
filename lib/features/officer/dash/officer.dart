@@ -8,6 +8,7 @@ import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
+import 'package:cais/features/officer/projects/projects.dart';
 import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -146,9 +147,9 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "DEMOGRAPHIC",
-                            to: const Village(),
-                            isactive: false),
+                            name: "Projects ".toUpperCase(),
+                            to: const Projects(),
+                            isactive: true),
                       ],
                     ),
                     Row(
@@ -156,12 +157,28 @@ class _OfficerDashState extends State<OfficerDash> {
                       children: [
                         dashCard(
                             context: context,
-                            name: "ECONOMIC",
+                            name: "Relief Distribution".capitalizeFirstofEach,
                             to: const Village(),
                             isactive: false),
                         dashCard(
                             context: context,
-                            name: "environment".toUpperCase(),
+                            name: "Demographic".capitalizeFirstofEach,
+                            to: const Village(),
+                            isactive: false),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        dashCard(
+                            context: context,
+                            name: "Economic",
+                            to: const Village(),
+                            isactive: false),
+                        dashCard(
+                            context: context,
+                            name: "environment".capitalizeFirstofEach,
                             to: const Village(),
                             isactive: false),
                       ],
@@ -176,7 +193,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: false),
                         dashCard(
                             context: context,
-                            name: "Health".toUpperCase(),
+                            name: "Health",
                             to: const Village(),
                             isactive: false),
                       ],
