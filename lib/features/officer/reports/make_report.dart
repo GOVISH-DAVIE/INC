@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
@@ -8,8 +9,10 @@ import 'package:cais/features/officer/reports/report_list.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_native_splash/cli_commands.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +37,39 @@ class _MakeReportState extends State<MakeReport> {
   List<String> genderOptions = ['Adult', 'Minor'];
 
   DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+
+  File? image;
+
+  bool noFileError = false;
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+      setState(() {
+        noFileError = false;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future pickImageFromCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+      setState(() {
+        noFileError = false;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -57,52 +93,6 @@ class _MakeReportState extends State<MakeReport> {
                 icon: const Icon(Icons.list_outlined))
           ],
         ),
-        // floatingActionButton: FloatingActionButton.extended(
-        //     backgroundColor: mainColor,
-        //     onPressed: () {
-        //       // we display showModalBottomSheet
-        //       showDialog<void>(
-        //         // context and builder are
-        //         // required properties in this widget
-        //         context: context,
-        //         builder: (BuildContext cxn) {
-        //           // we set up a container inside which
-        //           // we create center column and display text
-
-        //           // Returning SizedBox instead of a Container
-        //           return Dialog(
-        //             child: SizedBox(
-        //               height: MediaQuery.of(context).size.height * .6,
-        //               width: MediaQuery.of(context).size.width,
-        //               child: Center(
-        //                 child: Padding(
-        //                     padding: const EdgeInsets.all(20.0),
-        //                     child: MakeReportForm(
-        //                       cxn: cxn,
-        //                       report: widget.report,
-        //                     )),
-        //               ),
-        //             ),
-        //           );
-        //         },
-        //       );
-        //     },
-        //     label: const Row(
-        //       children: [
-        //         Padding(
-        //           padding: EdgeInsets.only(right: 8.0),
-        //           child: Icon(
-        //             Icons.add,
-        //             color: white,
-        //           ),
-        //         ),
-        //         Text(
-        //           "Add Security Report",
-        //           style: TextStyle(color: white),
-        //         ),
-        //       ],
-        //     )),
-
         body: FutureBuilder(
             future: getData("auth"),
             builder: (context, snap) {
@@ -245,6 +235,49 @@ class _MakeReportState extends State<MakeReport> {
                                 ),
                               ],
                             )),
+                        if (widget.report.has_image == "true")
+                          Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    pickImageFromCamera();
+                                  },
+                                  child: const Column(
+                                    children: [
+                                      Icon(
+                                        Icons.camera_alt,
+                                        size: 40,
+                                      ),
+                                      Text("Camera")
+                                    ],
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    pickImage();
+                                  },
+                                  child: const Column(
+                                    children: [
+                                      Icon(Icons.folder_open, size: 40),
+                                      Text("From gallery")
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        if (image != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28.0),
+                            child: Image.file(
+                              image!,
+                              height: 200,
+                            ),
+                          ),
+
                         const SizedBox(
                           height: 20,
                         ),

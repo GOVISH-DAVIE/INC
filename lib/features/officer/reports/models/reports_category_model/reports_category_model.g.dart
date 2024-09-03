@@ -12,6 +12,7 @@ _$ReportsCategoryModelImpl _$$ReportsCategoryModelImplFromJson(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
+      has_image: json['has_image'] as String?,
       fields: (json['fields'] as List<dynamic>?)
           ?.map((e) => Field.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$ReportsCategoryModelImplToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'has_image': instance.has_image,
       'fields': instance.fields,
       'created_at': instance.createdAt?.toIso8601String(),
       'ReportOccurrence': instance.reportOccurrence,

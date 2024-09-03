@@ -23,6 +23,7 @@ mixin _$ReportsCategoryModel {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get has_image => throw _privateConstructorUsedError;
   List<Field>? get fields => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $ReportsCategoryModelCopyWith<$Res> {
       {int? id,
       String? name,
       String? description,
+      String? has_image,
       List<Field>? fields,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence') List<dynamic>? reportOccurrence});
@@ -67,6 +69,7 @@ class _$ReportsCategoryModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? has_image = freezed,
     Object? fields = freezed,
     Object? createdAt = freezed,
     Object? reportOccurrence = freezed,
@@ -83,6 +86,10 @@ class _$ReportsCategoryModelCopyWithImpl<$Res,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      has_image: freezed == has_image
+          ? _value.has_image
+          : has_image // ignore: cast_nullable_to_non_nullable
               as String?,
       fields: freezed == fields
           ? _value.fields
@@ -112,6 +119,7 @@ abstract class _$$ReportsCategoryModelImplCopyWith<$Res>
       {int? id,
       String? name,
       String? description,
+      String? has_image,
       List<Field>? fields,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence') List<dynamic>? reportOccurrence});
@@ -131,6 +139,7 @@ class __$$ReportsCategoryModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? has_image = freezed,
     Object? fields = freezed,
     Object? createdAt = freezed,
     Object? reportOccurrence = freezed,
@@ -147,6 +156,10 @@ class __$$ReportsCategoryModelImplCopyWithImpl<$Res>
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      has_image: freezed == has_image
+          ? _value.has_image
+          : has_image // ignore: cast_nullable_to_non_nullable
               as String?,
       fields: freezed == fields
           ? _value._fields
@@ -171,6 +184,7 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
       {this.id,
       this.name,
       this.description,
+      this.has_image,
       final List<Field>? fields,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'ReportOccurrence') final List<dynamic>? reportOccurrence})
@@ -186,6 +200,8 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
   final String? name;
   @override
   final String? description;
+  @override
+  final String? has_image;
   final List<Field>? _fields;
   @override
   List<Field>? get fields {
@@ -213,7 +229,7 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
 
   @override
   String toString() {
-    return 'ReportsCategoryModel(id: $id, name: $name, description: $description, fields: $fields, createdAt: $createdAt, reportOccurrence: $reportOccurrence)';
+    return 'ReportsCategoryModel(id: $id, name: $name, description: $description, has_image: $has_image, fields: $fields, createdAt: $createdAt, reportOccurrence: $reportOccurrence)';
   }
 
   @override
@@ -225,6 +241,8 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.has_image, has_image) ||
+                other.has_image == has_image) &&
             const DeepCollectionEquality().equals(other._fields, _fields) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -239,6 +257,7 @@ class _$ReportsCategoryModelImpl implements _ReportsCategoryModel {
       id,
       name,
       description,
+      has_image,
       const DeepCollectionEquality().hash(_fields),
       createdAt,
       const DeepCollectionEquality().hash(_reportOccurrence));
@@ -264,6 +283,7 @@ abstract class _ReportsCategoryModel implements ReportsCategoryModel {
       {final int? id,
       final String? name,
       final String? description,
+      final String? has_image,
       final List<Field>? fields,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'ReportOccurrence')
@@ -278,6 +298,8 @@ abstract class _ReportsCategoryModel implements ReportsCategoryModel {
   String? get name;
   @override
   String? get description;
+  @override
+  String? get has_image;
   @override
   List<Field>? get fields;
   @override
