@@ -2,7 +2,6 @@ import 'package:cais/features/officer/reports/models/reports_category_model/repo
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,7 @@ class _SecurityListState extends State<SecurityList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Reports"),
+        title: const Text("Your Reports"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

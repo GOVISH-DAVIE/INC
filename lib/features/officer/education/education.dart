@@ -5,7 +5,6 @@ import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/education/schools.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
-import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

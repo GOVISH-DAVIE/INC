@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/reports/create_report.dart';
 import 'package:cais/features/officer/reports/models/reports_category_model/reports_category_model.dart';
 import 'package:cais/features/officer/reports/report_list.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';

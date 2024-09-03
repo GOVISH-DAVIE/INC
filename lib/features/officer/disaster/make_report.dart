@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/disaster/disaster_list.dart';
@@ -12,11 +11,9 @@ import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../disaster/create_report.dart';
 
 class MakeDisaster extends StatefulWidget {
   final DisasterModel disaster;
@@ -200,7 +197,7 @@ class _MakeReportState extends State<MakeDisaster> {
                                 onTap: () {
                                   pickImageFromCamera();
                                 },
-                                child: Column(
+                                child: const Column(
                                   children: [
                                     Icon(
                                       Icons.camera_alt,
@@ -214,7 +211,7 @@ class _MakeReportState extends State<MakeDisaster> {
                                 onTap: () {
                                   pickImage();
                                 },
-                                child: Column(
+                                child: const Column(
                                   children: [
                                     Icon(Icons.folder_open, size: 40),
                                     Text("From gallery")

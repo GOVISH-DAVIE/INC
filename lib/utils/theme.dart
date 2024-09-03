@@ -26,7 +26,7 @@ FloatingActionButtonThemeData _floatingActionButtonThemeData() {
 OutlinedButtonThemeData _outlinedButtonTheme() {
   return OutlinedButtonThemeData(
       style: ButtonStyle(
-          side: MaterialStateProperty.all<BorderSide>(BorderSide(color: black)),
+          side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: black)),
           shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
           foregroundColor: MaterialStateProperty.all<Color>(black),
@@ -58,14 +58,14 @@ ElevatedButtonThemeData _elevatedButton() {
 
 TextTheme textTheme() {
   return const TextTheme(
-    headline1: TextStyle(color: black),
-    headline2: TextStyle(color: black),
-    headline3: TextStyle(color: black),
-    headline4: TextStyle(color: black),
-    headline5: TextStyle(color: black),
-    headline6: TextStyle(color: black),
-    bodyText1: TextStyle(color: black),
-    bodyText2: TextStyle(color: textThemeGrey),
+    displayLarge: TextStyle(color: black),
+    displayMedium: TextStyle(color: black),
+    displaySmall: TextStyle(color: black),
+    headlineMedium: TextStyle(color: black),
+    headlineSmall: TextStyle(color: black),
+    titleLarge: TextStyle(color: black),
+    bodyLarge: TextStyle(color: black),
+    bodyMedium: TextStyle(color: textThemeGrey),
   );
 }
 

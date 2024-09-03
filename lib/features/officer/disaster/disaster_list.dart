@@ -4,8 +4,6 @@ import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class DisasterList extends StatefulWidget {
@@ -96,7 +94,7 @@ class _DisasterListState extends State<DisasterList> {
                                             context: context,
                                             builder: (context) {
                                               return Container(
-                                                padding: EdgeInsets.all(20),
+                                                padding: const EdgeInsets.all(20),
                                                 child: Stack(
                                                   children: [
                                                     SizedBox(
@@ -112,9 +110,9 @@ class _DisasterListState extends State<DisasterList> {
                                                         height: 100,
                                                         placeholder: (context,
                                                                 url) =>
-                                                            Center(
+                                                            const Center(
                                                                 child:
-                                                                    const CircularProgressIndicator()),
+                                                                    CircularProgressIndicator()),
                                                         errorWidget: (context,
                                                                 url, error) =>
                                                             const Icon(

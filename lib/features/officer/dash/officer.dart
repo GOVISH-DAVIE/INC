@@ -11,7 +11,6 @@ import 'package:cais/features/officer/education/education.dart';
 import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class OfficerDash extends StatefulWidget {
   const OfficerDash({super.key});
@@ -100,7 +99,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             borderRadius: BorderRadius.circular(5)),
                         child: Row(
                           children: [
-                            Icon(Icons.location_on_outlined),
+                            const Icon(Icons.location_on_outlined),
                             Padding(
                               padding: const EdgeInsets.only(left: 18.0),
                               child: Text(

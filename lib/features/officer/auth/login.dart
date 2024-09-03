@@ -97,9 +97,9 @@ class _OfficerAuthState extends State<OfficerAuth> {
                               });
                             },
                             child: context.watch<OfficerAuthNotifier>().isBusy
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: const CircularProgressIndicator(
+                                ? const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: CircularProgressIndicator(
                                       color: white,
                                     ),
                                   )
