@@ -25,7 +25,7 @@ class Projects extends StatefulWidget {
 }
 
 class _ProjectsState extends State<Projects> {
-  DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+  DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   List<String> options = ["Competed", "Ongoing", "Stalled", "Not_Stated"];
   @override
   void initState() {
@@ -154,13 +154,13 @@ class _ProjectsState extends State<Projects> {
                                 if (value == null) {
                                   return null;
                                 } else {
-                                  return DateFormat('yyyy-MM-dd HH:mm')
+                                  return DateFormat('yyyy-MM-dd')
                                       .format(value);
                                 }
                               },
-                              initialEntryMode: DatePickerEntryMode.calendar,
+                              initialEntryMode: DatePickerEntryMode.calendarOnly,
                               // initialValue: DateTime.now(),
-                              inputType: InputType.both,
+                              inputType: InputType.date,
 
                               onChanged: (value) {
                                 if (value == null) {
@@ -215,7 +215,7 @@ class _ProjectsState extends State<Projects> {
                             FormBuilderDateTimePicker(
                               name: "proposed_date",
                               format: dateFormat,
-                              lastDate: DateTime.now(),
+                              initialDate: DateTime.now(),
 
                               // controller: dateFormat,
 
@@ -223,13 +223,13 @@ class _ProjectsState extends State<Projects> {
                                 if (value == null) {
                                   return null;
                                 } else {
-                                  return DateFormat('yyyy-MM-dd HH:mm')
+                                  return DateFormat('yyyy-MM-dd')
                                       .format(value);
                                 }
                               },
-                              initialEntryMode: DatePickerEntryMode.calendar,
+                              initialEntryMode: DatePickerEntryMode.calendarOnly,
                               // initialValue: DateTime.now(),
-                              inputType: InputType.both,
+                              inputType: InputType.date,
 
                               onChanged: (value) {
                                 if (value == null) {
@@ -402,13 +402,13 @@ class _ProjectsState extends State<Projects> {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();
                                 context.showCustomSnackBar(
-                                    "Disaster Reported successfully");
+                                    "Projects Reported successfully");
 
                                 // Navigator.of(widget.cxn).pop();
                               }).catchError((onError) {
                                 logger.wtf(onError);
                                 context.showCustomSnackBar(
-                                    "[Disaster] An Error Occured",
+                                    "[Projects] An Error Occured",
                                     isError: true);
                               });
                             },
