@@ -1,44 +1,26 @@
 import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/admin/Village/village.dart';
-import 'package:cais/features/officer/Disaster/reports.dart';
-import 'package:cais/features/officer/admin/admin_dash.dart';
 import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
-import 'package:cais/features/officer/projects/projects.dart';
 import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class OfficerDash extends StatefulWidget {
-  const OfficerDash({super.key});
+class AdminDash extends StatefulWidget {
+  const AdminDash({super.key});
 
   @override
-  State<OfficerDash> createState() => _OfficerDashState();
+  State<AdminDash> createState() => _AdminDashState();
 }
 
-class _OfficerDashState extends State<OfficerDash> {
+class _AdminDashState extends State<AdminDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                removeData("auth");
-                context.appNavigatorReplacement(const OfficerAuth());
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.redAccent,
-              ))
-        ],
-      ),
-      body: SafeArea(
+      body:SafeArea(
         child: FutureBuilder(
             future: getData("auth"),
             builder: (context, snap) {
@@ -72,17 +54,7 @@ class _OfficerDashState extends State<OfficerDash> {
                     //         ?.copyWith(fontWeight: FontWeight.w700),
                     //   ),
                     // ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 23.0, top: 10),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          "${user.name}",
-                          textAlign: TextAlign.start,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
+                    
                     const Padding(
                       padding:
                           EdgeInsets.only(left: 23.0, right: 30, bottom: 20),
@@ -128,82 +100,29 @@ class _OfficerDashState extends State<OfficerDash> {
                       children: [
                         dashCard(
                             context: context,
-                            name: "EDUCATION",
+                            name: "RELIEF",
                             to: const OfficerEducation(),
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Security".toUpperCase(),
+                            name: "CITIZEN APPLICATIONS".toUpperCase(),
                             to: const ReportsOfficer(),
                             isactive: true),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
+                    dashCard(
                             context: context,
-                            name: "Disaster".toUpperCase(),
-                            to: const DisasterOfficer(),
+                            name: "BARAZAARS",
+                            to: const OfficerEducation(),
                             isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Projects ".toUpperCase(),
-                            to: const Projects(),
-                            isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Admin".toUpperCase(),
-                            to: const AdminDash(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Demographic".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Economic",
-                            to: const Village(),
-                            isactive: false),
-                        dashCard(
-                            context: context,
-                            name: "environment".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Dashboard",
-                            to: const Village(),
-                            isactive: false),
-                        dashCard(
-                            context: context,
-                            name: "Health",
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-                  ],
+                    
+ 
+              
+                   ],
                 ),
               );
             }),
-      ),
+      )
     );
   }
 }

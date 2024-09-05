@@ -113,7 +113,7 @@ class _MakeReportState extends State<MakeReport> {
                       children: <Widget>[
                         // Text(
                         //   "Report an Incident ",
-                        //   style: Theme.of(context).textTheme.headlineMedium,
+                        //   style: Theme. of(context).textTheme.headlineMedium,
                         // ),
                         // const Divider(),
                         const SizedBox(
