@@ -26,10 +26,10 @@ class Projects extends StatefulWidget {
 
 class _ProjectsState extends State<Projects> {
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  List<String> options = ["Competed", "Ongoing", "Stalled", "Not_Stated"];
+  List<String> options = ["Completed", "Ongoing", "Stalled", "Not_Started"];
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     context.read<ProjectNotifier>().getProjects();
   }
@@ -154,11 +154,11 @@ class _ProjectsState extends State<Projects> {
                                 if (value == null) {
                                   return null;
                                 } else {
-                                  return DateFormat('yyyy-MM-dd')
-                                      .format(value);
+                                  return DateFormat('yyyy-MM-dd').format(value);
                                 }
                               },
-                              initialEntryMode: DatePickerEntryMode.calendarOnly,
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
                               // initialValue: DateTime.now(),
                               inputType: InputType.date,
 
@@ -223,11 +223,11 @@ class _ProjectsState extends State<Projects> {
                                 if (value == null) {
                                   return null;
                                 } else {
-                                  return DateFormat('yyyy-MM-dd')
-                                      .format(value);
+                                  return DateFormat('yyyy-MM-dd').format(value);
                                 }
                               },
-                              initialEntryMode: DatePickerEntryMode.calendarOnly,
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
                               // initialValue: DateTime.now(),
                               inputType: InputType.date,
 

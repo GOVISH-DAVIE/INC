@@ -123,6 +123,7 @@ class _OfficerDashState extends State<OfficerDash> {
                           EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
                       child: SizedBox(),
                     ),
+                   
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
