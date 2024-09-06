@@ -187,16 +187,7 @@ class _MakeReportState extends State<MakeReport> {
                                               // value?.toIso8601String();
                                               String string =
                                                   dateFormat.format(value);
-
-                                              print(string);
-                                              // return string;
-
-                                              // value = string; // print(string);
-                                              // print(
-                                              //     _formKey.currentState!.value);
-                                              // _formKey.currentState!
-                                              //     .fields['date']?.value
-                                              //     .toString();
+ 
                                             },
                                             // controller: string,
                                             decoration: InputDecoration(

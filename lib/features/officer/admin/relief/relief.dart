@@ -1,69 +1,37 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/core/utilities/app_common_extentions.dart';
+import 'package:cais/core/utilities/logging_utils.dart';
+import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
+import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/disaster/disaster_list.dart';
-import 'package:cais/features/officer/disaster/model/disaster_model/disaster_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class MakeDisaster extends StatefulWidget {
-  final DisasterModel disaster;
-  const MakeDisaster({super.key, required this.disaster});
+class Relief extends StatefulWidget {
+  const Relief({super.key});
 
   @override
-  State<MakeDisaster> createState() => _MakeReportState();
+  State<Relief> createState() => _ReliefState();
 }
 
-class _MakeReportState extends State<MakeDisaster> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    context.read<DisasterNotifier>()
-      ..getCategories()
-      ..getReportOccurences();
-  }
+class _ReliefState extends State<Relief> {
+  List<String> choices = [
+    "Maize",
+    "Beans",
+    "Rice",
+    "Cooking_oil",
+    "Blankets",
+    "Mattresses",
+    "Building_materials"
+  ];
 
-  File? image;
-
-  bool noFileError = false;
-
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
-      setState(() {
-        noFileError = false;
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
-
-  Future pickImageFromCamera() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
-      setState(() {
-        noFileError = false;
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
-
+  DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -71,26 +39,14 @@ class _MakeReportState extends State<MakeDisaster> {
         appBar: AppBar(
           // foregroundColor: white,
           title: Text(
-            "${widget.disaster.name} ",
+            "Relief Distribution ",
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  context.appNavigatorPush(DisasterList(
-                    disaster: widget.disaster,
-                  ));
-                },
-                icon: const Icon(Icons.list_outlined))
-          ],
         ),
-        body: 
-        
-        
-        FutureBuilder(
+        body: FutureBuilder(
             future: getData("auth"),
             builder: (context, snap) {
               if (snap.hasError) {
@@ -116,122 +72,109 @@ class _MakeReportState extends State<MakeDisaster> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Description",
+                              "Type of Relief",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderDropdown<String>(
+                              name: "type_of_relief",
+                              decoration: InputDecoration(
+                                hintText: 'Choose an Option',
+                              ),
+                              items: choices
+                                  .map((gender) => DropdownMenuItem(
+                                        alignment: AlignmentDirectional.center,
+                                        value: gender,
+                                        child: Text(gender),
+                                      ))
+                                  .toList(),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "number of people given".capitalizeFirstofEach,
                               textAlign: TextAlign.left,
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
                             FormBuilderTextField(
+                              keyboardType: TextInputType.number,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
-                              name: "description",
+                              name: "number_of_people_given",
                               onChanged: (val) {
                                 print(
                                     val); // Print the text value write into TextField
                               },
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
+                            ),
+                            const Text(
+                              "Quantity Distributed",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: mainColor, fontSize: 17),
+                            ),
+                            FormBuilderTextField(
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                              name: "quantity_distributed",
+                              onChanged: (val) {
+                                print(
+                                    val); // Print the text value write into TextField
+                              },
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                           ],
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Affected Homesteads",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderTextField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: "homesteads",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
+                        FormBuilderDateTimePicker(
+                          name: "end_date",
+                          format: dateFormat,
+                          lastDate: DateTime.now(),
+
+                          // controller: dateFormat,
+
+                          valueTransformer: (value) {
+                            if (value == null) {
+                              return null;
+                            } else {
+                              return DateFormat('yyyy-MM-dd').format(value);
+                            }
+                          },
+                          initialEntryMode: DatePickerEntryMode.calendar,
+                          // initialValue: DateTime.now(),
+                          inputType: InputType.date,
+
+                          onChanged: (value) {
+                            if (value == null) {
+                              return;
+                            }
+                            // value?.toIso8601String();
+                            String string = dateFormat.format(value);
+                          },
+                          // controller: string,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                // print(_formKey
+                                //     .currentState!.value);
+                                // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                                _formKey.currentState!.fields["start_date"]
+                                    ?.didChange(null);
                               },
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Deaths",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderTextField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: "deaths",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  pickImageFromCamera();
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(
-                                      Icons.camera_alt,
-                                      size: 40,
-                                    ),
-                                    Text("Camera")
-                                  ],
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  pickImage();
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.folder_open, size: 40),
-                                    Text("From gallery")
-                                  ],
-                                ),
-                              ),
-                            ],
                           ),
+                          // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                          // locale: const Locale.fromSubtags(languageCode: 'fr'),
                         ),
-                        if (image != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 28.0),
-                            child: Image.file(
-                              image!,
-                              height: 200,
-                            ),
-                          ),
-                        const SizedBox(
+                        SizedBox(
                           height: 20,
                         ),
                         SizedBox(
@@ -248,11 +191,10 @@ class _MakeReportState extends State<MakeDisaster> {
                               _formKey.currentState?.validate();
                               var payload =
                                   Map.from(_formKey.currentState!.value);
-                              payload["villageId"] = (user.villageId);
-                              payload["disasterId"] = (widget.disaster.id);
+                              payload["area"] = (user.villageId);
                               context
-                                  .read<DisasterNotifier>()
-                                  .createReport(payload: payload, img: image!)
+                                  .read<ReliefNotifier>()
+                                  .createRelief(payload: payload,  )
                                   .then((value) {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();
@@ -263,11 +205,11 @@ class _MakeReportState extends State<MakeDisaster> {
                               }).catchError((onError) {
                                 logger.wtf(onError);
                                 context.showCustomSnackBar(
-                                    "[Disaster] An Error Occured",
+                                    "[Relief Distribution] An Error Occured",
                                     isError: true);
                               });
                             },
-                            child: context.watch<DisasterNotifier>().isBusy
+                            child: context.watch<ReliefNotifier>().isBusy
                                 ? const CircularProgressIndicator(
                                     color: white,
                                   )
@@ -284,7 +226,5 @@ class _MakeReportState extends State<MakeDisaster> {
                 ),
               );
             }));
-  
-  
   }
 }

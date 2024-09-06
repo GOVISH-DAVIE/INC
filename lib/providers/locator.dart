@@ -5,6 +5,8 @@ import 'package:cais/features/admin/genders/state/gender_notifier.dart';
 import 'package:cais/features/admin/schools_cartegories/state/school_cartegories_notifier.dart';
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/ward/state_ward.dart';
+import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
+import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/state/auth.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
@@ -27,4 +29,6 @@ void setupLocator() {
       () => SchoolCartegoriesNotifier());
   locator.registerFactory<OfficerAuthNotifier>(() => OfficerAuthNotifier());
   locator.registerFactory<ProjectNotifier>(() => ProjectNotifier());
+  locator.registerFactory<ReliefNotifier>(() => ReliefNotifier());
+  locator.registerFactory<ApplicationsNotifier>(() => ApplicationsNotifier());
 }
