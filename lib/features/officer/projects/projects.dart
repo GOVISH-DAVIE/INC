@@ -29,7 +29,6 @@ class _ProjectsState extends State<Projects> {
   List<String> options = ["Completed", "Ongoing", "Stalled", "Not_Started"];
   @override
   void initState() {
-    
     super.initState();
     context.read<ProjectNotifier>().getProjects();
   }

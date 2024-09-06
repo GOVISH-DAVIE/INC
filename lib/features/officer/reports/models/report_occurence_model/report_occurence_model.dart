@@ -12,6 +12,7 @@ class ReportOccurenceModel with _$ReportOccurenceModel {
     int? id,
     int? reportsId,
     String? description,
+    String? image,
     @JsonKey(name: 'who_was_affected') String? whoWasAffected,
     String? suspect,
     int? villageId,

@@ -23,6 +23,7 @@ mixin _$ReportOccurenceModel {
   int? get id => throw _privateConstructorUsedError;
   int? get reportsId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'who_was_affected')
   String? get whoWasAffected => throw _privateConstructorUsedError;
   String? get suspect => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $ReportOccurenceModelCopyWith<$Res> {
       {int? id,
       int? reportsId,
       String? description,
+      String? image,
       @JsonKey(name: 'who_was_affected') String? whoWasAffected,
       String? suspect,
       int? villageId,
@@ -78,6 +80,7 @@ class _$ReportOccurenceModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? reportsId = freezed,
     Object? description = freezed,
+    Object? image = freezed,
     Object? whoWasAffected = freezed,
     Object? suspect = freezed,
     Object? villageId = freezed,
@@ -98,6 +101,10 @@ class _$ReportOccurenceModelCopyWithImpl<$Res,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       whoWasAffected: freezed == whoWasAffected
           ? _value.whoWasAffected
@@ -167,6 +174,7 @@ abstract class _$$ReportOccurenceModelImplCopyWith<$Res>
       {int? id,
       int? reportsId,
       String? description,
+      String? image,
       @JsonKey(name: 'who_was_affected') String? whoWasAffected,
       String? suspect,
       int? villageId,
@@ -195,6 +203,7 @@ class __$$ReportOccurenceModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? reportsId = freezed,
     Object? description = freezed,
+    Object? image = freezed,
     Object? whoWasAffected = freezed,
     Object? suspect = freezed,
     Object? villageId = freezed,
@@ -215,6 +224,10 @@ class __$$ReportOccurenceModelImplCopyWithImpl<$Res>
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       whoWasAffected: freezed == whoWasAffected
           ? _value.whoWasAffected
@@ -255,6 +268,7 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
       {this.id,
       this.reportsId,
       this.description,
+      this.image,
       @JsonKey(name: 'who_was_affected') this.whoWasAffected,
       this.suspect,
       this.villageId,
@@ -273,6 +287,8 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
   final int? reportsId;
   @override
   final String? description;
+  @override
+  final String? image;
   @override
   @JsonKey(name: 'who_was_affected')
   final String? whoWasAffected;
@@ -299,7 +315,7 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
 
   @override
   String toString() {
-    return 'ReportOccurenceModel(id: $id, reportsId: $reportsId, description: $description, whoWasAffected: $whoWasAffected, suspect: $suspect, villageId: $villageId, createdAt: $createdAt, report: $report, village: $village, details: $details)';
+    return 'ReportOccurenceModel(id: $id, reportsId: $reportsId, description: $description, image: $image, whoWasAffected: $whoWasAffected, suspect: $suspect, villageId: $villageId, createdAt: $createdAt, report: $report, village: $village, details: $details)';
   }
 
   @override
@@ -312,6 +328,7 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
                 other.reportsId == reportsId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.whoWasAffected, whoWasAffected) ||
                 other.whoWasAffected == whoWasAffected) &&
             (identical(other.suspect, suspect) || other.suspect == suspect) &&
@@ -331,6 +348,7 @@ class _$ReportOccurenceModelImpl implements _ReportOccurenceModel {
       id,
       reportsId,
       description,
+      image,
       whoWasAffected,
       suspect,
       villageId,
@@ -360,6 +378,7 @@ abstract class _ReportOccurenceModel implements ReportOccurenceModel {
       {final int? id,
       final int? reportsId,
       final String? description,
+      final String? image,
       @JsonKey(name: 'who_was_affected') final String? whoWasAffected,
       final String? suspect,
       final int? villageId,
@@ -377,6 +396,8 @@ abstract class _ReportOccurenceModel implements ReportOccurenceModel {
   int? get reportsId;
   @override
   String? get description;
+  @override
+  String? get image;
   @override
   @JsonKey(name: 'who_was_affected')
   String? get whoWasAffected;

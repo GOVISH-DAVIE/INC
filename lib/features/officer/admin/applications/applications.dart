@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/logging_utils.dart';
+import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/officer/admin/applications/applications_list.dart';
 import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
@@ -41,6 +43,14 @@ class _ReliefState extends State<Applicaitons> {
                 .headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.read<ApplicationsNotifier>().getApplications();
+                  context.appNavigatorPush(ApplicationsList());
+                },
+                icon: Icon(Icons.list))
+          ],
         ),
         body: FutureBuilder(
             future: getData("auth"),
@@ -240,7 +250,9 @@ class _ReliefState extends State<Applicaitons> {
                               payload["villageId"] = (user.villageId);
                               context
                                   .read<ApplicationsNotifier>()
-                                  .createApplications(payload: payload,  )
+                                  .createApplications(
+                                    payload: payload,
+                                  )
                                   .then((value) {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();
@@ -254,7 +266,7 @@ class _ReliefState extends State<Applicaitons> {
                                     "[Applicaiton] An Error Occured",
                                     isError: true);
                               });
-                            },  
+                            },
                             child: context.watch<DisasterNotifier>().isBusy
                                 ? const CircularProgressIndicator(
                                     color: white,

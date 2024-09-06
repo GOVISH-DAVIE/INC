@@ -1,40 +1,43 @@
 import 'dart:convert';
 
 import 'package:cais/core/network/http_client.dart';
+import 'package:cais/features/officer/admin/applications/models/applications_model/applications_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class ApplicationsNotifier extends ChangeNotifier{
-
+class ApplicationsNotifier extends ChangeNotifier {
   bool _isBusy = false;
-  bool get isBusy =>_isBusy;
-   Future getCategories() async {
+  bool get isBusy => _isBusy;
+  List<ApplicationsModel> _applicaitons = [];
+  List<ApplicationsModel> get applicaitons => _applicaitons;
+
+  Future getApplications() async {
     _isBusy = true;
     notifyListeners();
 
     final response =
-        await intercepted_client.get(Uri.parse('${SERVERURL}reports'));
+        await intercepted_client.get(Uri.parse('${SERVERURL}applications'));
 
     if (response.statusCode == 200) {
-      // _reportsCategoryModel = (jsonDecode(source)(response.body)['data'] as List)
-      //     .map((e) => ReportsCategoryModel.fromJson(e))
-      //     .toList()
-      
- 
+      _applicaitons = (jsonDecode(response.body)['data'] as List)
+          .map((e) => ApplicationsModel.fromJson(e))
+          .toList();
+
       _isBusy = false;
       notifyListeners();
 
       //  _reportsCategoryModel   .sort((a, b) => a.name!
       //           .toLowerCase()
       //           .compareTo(b.name!.toLowerCase()));
-                notifyListeners();
+      notifyListeners();
     } else {
       _isBusy = false;
       notifyListeners();
       throw Exception('Failed to load Disaster');
     }
   }
-   Future createRelief({required Map payload}) async {
+
+  Future createRelief({required Map payload}) async {
     _isBusy = true;
     notifyListeners();
 
@@ -53,8 +56,7 @@ class ApplicationsNotifier extends ChangeNotifier{
     }
   }
 
-
-    Future createApplications({required Map payload}) async {
+  Future createApplications({required Map payload}) async {
     _isBusy = true;
     notifyListeners();
 
@@ -62,7 +64,7 @@ class ApplicationsNotifier extends ChangeNotifier{
         .post(Uri.parse('${SERVERURL}applications'), body: jsonEncode(payload));
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      // getCounties();
+      getApplications();
       _isBusy = false;
       notifyListeners();
     } else {
@@ -71,5 +73,4 @@ class ApplicationsNotifier extends ChangeNotifier{
       throw Exception('Failed to load Disaster ${response.statusCode}');
     }
   }
-
 }

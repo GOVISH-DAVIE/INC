@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/logging_utils.dart';
+import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
+import 'package:cais/features/officer/admin/relief/relief_list.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
@@ -45,6 +47,15 @@ class _ReliefState extends State<Relief> {
                 .headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
+
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.read<ReliefNotifier>().getDistributions();
+                  context.appNavigatorPush(const ReliefList());
+                },
+                icon: const Icon(Icons.list))
+          ],
         ),
         body: FutureBuilder(
             future: getData("auth"),
@@ -117,7 +128,7 @@ class _ReliefState extends State<Relief> {
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
                             FormBuilderTextField(
-                              keyboardType: TextInputType.number,
+                              // keyboardType: TextInputType.,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                               ),
@@ -133,7 +144,7 @@ class _ReliefState extends State<Relief> {
                           ],
                         ),
                         FormBuilderDateTimePicker(
-                          name: "end_date",
+                          name: "relief_date",
                           format: dateFormat,
                           lastDate: DateTime.now(),
 
@@ -194,7 +205,9 @@ class _ReliefState extends State<Relief> {
                               payload["area"] = (user.villageId);
                               context
                                   .read<ReliefNotifier>()
-                                  .createRelief(payload: payload,  )
+                                  .createRelief(
+                                    payload: payload,
+                                  )
                                   .then((value) {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();

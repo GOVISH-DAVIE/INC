@@ -27,7 +27,8 @@ List<SingleChildWidget> providersChange = [
   ChangeNotifierProvider(create: (context) => locator.get<DisasterNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<ProjectNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<ReliefNotifier>()),
-  ChangeNotifierProvider(create: (context) => locator.get<ApplicationsNotifier>()),
+  ChangeNotifierProvider(
+      create: (context) => locator.get<ApplicationsNotifier>()),
   ChangeNotifierProvider(
       create: (context) => locator.get<SchoolCartegoriesNotifier>()),
   ChangeNotifierProvider(

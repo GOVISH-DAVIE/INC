@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cais/core/network/http_client.dart';
-import 'package:cais/core/utilities/utilities.dart'; 
-import 'package:cais/features/officer/projects/state/projects_model/projects_model.dart'; 
+import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/officer/projects/state/projects_model/projects_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 class ProjectNotifier extends ChangeNotifier {
   bool _isBusy = false;
-  bool get isBusy => _isBusy; 
+  bool get isBusy => _isBusy;
 
   List<ProjectsModel> _projects = [];
   List<ProjectsModel> get projects => _projects;
@@ -36,7 +36,6 @@ class ProjectNotifier extends ChangeNotifier {
     }
   }
 
- 
   Future createProject({required Map payload, required File img}) async {
     _isBusy = true;
     notifyListeners();

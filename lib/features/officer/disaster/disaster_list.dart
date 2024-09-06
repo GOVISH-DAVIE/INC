@@ -85,7 +85,7 @@ class _DisasterListState extends State<DisasterList> {
                               children: [
                                 Text(" Deaths: ${e.deaths}"),
                                 Text(" Description: ${e.description}"),
-                                Text(" Description: ${e.image}"),
+                                Text(" Image: ${e.image}"),
                                 InkWell(
                                   onTap: () {
                                     e.image == null
@@ -164,10 +164,6 @@ class _DisasterListState extends State<DisasterList> {
                           ),
                         ),
                       ))
-            
-            
-            
-            
             ],
           ),
         ))

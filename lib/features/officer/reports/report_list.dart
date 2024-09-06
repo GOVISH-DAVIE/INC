@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cais/features/officer/reports/models/reports_category_model/reports_category_model.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
+import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:provider/provider.dart';
@@ -98,6 +100,91 @@ class _SecurityListState extends State<SecurityList> {
 
                                       // Text(
                                       //     "  ${f.replaceAll("_", " ")}: ${e.details![f]}")),
+
+                                      ,
+                                      if(e.image != null)
+                                      InkWell(
+                                        onTap: () {
+                                          e.image == null
+                                              ? ""
+                                              : showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20),
+                                                      child: Stack(
+                                                        children: [
+                                                          SizedBox(
+                                                            width:
+                                                                double.infinity,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                .9,
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl:
+                                                                  "$SERVERImages${e.image}",
+                                                              height: 100,
+                                                              placeholder: (context,
+                                                                      url) =>
+                                                                  const Center(
+                                                                      child:
+                                                                          CircularProgressIndicator()),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  const Icon(Icons
+                                                                      .error),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                              top: 10,
+                                                              right: 10,
+                                                              child:
+                                                                  OutlinedButton(
+                                                                      style:
+                                                                          ButtonStyle(
+                                                                        side: MaterialStateProperty.all<BorderSide>(
+                                                                            const BorderSide(
+                                                                          color:
+                                                                              Colors.red,
+                                                                        )),
+                                                                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                                                                            const CircleBorder()),
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                      child:
+                                                                          const Icon(
+                                                                        Icons
+                                                                            .close,
+                                                                        color: Colors
+                                                                            .red,
+                                                                      )))
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                        },
+                                        child: CachedNetworkImage(
+                                          imageUrl: "$SERVERImages${e.image}",
+                                          height: 100,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                                  child:
+                                                      CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

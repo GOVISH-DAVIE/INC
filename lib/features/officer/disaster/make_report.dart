@@ -87,10 +87,7 @@ class _MakeReportState extends State<MakeDisaster> {
                 icon: const Icon(Icons.list_outlined))
           ],
         ),
-        body: 
-        
-        
-        FutureBuilder(
+        body: FutureBuilder(
             future: getData("auth"),
             builder: (context, snap) {
               if (snap.hasError) {
@@ -284,7 +281,5 @@ class _MakeReportState extends State<MakeDisaster> {
                 ),
               );
             }));
-  
-  
   }
 }

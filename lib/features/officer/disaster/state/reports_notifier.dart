@@ -99,6 +99,7 @@ class DisasterNotifier extends ChangeNotifier {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         // getReportOccurences();
+        getReportOccurences();
         _isBusy = false;
         notifyListeners();
       } else {

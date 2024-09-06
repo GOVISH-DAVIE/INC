@@ -134,7 +134,7 @@ class _AdminDashState extends State<AdminDash> {
                         ),
                       ),
 
-                      dashCard(
+                      dashCardOfficerAdmin(
                           context: context,
                           name: "BARAZA",
                           to: const OfficerEducation(),

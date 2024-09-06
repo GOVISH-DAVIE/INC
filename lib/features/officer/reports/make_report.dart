@@ -187,7 +187,6 @@ class _MakeReportState extends State<MakeReport> {
                                               // value?.toIso8601String();
                                               String string =
                                                   dateFormat.format(value);
- 
                                             },
                                             // controller: string,
                                             decoration: InputDecoration(
@@ -292,10 +291,10 @@ class _MakeReportState extends State<MakeReport> {
                               print(payload);
                               context
                                   .read<ReportsNotifier>()
-                                  .createReport(payload: payload)
+                                  .createReport(payload: payload, image: image)
                                   .then((value) {
                                 _formKey.currentState?.reset();
-                                Navigator.of(context).pop();
+                                // Navigator.of(context).pop();
                                 context.showCustomSnackBar(
                                     "Report Created successfully");
 
