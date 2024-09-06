@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/logging_utils.dart';
+import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
@@ -237,23 +238,23 @@ class _ReliefState extends State<Applicaitons> {
                               var payload =
                                   Map.from(_formKey.currentState!.value);
                               payload["villageId"] = (user.villageId);
-                              // context
-                              //     .read<DisasterNotifier>()
-                              //     .createReport(payload: payload,  )
-                              //     .then((value) {
-                              //   _formKey.currentState?.reset();
-                              //   Navigator.of(context).pop();
-                              //   context.showCustomSnackBar(
-                              //       "Disaster Reported successfully");
+                              context
+                                  .read<ApplicationsNotifier>()
+                                  .createApplications(payload: payload,  )
+                                  .then((value) {
+                                _formKey.currentState?.reset();
+                                Navigator.of(context).pop();
+                                context.showCustomSnackBar(
+                                    "Applicaiton Reported successfully");
 
-                              //   // Navigator.of(widget.cxn).pop();
-                              // }).catchError((onError) {
-                              //   logger.wtf(onError);
-                              //   context.showCustomSnackBar(
-                              //       "[Disaster] An Error Occured",
-                              //       isError: true);
-                              // });
-                            },
+                                // Navigator.of(widget.cxn).pop();
+                              }).catchError((onError) {
+                                logger.wtf(onError);
+                                context.showCustomSnackBar(
+                                    "[Applicaiton] An Error Occured",
+                                    isError: true);
+                              });
+                            },  
                             child: context.watch<DisasterNotifier>().isBusy
                                 ? const CircularProgressIndicator(
                                     color: white,

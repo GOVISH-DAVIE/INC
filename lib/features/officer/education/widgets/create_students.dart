@@ -143,10 +143,9 @@ class _AddStudentsState extends State<AddStudents> {
                                         .createStudents(payload: payload)
                                         .then((value) {
                                       context.showCustomSnackBar(
-                                          "Ward Created successfully");
-
-                                      Navigator.of(cxn).pop();
+                                          "School Updated successfully");
                                     });
+                                    Navigator.of(cxn).pop();
                                   },
                                   child:
                                       context.watch<EducationNotifier>().isBusy

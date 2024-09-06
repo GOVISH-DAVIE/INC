@@ -145,9 +145,9 @@ class _AddTeacherState extends State<AddTeacher> {
                                         .then((value) {
                                       context.showCustomSnackBar(
                                           "Updated successfully");
-
-                                      Navigator.of(cxn).pop();
                                     });
+
+                                    Navigator.of(cxn).pop();
                                   },
                                   child:
                                       context.watch<EducationNotifier>().isBusy

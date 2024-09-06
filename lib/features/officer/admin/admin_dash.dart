@@ -23,6 +23,7 @@ class _AdminDashState extends State<AdminDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
         body: SafeArea(
       child: FutureBuilder(
           future: getData("auth"),

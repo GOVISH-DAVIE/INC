@@ -59,7 +59,7 @@ class ApplicationsNotifier extends ChangeNotifier{
     notifyListeners();
 
     final response = await intercepted_client
-        .post(Uri.parse('${SERVERURL}counties'), body: jsonEncode(payload));
+        .post(Uri.parse('${SERVERURL}applications'), body: jsonEncode(payload));
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       // getCounties();
