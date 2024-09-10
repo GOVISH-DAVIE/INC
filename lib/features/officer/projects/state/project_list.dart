@@ -26,7 +26,7 @@ class _ProjectListState extends State<ProjectList> {
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           ...context.watch<ProjectNotifier>().projects.map((e) => Card(
                 color: mainColorCard,

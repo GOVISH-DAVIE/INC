@@ -13,6 +13,7 @@ _$AuthUserOfficerModelImpl _$$AuthUserOfficerModelImplFromJson(
       name: json['name'] as String?,
       serviceNumber: (json['service_number'] as num?)?.toInt(),
       password: json['password'] as String?,
+      permmisions: json['permmisions'] as String?,
       profilePic: json['profile_pic'],
       createdAt: json['created_at'] == null
           ? null
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$AuthUserOfficerModelImplToJson(
       'name': instance.name,
       'service_number': instance.serviceNumber,
       'password': instance.password,
+      'permmisions': instance.permmisions,
       'profile_pic': instance.profilePic,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),

@@ -2,28 +2,26 @@ import 'dart:convert';
 
 import 'package:cais/choices.dart';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/app_common_extentions.dart';
-import 'package:cais/core/utilities/logging_utils.dart';
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
+import 'package:cais/features/county_admin/receive/receive_relief_list.dart';
+import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
 import 'package:cais/features/officer/admin/relief/relief_list.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class Relief extends StatefulWidget {
-  const Relief({super.key});
+class ReceiveRelief extends StatefulWidget {
+  const ReceiveRelief({super.key});
 
   @override
-  State<Relief> createState() => _ReliefState();
+  State<ReceiveRelief> createState() => _ReceiveReliefState();
 }
 
-class _ReliefState extends State<Relief> {
+class _ReceiveReliefState extends State<ReceiveRelief> {
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   final _formKey = GlobalKey<FormBuilderState>();
   @override
@@ -32,7 +30,7 @@ class _ReliefState extends State<Relief> {
         appBar: AppBar(
           // foregroundColor: white,
           title: Text(
-            "Relief Distribution ",
+            "Receive Relief ",
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium
@@ -42,8 +40,8 @@ class _ReliefState extends State<Relief> {
           actions: [
             IconButton(
                 onPressed: () {
-                  context.read<ReliefNotifier>().getDistributions();
-                  context.appNavigatorPush(const ReliefList());
+                  context.read<ReceiveReliefNotifier>().getReceivership();
+                  context.appNavigatorPush(const ReliefReceiveList());
                 },
                 icon: const Icon(Icons.list))
           ],
@@ -79,7 +77,7 @@ class _ReliefState extends State<Relief> {
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
                             FormBuilderDropdown<String>(
-                              name: "type_of_relief",
+                              name: "relief_type",
                               decoration: InputDecoration(
                                 hintText: 'Choose an Option',
                               ),
@@ -94,48 +92,98 @@ class _ReliefState extends State<Relief> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
-                              "number of people given".capitalizeFirstofEach,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderTextField(
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: "number_of_people_given",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "Quantity Distributed",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            color: mainColor, fontSize: 17),
+                                      ),
+                                      FormBuilderTextField(
+                                        // keyboardType: TextInputType.,
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        name: "quantity",
+                                        onChanged: (val) {
+                                          print(
+                                              val); // Print the text value write into TextField
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "Quantity Type",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            color: mainColor, fontSize: 17),
+                                      ),
+                                      FormBuilderDropdown<String>(
+                                        name: "type",
+                                        decoration: InputDecoration(
+                                          hintText: 'Choose an Option',
+                                        ),
+                                        items: quantityType
+                                            .map((qty) => DropdownMenuItem(
+                                                  alignment:
+                                                      AlignmentDirectional
+                                                          .center,
+                                                  value: qty,
+                                                  child: Text(qty),
+                                                ))
+                                            .toList(),
+                                      ),
+                                    ],
+                                  ),
+                                ))
+                              ],
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             const Text(
-                              "Quantity Distributed",
+                              "Source",
                               textAlign: TextAlign.left,
                               style: TextStyle(color: mainColor, fontSize: 17),
                             ),
-                            FormBuilderTextField(
-                              // keyboardType: TextInputType.,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                            FormBuilderDropdown<String>(
+                              name: "source",
+                              decoration: InputDecoration(
+                                hintText: 'Choose an Option',
                               ),
-                              name: "quantity_distributed",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
+                              items: reliefFrom
+                                  .map((gender) => DropdownMenuItem(
+                                        alignment: AlignmentDirectional.center,
+                                        value: gender,
+                                        child:
+                                            Text(gender.replaceAll("_", " ")),
+                                      ))
+                                  .toList(),
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                           ],
                         ),
+                        const Text(
+                          "Received On",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(color: mainColor, fontSize: 17),
+                        ),
                         FormBuilderDateTimePicker(
-                          name: "relief_date",
+                          name: "date_and_time",
                           format: dateFormat,
                           lastDate: DateTime.now(),
 
@@ -193,9 +241,8 @@ class _ReliefState extends State<Relief> {
                               _formKey.currentState?.validate();
                               var payload =
                                   Map.from(_formKey.currentState!.value);
-                              payload["area"] = (user.villageId);
                               context
-                                  .read<ReliefNotifier>()
+                                  .read<ReceiveReliefNotifier>()
                                   .createRelief(
                                     payload: payload,
                                   )
@@ -203,17 +250,17 @@ class _ReliefState extends State<Relief> {
                                 _formKey.currentState?.reset();
                                 Navigator.of(context).pop();
                                 context.showCustomSnackBar(
-                                    "Disaster Reported successfully");
+                                    "Data Reported successfully");
 
                                 // Navigator.of(widget.cxn).pop();
                               }).catchError((onError) {
                                 logger.wtf(onError);
                                 context.showCustomSnackBar(
-                                    "[Relief Distribution] An Error Occured",
+                                    "[Relief Receivership] An Error Occured",
                                     isError: true);
                               });
                             },
-                            child: context.watch<ReliefNotifier>().isBusy
+                            child: context.watch<ReceiveReliefNotifier>().isBusy
                                 ? const CircularProgressIndicator(
                                     color: white,
                                   )

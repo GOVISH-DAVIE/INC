@@ -25,6 +25,7 @@ mixin _$AuthUserOfficerModel {
   @JsonKey(name: 'service_number')
   int? get serviceNumber => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
+  String? get permmisions => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_pic')
   dynamic get profilePic => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -51,6 +52,7 @@ abstract class $AuthUserOfficerModelCopyWith<$Res> {
       String? name,
       @JsonKey(name: 'service_number') int? serviceNumber,
       String? password,
+      String? permmisions,
       @JsonKey(name: 'profile_pic') dynamic profilePic,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -78,6 +80,7 @@ class _$AuthUserOfficerModelCopyWithImpl<$Res,
     Object? name = freezed,
     Object? serviceNumber = freezed,
     Object? password = freezed,
+    Object? permmisions = freezed,
     Object? profilePic = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -100,6 +103,10 @@ class _$AuthUserOfficerModelCopyWithImpl<$Res,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      permmisions: freezed == permmisions
+          ? _value.permmisions
+          : permmisions // ignore: cast_nullable_to_non_nullable
               as String?,
       profilePic: freezed == profilePic
           ? _value.profilePic
@@ -150,6 +157,7 @@ abstract class _$$AuthUserOfficerModelImplCopyWith<$Res>
       String? name,
       @JsonKey(name: 'service_number') int? serviceNumber,
       String? password,
+      String? permmisions,
       @JsonKey(name: 'profile_pic') dynamic profilePic,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -175,6 +183,7 @@ class __$$AuthUserOfficerModelImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? serviceNumber = freezed,
     Object? password = freezed,
+    Object? permmisions = freezed,
     Object? profilePic = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -197,6 +206,10 @@ class __$$AuthUserOfficerModelImplCopyWithImpl<$Res>
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      permmisions: freezed == permmisions
+          ? _value.permmisions
+          : permmisions // ignore: cast_nullable_to_non_nullable
               as String?,
       profilePic: freezed == profilePic
           ? _value.profilePic
@@ -230,6 +243,7 @@ class _$AuthUserOfficerModelImpl implements _AuthUserOfficerModel {
       this.name,
       @JsonKey(name: 'service_number') this.serviceNumber,
       this.password,
+      this.permmisions,
       @JsonKey(name: 'profile_pic') this.profilePic,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
@@ -249,6 +263,8 @@ class _$AuthUserOfficerModelImpl implements _AuthUserOfficerModel {
   @override
   final String? password;
   @override
+  final String? permmisions;
+  @override
   @JsonKey(name: 'profile_pic')
   final dynamic profilePic;
   @override
@@ -264,7 +280,7 @@ class _$AuthUserOfficerModelImpl implements _AuthUserOfficerModel {
 
   @override
   String toString() {
-    return 'AuthUserOfficerModel(id: $id, name: $name, serviceNumber: $serviceNumber, password: $password, profilePic: $profilePic, createdAt: $createdAt, updatedAt: $updatedAt, villageId: $villageId, village: $village)';
+    return 'AuthUserOfficerModel(id: $id, name: $name, serviceNumber: $serviceNumber, password: $password, permmisions: $permmisions, profilePic: $profilePic, createdAt: $createdAt, updatedAt: $updatedAt, villageId: $villageId, village: $village)';
   }
 
   @override
@@ -278,6 +294,8 @@ class _$AuthUserOfficerModelImpl implements _AuthUserOfficerModel {
                 other.serviceNumber == serviceNumber) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.permmisions, permmisions) ||
+                other.permmisions == permmisions) &&
             const DeepCollectionEquality()
                 .equals(other.profilePic, profilePic) &&
             (identical(other.createdAt, createdAt) ||
@@ -297,6 +315,7 @@ class _$AuthUserOfficerModelImpl implements _AuthUserOfficerModel {
       name,
       serviceNumber,
       password,
+      permmisions,
       const DeepCollectionEquality().hash(profilePic),
       createdAt,
       updatedAt,
@@ -325,6 +344,7 @@ abstract class _AuthUserOfficerModel implements AuthUserOfficerModel {
       final String? name,
       @JsonKey(name: 'service_number') final int? serviceNumber,
       final String? password,
+      final String? permmisions,
       @JsonKey(name: 'profile_pic') final dynamic profilePic,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
@@ -343,6 +363,8 @@ abstract class _AuthUserOfficerModel implements AuthUserOfficerModel {
   int? get serviceNumber;
   @override
   String? get password;
+  @override
+  String? get permmisions;
   @override
   @JsonKey(name: 'profile_pic')
   dynamic get profilePic;

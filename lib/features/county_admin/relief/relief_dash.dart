@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
-import 'package:cais/features/county_admin/home.dart';
+import 'package:cais/features/county_admin/receive/receive_relief.dart';
 import 'package:cais/features/officer/Disaster/reports.dart';
 import 'package:cais/features/officer/admin/admin_dash.dart';
 import 'package:cais/features/officer/auth/login.dart';
@@ -15,30 +15,17 @@ import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class OfficerDash extends StatefulWidget {
-  const OfficerDash({super.key});
+class ReliefDash extends StatefulWidget {
+  const ReliefDash({super.key});
 
   @override
-  State<OfficerDash> createState() => _OfficerDashState();
+  State<ReliefDash> createState() => _ReliefDashState();
 }
 
-class _OfficerDashState extends State<OfficerDash> {
+class _ReliefDashState extends State<ReliefDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                removeData("auth");
-                context.appNavigatorReplacement(const OfficerAuth());
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.redAccent,
-              ))
-        ],
-      ),
       body: SafeArea(
         child: FutureBuilder(
             future: getData("auth"),
@@ -55,10 +42,6 @@ class _OfficerDashState extends State<OfficerDash> {
 
               AuthUserOfficerModel user =
                   AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
-
-              if (user.permmisions == "CountyAdmin") {
-                return CountyAdmin();
-              }
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,7 +93,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             Padding(
                               padding: const EdgeInsets.only(left: 18.0),
                               child: Text(
-                                "${user.village?.name}".toUpperCase(),
+                                "Mombasa".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium
@@ -134,74 +117,13 @@ class _OfficerDashState extends State<OfficerDash> {
                       children: [
                         dashCard(
                             context: context,
-                            name: "EDUCATION",
-                            to: const OfficerEducation(),
+                            name: "Receive Relief".toUpperCase(),
+                            to: const ReceiveRelief(),
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Security".toUpperCase(),
+                            name: "Distribute Relief".toUpperCase(),
                             to: const ReportsOfficer(),
-                            isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Disaster".toUpperCase(),
-                            to: const DisasterOfficer(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Projects ".toUpperCase(),
-                            to: const Projects(),
-                            isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Admin".toUpperCase(),
-                            to: const AdminDash(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Demographic".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Economic",
-                            to: const Village(),
-                            isactive: false),
-                        dashCard(
-                            context: context,
-                            name: "environment".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Dashboard",
-                            to: const Village(),
-                            isactive: false),
-                        dashCard(
-                            context: context,
-                            name: "Health",
-                            to: const Village(),
                             isactive: false),
                       ],
                     ),

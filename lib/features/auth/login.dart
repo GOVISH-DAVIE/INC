@@ -48,7 +48,7 @@ class _LoginState extends State<Login> {
             ),
             InkWell(
               onTap: () {
-                context.appNavigatorPush(const OfficerAuth());
+                context.appNavigatorReplacement(const OfficerAuth());
               },
               child: SizedBox(
                 height: 100,

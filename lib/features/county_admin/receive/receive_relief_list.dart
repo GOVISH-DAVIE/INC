@@ -1,16 +1,17 @@
+import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ReliefList extends StatefulWidget {
-  const ReliefList({super.key});
+class ReliefReceiveList extends StatefulWidget {
+  const ReliefReceiveList({super.key});
 
   @override
-  State<ReliefList> createState() => _ReliefListState();
+  State<ReliefReceiveList> createState() => _ReliefListState();
 }
 
-class _ReliefListState extends State<ReliefList> {
+class _ReliefListState extends State<ReliefReceiveList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +21,12 @@ class _ReliefListState extends State<ReliefList> {
         child: ListView(
           cacheExtent: 5,
           children: [
-            ...context.watch<ReliefNotifier>().relief.map((e) => Card(
+            ...context.watch<ReceiveReliefNotifier>().relief.map((e) => Card(
                   color: mainColorCard,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      title: Text("${e.typeOfRelief}"),
+                      title: Text("${e.reliefType}"),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -33,13 +34,13 @@ class _ReliefListState extends State<ReliefList> {
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
-                                  text: "Number of People Helped \t\t",
+                                  text: "Source\t\t",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall
                                       ?.copyWith(fontSize: 18)),
                               TextSpan(
-                                  text: "${e.numberOfPeopleGiven}",
+                                  text: "${e.source}",
                                   style:
                                       Theme.of(context).textTheme.headlineSmall)
                             ]),
@@ -47,13 +48,13 @@ class _ReliefListState extends State<ReliefList> {
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
-                                  text: "Quantity Distributed \t\t",
+                                  text: "Quantity Received \t\t",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall
                                       ?.copyWith(fontSize: 18)),
                               TextSpan(
-                                  text: "${e.quantityDistributed}",
+                                  text: "${e.quantity} ${e.type}",
                                   style:
                                       Theme.of(context).textTheme.headlineSmall)
                             ]),
@@ -61,17 +62,18 @@ class _ReliefListState extends State<ReliefList> {
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
-                                  text: "Distributed on \t\t",
+                                  text: " Received  on\t\t",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall
                                       ?.copyWith(fontSize: 18)),
                               TextSpan(
-                                  text: "${e.relief_date ?? "-"}",
+                                  text: "${e.dateAndTime}",
                                   style:
-                                      Theme.of(context).textTheme.headlineSmall)
+                                      Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16))
                             ]),
                           ),
+                           
                         ],
                       ),
                     ),

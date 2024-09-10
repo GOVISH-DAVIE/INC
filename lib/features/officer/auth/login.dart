@@ -89,7 +89,8 @@ class _OfficerAuthState extends State<OfficerAuth> {
                                   .login(payload: _formKey.currentState!.value)
                                   .then((value) {
                                 context.showCustomSnackBar("successfull");
-                                context.appNavigatorPush(const OfficerDash());
+                                context.appNavigatorReplacement(
+                                    const OfficerDash());
                                 // ignore: argument_type_not_assignable_to_error_handler
                               }).catchError(() {
                                 context.showCustomSnackBar("Try again later",

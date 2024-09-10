@@ -27,6 +27,7 @@ Widget dashCard(
             ))),
       ));
 }
+
 Widget dashCardOfficerAdmin(
     {required BuildContext context,
     required String name,
@@ -34,7 +35,7 @@ Widget dashCardOfficerAdmin(
     required bool isactive}) {
   return SizedBox(
       height: 80,
-      width: MediaQuery.of(context).size.width*.9,
+      width: MediaQuery.of(context).size.width * .9,
       child: InkWell(
         onTap: () {
           !isactive ? null : context.appNavigatorPush(to);

@@ -12,6 +12,7 @@ class AuthUserOfficerModel with _$AuthUserOfficerModel {
     String? name,
     @JsonKey(name: 'service_number') int? serviceNumber,
     String? password,
+    String? permmisions,
     @JsonKey(name: 'profile_pic') dynamic profilePic,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
