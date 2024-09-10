@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
+import 'package:cais/features/county_admin/distribute_relief/distribute.dart';
 import 'package:cais/features/county_admin/receive/receive_relief.dart';
 import 'package:cais/features/officer/Disaster/reports.dart';
 import 'package:cais/features/officer/admin/admin_dash.dart';
@@ -123,8 +124,8 @@ class _ReliefDashState extends State<ReliefDash> {
                         dashCard(
                             context: context,
                             name: "Distribute Relief".toUpperCase(),
-                            to: const ReportsOfficer(),
-                            isactive: false),
+                            to: const DistributeRelief(),
+                            isactive: true),
                       ],
                     ),
                   ],

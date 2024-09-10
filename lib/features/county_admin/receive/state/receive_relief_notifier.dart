@@ -13,8 +13,7 @@ class ReceiveReliefNotifier extends ChangeNotifier {
   List<ReceiveReliefModel> _relief = [];
   List<ReceiveReliefModel> get relief => _relief;
 
-
-    Future getReceivership() async {
+  Future getReceivership() async {
     _isBusy = true;
     notifyListeners();
 
@@ -39,7 +38,6 @@ class ReceiveReliefNotifier extends ChangeNotifier {
       throw Exception('Failed to load Disaster');
     }
   }
-
 
   Future createRelief({required Map payload}) async {
     _isBusy = true;

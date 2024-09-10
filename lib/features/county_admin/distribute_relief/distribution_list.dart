@@ -1,17 +1,16 @@
-import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
-import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
+import 'package:cais/features/county_admin/distribute_relief/state/distribution_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ReliefReceiveList extends StatefulWidget {
-  const ReliefReceiveList({super.key});
+class DistributionList extends StatefulWidget {
+  const DistributionList({super.key});
 
   @override
-  State<ReliefReceiveList> createState() => _ReliefListState();
+  State<DistributionList> createState() => _DistributionListState();
 }
 
-class _ReliefListState extends State<ReliefReceiveList> {
+class _DistributionListState extends State<DistributionList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _ReliefListState extends State<ReliefReceiveList> {
         child: ListView(
           cacheExtent: 5,
           children: [
-            ...context.watch<ReceiveReliefNotifier>().relief.map((e) => Card(
+            ...context.watch<DistributeReliefNotifier>().reliefDistribution.map((e) => Card(
                   color: mainColorCard,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -40,7 +39,7 @@ class _ReliefListState extends State<ReliefReceiveList> {
                                       .headlineSmall
                                       ?.copyWith(fontSize: 18)),
                               TextSpan(
-                                  text: "${e.source}",
+                                  text: "${e.ward?.name}",
                                   style:
                                       Theme.of(context).textTheme.headlineSmall)
                             ]),
@@ -86,3 +85,4 @@ class _ReliefListState extends State<ReliefReceiveList> {
     );
   }
 }
+
