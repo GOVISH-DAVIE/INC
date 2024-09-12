@@ -78,7 +78,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
                                                     : Icons.visibility_off,
                                                 color: themePrimary,
                                               ))
-                                          : SizedBox(
+                                          :  SizedBox(
                                               height: 40,
                                             )),
                                   name: e,
