@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
+import 'package:cais/features/county_admin/country_dashboard/dashboard.dart';
 import 'package:cais/features/county_admin/relief/relief_dash.dart';
 import 'package:cais/features/officer/Disaster/reports.dart';
 import 'package:cais/features/officer/admin/admin_dash.dart';
@@ -123,7 +124,7 @@ class _OfficerDashState extends State<CountyAdmin> {
                         dashCard(
                             context: context,
                             name: "Dashboard".toUpperCase(),
-                            to: const ReportsOfficer(),
+                            to: const CountyDashboard(),
                             isactive: true),
                       ],
                     ),

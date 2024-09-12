@@ -27,6 +27,7 @@ class _ReliefDashState extends State<ReliefDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: FutureBuilder(
             future: getData("auth"),

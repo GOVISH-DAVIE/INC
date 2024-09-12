@@ -16,6 +16,7 @@ class OfficerAuth extends StatefulWidget {
 
 class _OfficerAuthState extends State<OfficerAuth> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +47,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
                         const SizedBox(
                           height: 10,
                         ),
+                        // Text('data'),
                         ...officerAuthEntries.map((e) => Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -59,9 +61,26 @@ class _OfficerAuthState extends State<OfficerAuth> {
                                   height: 10,
                                 ),
                                 FormBuilderTextField(
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                  ),
+                                  obscureText:
+                                      e == "password" ? isVisible : false,
+                                  decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      suffix: e == "password"
+                                          ? IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  isVisible = !isVisible;
+                                                });
+                                              },
+                                              icon: Icon(
+                                                isVisible
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off,
+                                                color: themePrimary,
+                                              ))
+                                          : SizedBox(
+                                              height: 40,
+                                            )),
                                   name: e,
                                   onChanged: (val) {
                                     print(
