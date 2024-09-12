@@ -109,6 +109,7 @@ dependencies:
   permission_handler: ^10.2.0
   webview_flutter: ^4.2.4
   cached_network_image:
+  mqtt_client: ^10.3.0
 
   # walkthrough package
   smooth_page_indicator: ^1.1.0

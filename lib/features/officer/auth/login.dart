@@ -73,7 +73,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
                                                 });
                                               },
                                               icon: Icon(
-                                                isVisible
+                                                !isVisible
                                                     ? Icons.visibility
                                                     : Icons.visibility_off,
                                                 color: themePrimary,
