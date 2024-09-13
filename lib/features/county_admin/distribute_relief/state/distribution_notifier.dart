@@ -13,7 +13,8 @@ class DistributeReliefNotifier extends ChangeNotifier {
   List<DistributionWardsModel> _wards = [];
   List<DistributionWardsModel> get wards => _wards;
   List<ReliefDistributionCountyModel> _reliefDistribution = [];
-  List<ReliefDistributionCountyModel> get reliefDistribution => _reliefDistribution;
+  List<ReliefDistributionCountyModel> get reliefDistribution =>
+      _reliefDistribution;
 
   Future getWards() async {
     _isBusy = true;
@@ -54,19 +55,19 @@ class DistributeReliefNotifier extends ChangeNotifier {
       throw Exception('Failed to load Disaster ${response.statusCode}');
     }
   }
+
   Future getReliefDistribution() async {
     _isBusy = true;
     notifyListeners();
 
     final response = await intercepted_client.get(
-        Uri.parse('${SERVERURL}county_admin/distribution'),
-         );
+      Uri.parse('${SERVERURL}county_admin/distribution'),
+    );
     logger.e(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       // get();
-       _reliefDistribution = (jsonDecode(response.body)['data'] as List)
-          .map((e) => ReliefDistributionCountyModel
-          .fromJson(e))
+      _reliefDistribution = (jsonDecode(response.body)['data'] as List)
+          .map((e) => ReliefDistributionCountyModel.fromJson(e))
           .toList();
       _isBusy = false;
       notifyListeners();

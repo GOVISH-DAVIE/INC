@@ -80,8 +80,7 @@ class _OfficerAuthState extends State<OfficerAuth> {
                                               ))
                                           : const SizedBox(
                                               height: 40,
-                                            )
-                                            ),
+                                            )),
                                   name: e,
                                   onChanged: (val) {
                                     print(

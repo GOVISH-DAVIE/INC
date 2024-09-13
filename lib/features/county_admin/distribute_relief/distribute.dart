@@ -21,21 +21,23 @@ class _DistributeReliefState extends State<DistributeRelief> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Select Relief Type",
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        actions:[
-          IconButton(onPressed: (){
-            context.read<DistributeReliefNotifier>().getReliefDistribution();
-            context.appNavigatorPush(const DistributionList());
-          }, icon: Icon(Icons.list))
-
-        ]
-      ),
+          title: Text(
+            "Select Relief Type",
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context
+                      .read<DistributeReliefNotifier>()
+                      .getReliefDistribution();
+                  context.appNavigatorPush(const DistributionList());
+                },
+                icon: Icon(Icons.list))
+          ]),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(

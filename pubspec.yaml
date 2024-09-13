@@ -110,6 +110,10 @@ dependencies:
   webview_flutter: ^4.2.4
   cached_network_image:
   mqtt_client: ^10.3.0
+  flutter_background_service: ^5.0.10
+  # mqtt_client: ^10.5.1
+  flutter_timezone: ^1.0.8
+  flutter_local_notifications:
 
   # walkthrough package
   smooth_page_indicator: ^1.1.0
