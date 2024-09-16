@@ -251,8 +251,8 @@ class _MakeReportState extends State<MakeDisaster> {
                                   .read<DisasterNotifier>()
                                   .createReport(payload: payload, img: image!)
                                   .then((value) {
-                                _formKey.currentState?.reset();
-                                Navigator.of(context).pop();
+                                // _formKey.currentState?.reset();
+                                // Navigator.of(context).pop();
                                 context.showCustomSnackBar(
                                     "Disaster Reported successfully");
 

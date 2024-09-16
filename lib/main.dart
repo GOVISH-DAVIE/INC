@@ -15,9 +15,10 @@ import 'features/officer/auth/login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initiatePrermisions();
   setupLocator();
   await initializeService();
-  await initiatePrermisions();
 
   runApp(MultiProvider(providers: providersChange, child: const MyApp()));
 }

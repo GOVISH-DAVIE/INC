@@ -39,7 +39,11 @@ Future<void> initializeService() async {
       autoStart: true,
       onStart: onStart,
       isForegroundMode: false,
+      notificationChannelId: 'my_foreground',
+      initialNotificationTitle: 'Service Running',
+      initialNotificationContent: 'Tap to return to the app',
       autoStartOnBoot: true,
+      
     ),
   );
 }
@@ -53,9 +57,12 @@ Future<bool> onIosBackground(ServiceInstance service) async {
 }
 
 Future<void> connectMQTT() async {
-  final client = MqttServerClient(mqttUrl, clientId);
-  void _onDisconnected() {
+  var clientID = clientId;
+  final client = MqttServerClient(mqttUrl, clientID);
+  Future<void> _onDisconnected() async {
     print('MQTT Client Disconnected');
+
+    await client.connect();
   }
 
   void _onConnected() {
@@ -67,14 +74,14 @@ Future<void> connectMQTT() async {
   }
 
   client.port = 1883;
-  client.keepAlivePeriod = 20;
+  client.keepAlivePeriod = 6000000000000000;
   client.onDisconnected = _onDisconnected;
   client.logging(on: true);
   client.onConnected = _onConnected;
   client.onSubscribed = _onSubscribed;
 
   final connMessage = MqttConnectMessage()
-      .withClientIdentifier('flutter_client')
+      .withClientIdentifier(clientID)
       .startClean()
       .withWillQos(MqttQos.atLeastOnce);
   client.connectionMessage = connMessage;
@@ -85,7 +92,7 @@ Future<void> connectMQTT() async {
     client.subscribe('inc/security', MqttQos.atLeastOnce);
   } catch (e) {
     print('MQTT Connection Exception: $e');
-    client.disconnect();
+    // client.disconnect();
   }
 
   client.updates!.listen((List<MqttReceivedMessage<MqttMessage?>>? c) async {
@@ -100,85 +107,84 @@ Future<void> connectMQTT() async {
     if (userdata != null) {
       AuthUserOfficerModel user =
           AuthUserOfficerModel.fromJson(jsonDecode(userdata));
-      if (user.permmisions == "CountyAdmin") {
-        if (c[0].topic == "inc/disaster") {
-          DisasterNotificationModel disasterNotificationModel =
-              DisasterNotificationModel.fromJson(jsonDecode(pt));
+      // if (user.permmisions == "CountyAdmin") {
+      if (c[0].topic == "inc/disaster") {
+        DisasterNotificationModel disasterNotificationModel =
+            DisasterNotificationModel.fromJson(jsonDecode(pt));
 
-          final Response response = await intercepted_client.get(Uri.parse(
-              "$SERVERImages${disasterNotificationModel.message?.image}"));
-          final String base64Image = base64Encode(response.bodyBytes);
-          BigPictureStyleInformation bigPictureStyleInformation =
-              BigPictureStyleInformation(
-            contentTitle:
-                '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
-            summaryText:
-                "Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths} \n ${disasterNotificationModel.message?.description}",
-            ByteArrayAndroidBitmap.fromBase64String(
-                base64Image), // Use image fetched from server
-            largeIcon: ByteArrayAndroidBitmap.fromBase64String(
-                base64Image), // Optional large icon (same image in this case)
-          );
-
-          AndroidNotificationDetails androidNotificationDetails =
-              AndroidNotificationDetails('${disasterNotificationModel.title}',
-                  '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
-                  channelDescription:
-                      '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
-                  importance: Importance.max,
-                  priority: Priority.high,
-                  playSound: true,
-                  styleInformation: bigPictureStyleInformation,
-                  ticker: 'ticker');
-          NotificationDetails notificationDetails = NotificationDetails(
-            android: androidNotificationDetails,
-          );
-          await flutterLocalNotificationsPlugin.show(
-              id++,
+        final Response response = await intercepted_client.get(Uri.parse(
+            "$SERVERImages${disasterNotificationModel.message?.image}"));
+        final String base64Image = base64Encode(response.bodyBytes);
+        BigPictureStyleInformation bigPictureStyleInformation =
+            BigPictureStyleInformation(
+          contentTitle:
               '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
-              'Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths}',
-              notificationDetails,
-              payload:
-                  'Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths}');
-        }
-        if (c[0].topic == "inc/security") {
-          SecurityNotificationsModel disasterNotificationModel =
-              SecurityNotificationsModel.fromJson(jsonDecode(pt));
+          summaryText:
+              "Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths} \n ${disasterNotificationModel.message?.description}",
+          ByteArrayAndroidBitmap.fromBase64String(
+              base64Image), // Use image fetched from server
+          largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+              base64Image), // Optional large icon (same image in this case)
+        );
 
-          final Response response = await intercepted_client.get(Uri.parse(
-              "$SERVERImages${disasterNotificationModel.message?.image}"));
-          final String base64Image = base64Encode(response.bodyBytes);
-          BigPictureStyleInformation bigPictureStyleInformation =
-              BigPictureStyleInformation(
-            contentTitle:
-                '${disasterNotificationModel.message?.report?.name} in ${disasterNotificationModel.message?.village?.name}',
-            summaryText: " ')}",
-            ByteArrayAndroidBitmap.fromBase64String(
-                base64Image), // Use image fetched from server
-            largeIcon: ByteArrayAndroidBitmap.fromBase64String(
-                base64Image), // Optional large icon (same image in this case)
-          );
-
-          AndroidNotificationDetails androidNotificationDetails =
-              AndroidNotificationDetails(
-                  '${disasterNotificationModel.title}', "",
-                  channelDescription: "",
-                  importance: Importance.max,
-                  priority: Priority.high,
-                  playSound: true,
-                  styleInformation: bigPictureStyleInformation,
-                  ticker: 'ticker');
-          NotificationDetails notificationDetails = NotificationDetails(
-            android: androidNotificationDetails,
-          );
-          await flutterLocalNotificationsPlugin.show(
-              id++,
-              '${disasterNotificationModel.message?.report?.name} in ${disasterNotificationModel.message?.village?.name}',
-              "  ",
-              notificationDetails,
-              payload: "");
-        }
+        AndroidNotificationDetails androidNotificationDetails =
+            AndroidNotificationDetails('${disasterNotificationModel.title}',
+                '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
+                channelDescription:
+                    '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
+                importance: Importance.max,
+                priority: Priority.high,
+                playSound: true,
+                styleInformation: bigPictureStyleInformation,
+                ticker: 'ticker');
+        NotificationDetails notificationDetails = NotificationDetails(
+          android: androidNotificationDetails,
+        );
+        await flutterLocalNotificationsPlugin.show(
+            id++,
+            '${disasterNotificationModel.message?.disaster?.name} in ${disasterNotificationModel.message?.village?.name}',
+            'Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths}',
+            notificationDetails,
+            payload:
+                'Homesteads Affected: ${disasterNotificationModel.message?.homesteads} \n Deaths: ${disasterNotificationModel.message?.deaths}');
       }
+      if (c[0].topic == "inc/security") {
+        SecurityNotificationsModel disasterNotificationModel =
+            SecurityNotificationsModel.fromJson(jsonDecode(pt));
+
+        final Response response = await intercepted_client.get(Uri.parse(
+            "$SERVERImages${disasterNotificationModel.message?.image}"));
+        final String base64Image = base64Encode(response.bodyBytes);
+        BigPictureStyleInformation bigPictureStyleInformation =
+            BigPictureStyleInformation(
+          contentTitle:
+              '${disasterNotificationModel.message?.report?.name} in ${disasterNotificationModel.message?.village?.name}',
+          summaryText: " ')}",
+          ByteArrayAndroidBitmap.fromBase64String(
+              base64Image), // Use image fetched from server
+          largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+              base64Image), // Optional large icon (same image in this case)
+        );
+
+        AndroidNotificationDetails androidNotificationDetails =
+            AndroidNotificationDetails('${disasterNotificationModel.title}', "",
+                channelDescription: "",
+                importance: Importance.max,
+                priority: Priority.high,
+                playSound: true,
+                styleInformation: bigPictureStyleInformation,
+                ticker: 'ticker');
+        NotificationDetails notificationDetails = NotificationDetails(
+          android: androidNotificationDetails,
+        );
+        await flutterLocalNotificationsPlugin.show(
+            id++,
+            '${disasterNotificationModel.message?.report?.name} in ${disasterNotificationModel.message?.village?.name}',
+            "  ",
+            notificationDetails,
+            payload: "");
+      }
+      // }
     }
   });
 }
@@ -198,5 +204,6 @@ void onStart(ServiceInstance service) async {
   Timer.periodic(const Duration(seconds: 1), (timer) {
     // client.emit("event-name", "your-message");
     print("service is successfully running ${DateTime.now().second} ");
+    // client.
   });
 }
