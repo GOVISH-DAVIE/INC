@@ -64,7 +64,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                       height: 20,
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 170,
                       width: MediaQuery.of(context).size.width * .9,
                       child: Card(
                         color: const Color.fromARGB(255, 229, 227, 227),
@@ -88,7 +88,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: SizedBox(
-                                    width: 180,
+                                    width: 190,
                                     child: OutlinedButton(
                                       onPressed: () {
                                         context.appNavigatorPush(OfficerSchools(

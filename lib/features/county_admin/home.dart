@@ -94,7 +94,7 @@ class _OfficerDashState extends State<CountyAdmin> {
                             Padding(
                               padding: const EdgeInsets.only(left: 18.0),
                               child: Text(
-                                "Mombasa".toUpperCase(),
+                                "Nairobi".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium

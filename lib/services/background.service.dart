@@ -107,7 +107,7 @@ Future<void> connectMQTT() async {
     if (userdata != null) {
       AuthUserOfficerModel user =
           AuthUserOfficerModel.fromJson(jsonDecode(userdata));
-      // if (user.permmisions == "CountyAdmin") {
+      if (user.permmisions == "CountyAdmin") {
       if (c[0].topic == "inc/disaster") {
         DisasterNotificationModel disasterNotificationModel =
             DisasterNotificationModel.fromJson(jsonDecode(pt));
@@ -184,7 +184,7 @@ Future<void> connectMQTT() async {
             notificationDetails,
             payload: "");
       }
-      // }
+      }
     }
   });
 }

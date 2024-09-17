@@ -44,7 +44,7 @@ class _MakeReportState extends State<MakeReport> {
 
   Future pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery,imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);
@@ -58,7 +58,7 @@ class _MakeReportState extends State<MakeReport> {
 
   Future pickImageFromCamera() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);

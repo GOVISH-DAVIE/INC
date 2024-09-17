@@ -39,7 +39,7 @@ class _CountyDashboardState extends State<CountyDashboard> {
         ),
       )
       ..loadRequest(Uri.parse(
-          'https://superset.cabinex.co.ke/superset/dashboard/p/GwgrY5gryVX'));
+          'https://superset.cabinex.co.ke/superset/dashboard/367c7f4a-68d0-4e3c-844c-7f3addb12703/?permalink_key=RYKP3QZom2y&standalone=true'));
 
     super.initState();
   }
