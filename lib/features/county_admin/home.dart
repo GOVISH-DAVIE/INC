@@ -4,6 +4,7 @@ import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
 import 'package:cais/features/county_admin/country_dashboard/dashboard.dart';
+import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_assign_jobs.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_users.dart';
 import 'package:cais/features/county_admin/relief/relief_dash.dart';
 import 'package:cais/features/officer/Disaster/reports.dart';
@@ -136,6 +137,11 @@ class _OfficerDashState extends State<CountyAdmin> {
                             context: context,
                             name: "Mombasa Yangu".toUpperCase(),
                             to: const MombasaYanguUsers(),
+                            isactive: true),
+                        dashCard(
+                            context: context,
+                            name: "assign Jobs".toUpperCase(),
+                            to: const MombasaYanguUsersJobs(),
                             isactive: true),
                         // dashCard(
                         //     context: context,
