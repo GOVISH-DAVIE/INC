@@ -201,9 +201,9 @@ void onStart(ServiceInstance service) async {
   service.on("start").listen((event) {
     connectMQTT();
   });
-  Timer.periodic(const Duration(seconds: 1), (timer) {
-    // client.emit("event-name", "your-message");
-    print("service is successfully running ${DateTime.now().second} ");
-    // client.
-  });
+  // Timer.periodic(const Duration(seconds: 1), (timer) {
+  //   // client.emit("event-name", "your-message");
+  //   print("service is successfully running ${DateTime.now().second} ");
+  //   // client.
+  // });
 }

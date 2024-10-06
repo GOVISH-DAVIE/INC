@@ -38,7 +38,8 @@ class _MakeReportState extends State<MakeDisaster> {
 
   Future pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 40);
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.gallery, imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);
@@ -52,7 +53,8 @@ class _MakeReportState extends State<MakeDisaster> {
 
   Future pickImageFromCamera() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 40);
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.camera, imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);

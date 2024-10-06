@@ -39,7 +39,8 @@ class _ProjectsState extends State<Projects> {
 
   Future pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 40);
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.gallery, imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);
@@ -53,7 +54,8 @@ class _ProjectsState extends State<Projects> {
 
   Future pickImageFromCamera() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 40);
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.camera, imageQuality: 40);
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);
