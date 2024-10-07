@@ -35,7 +35,7 @@ class _ReliefListState extends State<MombasaYanguEmployees> {
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
-                                  text: "Source\t\t",
+                                  text: "Designation\t\t",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall
@@ -49,7 +49,7 @@ class _ReliefListState extends State<MombasaYanguEmployees> {
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
-                                  text: "Quantity Received \t\t",
+                                  text: "From \t\t",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall
