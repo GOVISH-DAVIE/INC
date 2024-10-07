@@ -6,6 +6,7 @@ import 'package:cais/features/admin/schools_cartegories/state/school_cartegories
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/ward/state_ward.dart';
 import 'package:cais/features/county_admin/distribute_relief/state/distribution_notifier.dart';
+import 'package:cais/features/county_admin/messages/state/messages_notifier.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/state/receive_relief_notifier.dart';
 import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
 import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
@@ -30,6 +31,7 @@ List<SingleChildWidget> providersChange = [
   ChangeNotifierProvider(create: (context) => locator.get<DisasterNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<ProjectNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<ReliefNotifier>()),
+  ChangeNotifierProvider(create: (context) => locator.get<MessageNotifier>()),
   ChangeNotifierProvider(
       create: (context) => locator.get<MombasaYanguNotifier>()),
   ChangeNotifierProvider(

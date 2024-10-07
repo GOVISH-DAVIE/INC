@@ -4,6 +4,7 @@ import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
 import 'package:cais/features/county_admin/country_dashboard/dashboard.dart';
+import 'package:cais/features/county_admin/messages/messages.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_assign_jobs.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_users.dart';
 import 'package:cais/features/county_admin/relief/relief_dash.dart';
@@ -143,11 +144,16 @@ class _OfficerDashState extends State<CountyAdmin> {
                             name: "assign Jobs".toUpperCase(),
                             to: const MombasaYanguUsersJobs(),
                             isactive: true),
-                        // dashCard(
-                        //     context: context,
-                        //     name: "Dashboard".toUpperCase(),
-                        //     to: const CountyDashboard(),
-                        //     isactive: true),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        dashCard(
+                            context: context,
+                            name: "Messages Dashboard".toUpperCase(),
+                            to: const MessagesDashboard(),
+                            isactive: true),
                       ],
                     ),
                   ],

@@ -6,6 +6,7 @@ import 'package:cais/features/admin/schools_cartegories/state/school_cartegories
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/ward/state_ward.dart';
 import 'package:cais/features/county_admin/distribute_relief/state/distribution_notifier.dart';
+import 'package:cais/features/county_admin/messages/state/messages_notifier.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/state/receive_relief_notifier.dart';
 import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
 import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
@@ -20,6 +21,7 @@ import 'package:get_it/get_it.dart';
 GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerFactory<MombasaYanguNotifier>(() => MombasaYanguNotifier());
+  locator.registerFactory<MessageNotifier>(() => MessageNotifier());
   locator.registerFactory<CountiesNotifier>(() => CountiesNotifier());
   locator.registerFactory<EthnicityNotifier>(() => EthnicityNotifier());
   locator.registerFactory<GenderNotifier>(() => GenderNotifier());
