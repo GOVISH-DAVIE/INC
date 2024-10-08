@@ -9,7 +9,7 @@ Widget dashCard(
     required bool isactive}) {
   return SizedBox(
       height: 80,
-      width: 150,
+      width: 155,
       child: InkWell(
         onTap: () {
           !isactive ? null : context.appNavigatorPush(to);

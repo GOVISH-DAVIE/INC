@@ -188,7 +188,7 @@ class _CreateCountiesState extends State<MakeReportForm> {
                           context.showCustomSnackBar(
                               "Report Created successfully");
 
-                          Navigator.of(widget.cxn).pop();
+                          Navigator.of(context).pop();
                         });
                       },
                       child: context.watch<ReportsNotifier>().isBusy

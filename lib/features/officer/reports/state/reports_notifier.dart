@@ -102,7 +102,7 @@ class ReportsNotifier extends ChangeNotifier {
         _isBusy = false;
         notifyListeners();
         getReportOccurences();
-        // throw Exception('Failed to load Disaster');
+        throw Exception('Failed to load Disaster');
       }
     } catch (e) {
       _isBusy = false;

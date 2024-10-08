@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cais/features/county_admin/messages/presentation/widgets/high.dart';
 import 'package:cais/features/county_admin/messages/state/messages_notifier.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,9 @@ class _MessagesDashboardState extends State<LowMessages> {
   void initState() {
     super.initState();
     context.read<MessageNotifier>().getMessages();
+    Timer(const Duration(seconds: 40), () {
+      context.read<MessageNotifier>().getMessagesTimer();
+    });
   }
 
   @override

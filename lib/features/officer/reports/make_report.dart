@@ -296,10 +296,10 @@ class _MakeReportState extends State<MakeReport> {
                                   .createReport(payload: payload, image: image)
                                   .then((value) {
                                 _formKey.currentState?.reset();
-                                // Navigator.of(context).pop();
+
                                 context.showCustomSnackBar(
                                     "Report Created successfully");
-
+                                Navigator.of(context).pop();
                                 // Navigator.of(widget.cxn).pop();
                               });
                             },

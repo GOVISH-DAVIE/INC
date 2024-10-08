@@ -19,6 +19,8 @@ class MessageNotifier extends ChangeNotifier {
 
   List<MessagesModel> _messages = [];
   List<MessagesModel> get messages => _messages;
+  List<MessagesModel> _messages1 = [];
+  List<MessagesModel> get messages1 => _messages1;
 
   Future getWards() async {
     _isBusy = true;
@@ -57,6 +59,26 @@ class MessageNotifier extends ChangeNotifier {
       notifyListeners();
     } else {
       _isBusy = false;
+      notifyListeners();
+      throw Exception('Failed to load Wards');
+    }
+  }
+
+  Future getMessagesTimer() async {
+    final response = await intercepted_client
+        .get(Uri.parse('${MessageURL}message/analyzedall'));
+
+    if (response.statusCode == 200) {
+      _messages1 = (jsonDecode(response.body)['data'] as List)
+          .map((e) => MessagesModel.fromJson(e))
+          .toList();
+      List<MessagesModel> difference1 =
+          _messages1.where((item) => !_messages.contains(item)).toList();
+
+      // _isBusy = false;
+      notifyListeners();
+    } else {
+      // _isBusy = false;
       notifyListeners();
       throw Exception('Failed to load Wards');
     }

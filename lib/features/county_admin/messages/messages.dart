@@ -1,3 +1,5 @@
+import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/county_admin/message_dashboard/dashboard.dart';
 import 'package:cais/features/county_admin/messages/high.dart';
 import 'package:cais/features/county_admin/messages/medium.dart';
 import 'package:cais/features/county_admin/messages/state/messages_notifier.dart';
@@ -36,7 +38,10 @@ class _MessagesDashboardState extends State<MessagesDashboard> {
                       Container(
                         padding: const EdgeInsets.only(right: 10),
                         child: OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context
+                                  .appNavigatorPush(const MessageDashboard());
+                            },
                             child: const Row(
                               children: [
                                 Text("Dashboard"),

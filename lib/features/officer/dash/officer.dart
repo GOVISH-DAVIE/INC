@@ -4,6 +4,8 @@ import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
 import 'package:cais/features/county_admin/home.dart';
+import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_assign_jobs.dart';
+import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_users.dart';
 import 'package:cais/features/officer/Disaster/reports.dart';
 import 'package:cais/features/officer/admin/admin_dash.dart';
 import 'package:cais/features/officer/auth/login.dart';
@@ -57,7 +59,7 @@ class _OfficerDashState extends State<OfficerDash> {
                   AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
 
               if (user.permmisions == "CountyAdmin") {
-                return CountyAdmin();
+                return const CountyAdmin();
               }
               return SingleChildScrollView(
                 child: Column(
@@ -156,6 +158,21 @@ class _OfficerDashState extends State<OfficerDash> {
                             context: context,
                             name: "Projects ".toUpperCase(),
                             to: const Projects(),
+                            isactive: true),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        dashCard(
+                            context: context,
+                            name: "Mombasa Yangu".toUpperCase(),
+                            to: const MombasaYanguUsers(),
+                            isactive: true),
+                        dashCard(
+                            context: context,
+                            name: "assign Jobs".toUpperCase(),
+                            to: const MombasaYanguUsersJobs(),
                             isactive: true),
                       ],
                     ),
