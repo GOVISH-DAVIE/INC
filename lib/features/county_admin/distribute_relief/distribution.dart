@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:cais/choices.dart';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
@@ -82,7 +81,7 @@ class _ReliefDistributionState extends State<ReliefDistributionPage> {
                                   ),
                                   FormBuilderDropdown<int>(
                                     name: "wardId",
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Choose an Option',
                                     ),
                                     items: context
@@ -96,7 +95,7 @@ class _ReliefDistributionState extends State<ReliefDistributionPage> {
                                             ))
                                         .toList(),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                   Row(
@@ -141,7 +140,7 @@ class _ReliefDistributionState extends State<ReliefDistributionPage> {
                                             ),
                                             FormBuilderDropdown<String>(
                                               name: "type",
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: 'Choose an Option',
                                               ),
                                               items: quantityType
@@ -215,7 +214,7 @@ class _ReliefDistributionState extends State<ReliefDistributionPage> {
                                 // initialTime: const TimeOfDay(hour: 8, minute: 0),
                                 // locale: const Locale.fromSubtags(languageCode: 'fr'),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               SizedBox(

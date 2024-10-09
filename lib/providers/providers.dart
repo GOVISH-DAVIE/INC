@@ -6,6 +6,7 @@ import 'package:cais/features/admin/schools_cartegories/state/school_cartegories
 import 'package:cais/features/admin/sub_counties/state_sub_counties.dart';
 import 'package:cais/features/admin/ward/state_ward.dart';
 import 'package:cais/features/county_admin/distribute_relief/state/distribution_notifier.dart';
+import 'package:cais/features/county_admin/health/state/health_admin.dart';
 import 'package:cais/features/county_admin/messages/state/messages_notifier.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/state/receive_relief_notifier.dart';
 import 'package:cais/features/county_admin/receive/state/receive_relief_notifier.dart';
@@ -22,6 +23,8 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 List<SingleChildWidget> providersChange = [
+  ChangeNotifierProvider(
+      create: (context) => locator.get<HealthAdminNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<CountiesNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<EthnicityNotifier>()),
   ChangeNotifierProvider(create: (context) => locator.get<GenderNotifier>()),
