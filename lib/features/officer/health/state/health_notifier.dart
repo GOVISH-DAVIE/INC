@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class HealthNotifier extends ChangeNotifier {
   bool _isBusy = false;
-  bool get isBusy => false;
+  bool get isBusy => _isBusy;
 
   List<PregnatMomsModel> _pregnantMoms = [];
   List<PregnatMomsModel> get pregnantMoms => _pregnantMoms;
@@ -37,7 +37,7 @@ class HealthNotifier extends ChangeNotifier {
     notifyListeners();
 
     final response =
-        await intercepted_client.get(Uri.parse('${SERVERURL}disaster'));
+        await intercepted_client.get(Uri.parse('${SERVERURL}pregnancy_moms'));
 
     if (response.statusCode == 200) {
       _pregnantMoms = (jsonDecode(response.body)['data'] as List)

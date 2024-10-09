@@ -30,7 +30,7 @@ class _ReliefListState extends State<ReliefReceiveList> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Divider(),
+                          const Divider(),
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
