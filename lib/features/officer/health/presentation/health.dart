@@ -6,6 +6,7 @@ import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
+import 'package:cais/features/officer/health/presentation/births/births.dart';
 import 'package:cais/features/officer/health/presentation/pregnant_moms/pregnant_moms.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,7 @@ class _HealthState extends State<Health> {
                             onTap: () {
                               context.appNavigatorPush(const PregnantMoms());
                             },
-                            title: Text("Pregnant Moms",
+                            title: Text("Pregnant Moms".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -120,7 +121,7 @@ class _HealthState extends State<Health> {
                           child: ListTile(
                             enabled: true,
                             onTap: () {
-                              // context.appNavigatorPush(const Applicaitons());
+                              context.appNavigatorPush(const Births());
                             },
                             title: Text("Births".toUpperCase(),
                                 style: Theme.of(context)
@@ -138,7 +139,7 @@ class _HealthState extends State<Health> {
                             onTap: () {
                               // context.appNavigatorPush(const Applicaitons());
                             },
-                            title: Text("Births".toUpperCase(),
+                            title: Text("Vaccinces".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -147,11 +148,11 @@ class _HealthState extends State<Health> {
                         ),
                       ),
 
-                      dashCardOfficerAdmin(
-                          context: context,
-                          name: "Vaccines",
-                          to: const OfficerEducation(),
-                          isactive: false),
+                      // dashCardOfficerAdmin(
+                      //     context: context,
+                      //     name: "Vaccines",
+                      //     to: const OfficerEducation(),
+                      //     isactive: false),
                     ],
                   ),
                 );
