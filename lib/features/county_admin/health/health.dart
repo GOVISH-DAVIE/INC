@@ -20,14 +20,16 @@ import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class CountyAdmin extends StatefulWidget {
-  const CountyAdmin({super.key});
+import 'vaccinces/vaccines.dart';
+
+class CountyAdminHealth extends StatefulWidget {
+  const CountyAdminHealth({super.key});
 
   @override
-  State<CountyAdmin> createState() => _OfficerDashState();
+  State<CountyAdminHealth> createState() => _CountyAdminHealthState();
 }
 
-class _OfficerDashState extends State<CountyAdmin> {
+class _CountyAdminHealthState extends State<CountyAdminHealth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,45 +122,10 @@ class _OfficerDashState extends State<CountyAdmin> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        dashCard(
+                        dashCardOfficerAdmin(
                             context: context,
-                            name: "Relief".toUpperCase(),
-                            to: const ReliefDash(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Dashboard".toUpperCase(),
-                            to: const CountyDashboard(),
-                            isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Mombasa Yangu".toUpperCase(),
-                            to: const MombasaYanguUsers(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "assign Jobs".toUpperCase(),
-                            to: const MombasaYanguUsersJobs(),
-                            isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Messages Dashboard".toUpperCase(),
-                            to: const MessagesDashboard(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "Health".toUpperCase(),
-                            to: const CountyAdminHealth(),
+                            name: "Vaccinces".toUpperCase(),
+                            to: const VaccinesTypes(),
                             isactive: true),
                       ],
                     ),
