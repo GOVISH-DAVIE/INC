@@ -12,6 +12,7 @@ import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
+import 'package:cais/features/officer/health/presentation/health.dart';
 import 'package:cais/features/officer/projects/projects.dart';
 import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
@@ -186,9 +187,9 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Demographic".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
+                            name: "Health".capitalizeFirstofEach,
+                            to: const Health(),
+                            isactive: true),
                       ],
                     ),
 
@@ -217,7 +218,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: false),
                         dashCard(
                             context: context,
-                            name: "Health",
+                            name: "Demographic",
                             to: const Village(),
                             isactive: false),
                       ],

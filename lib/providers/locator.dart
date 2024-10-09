@@ -14,12 +14,14 @@ import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/state/auth.dart';
 import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/features/officer/education/state/education_notifier.dart';
+import 'package:cais/features/officer/health/state/health_notifier.dart';
 import 'package:cais/features/officer/projects/state/project_notifier.dart';
 import 'package:cais/features/officer/reports/state/reports_notifier.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
 void setupLocator() {
+  locator.registerFactory<HealthNotifier>(() => HealthNotifier());
   locator.registerFactory<MombasaYanguNotifier>(() => MombasaYanguNotifier());
   locator.registerFactory<MessageNotifier>(() => MessageNotifier());
   locator.registerFactory<CountiesNotifier>(() => CountiesNotifier());
