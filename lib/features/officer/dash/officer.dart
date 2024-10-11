@@ -18,6 +18,8 @@ import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../mombasa_ni_yangu/mombasa_dash.dart';
+
 class OfficerDash extends StatefulWidget {
   const OfficerDash({super.key});
 
@@ -162,21 +164,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Mombasa Yangu".toUpperCase(),
-                            to: const MombasaYanguUsers(),
-                            isactive: true),
-                        dashCard(
-                            context: context,
-                            name: "assign Jobs".toUpperCase(),
-                            to: const MombasaYanguUsersJobs(),
-                            isactive: true),
-                      ],
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -187,7 +175,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Health".capitalizeFirstofEach,
+                            name: "Health".toUpperCase(),
                             to: const Health(),
                             isactive: true),
                       ],
@@ -198,9 +186,10 @@ class _OfficerDashState extends State<OfficerDash> {
                       children: [
                         dashCard(
                             context: context,
-                            name: "Economic",
-                            to: const Village(),
-                            isactive: false),
+                            name: "Mombasa Yangu".toUpperCase(),
+                            to: const MombasaNiYangu(),
+                            // to: const MombasaYanguUsers(),
+                            isactive: true),
                         dashCard(
                             context: context,
                             name: "environment".capitalizeFirstofEach,
@@ -213,9 +202,19 @@ class _OfficerDashState extends State<OfficerDash> {
                       children: [
                         dashCard(
                             context: context,
-                            name: "Dashboard",
+                            name: "Economic",
                             to: const Village(),
                             isactive: false),
+                        dashCard(
+                            context: context,
+                            name: "Dashboard".capitalizeFirstofEach,
+                            to: const Village(),
+                            isactive: false),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
                         dashCard(
                             context: context,
                             name: "Demographic",

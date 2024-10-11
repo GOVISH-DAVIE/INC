@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/network/http_client.dart';
 import 'package:cais/features/officer/health/models/birth_model/birth_model.dart';
 import 'package:cais/features/officer/health/models/pregnat_moms_model/pregnat_moms_model.dart';
-import 'package:cais/features/officer/health/presentation/pregnant_moms/pregnant_moms_list.dart';
+import 'package:cais/features/officer/health/models/vaccinces_response_model/vaccinces_response_model.dart';
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +16,9 @@ class HealthNotifier extends ChangeNotifier {
 
   List<BirthModel> _births = [];
   List<BirthModel> get births => _births;
+
+  List<VaccincesResponseModel> _vaccinesissue = [];
+  List<VaccincesResponseModel> get vaccinesissue => _vaccinesissue;
   Future createPregnantMom({required Map payload}) async {
     _isBusy = true;
     notifyListeners();
@@ -52,6 +55,45 @@ class HealthNotifier extends ChangeNotifier {
       _isBusy = false;
       notifyListeners();
       throw Exception('Failed to load Disaster ${response.statusCode}');
+    }
+  }
+
+  Future createVaccine({required Map payload}) async {
+    _isBusy = true;
+    notifyListeners();
+
+    final response = await intercepted_client
+        .post(Uri.parse('${SERVERURL}vaccines'), body: jsonEncode(payload));
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      getBirth();
+      // get
+      _isBusy = false;
+      notifyListeners();
+    } else {
+      _isBusy = false;
+      notifyListeners();
+      throw Exception('Failed to load Vaccines ${response.statusCode}');
+    }
+  }
+
+  Future getVaccines() async {
+    _isBusy = true;
+    notifyListeners();
+
+    final response =
+        await intercepted_client.get(Uri.parse('${SERVERURL}vaccines'));
+
+    if (response.statusCode == 200) {
+      _vaccinesissue = (jsonDecode(response.body)['data'] as List)
+          .map((e) => VaccincesResponseModel.fromJson(e))
+          .toList();
+      _isBusy = false;
+      notifyListeners();
+    } else {
+      _isBusy = false;
+      notifyListeners();
+      throw Exception('Failed to load Disaster');
     }
   }
 

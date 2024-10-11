@@ -2,25 +2,21 @@ import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_assign_jobs.dart';
+import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_users.dart';
 import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/dash/widgets/dashCards.dart';
-import 'package:cais/features/officer/education/education.dart';
-import 'package:cais/features/officer/health/presentation/births/births.dart';
-import 'package:cais/features/officer/health/presentation/pregnant_moms/pregnant_moms.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'vaccines/vaccines.dart';
-
-class Health extends StatefulWidget {
-  const Health({super.key});
+class MombasaNiYangu extends StatefulWidget {
+  const MombasaNiYangu({super.key});
 
   @override
-  State<Health> createState() => _HealthState();
+  State<MombasaNiYangu> createState() => _MombasaNiYanguState();
 }
 
-class _HealthState extends State<Health> {
+class _MombasaNiYanguState extends State<MombasaNiYangu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,9 +103,10 @@ class _HealthState extends State<Health> {
                         child: Card(
                           child: ListTile(
                             onTap: () {
-                              context.appNavigatorPush(const PregnantMoms());
+                              context
+                                  .appNavigatorPush(const MombasaYanguUsers());
                             },
-                            title: Text("Pregnant Moms".toUpperCase(),
+                            title: Text("Mombasa Ni Yangu".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -123,25 +120,10 @@ class _HealthState extends State<Health> {
                           child: ListTile(
                             enabled: true,
                             onTap: () {
-                              context.appNavigatorPush(const Births());
+                              context.appNavigatorPush(
+                                  const MombasaYanguUsersJobs());
                             },
-                            title: Text("Births".toUpperCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall
-                                    ?.copyWith(fontWeight: FontWeight.w400)),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18.0, right: 18),
-                        child: Card(
-                          child: ListTile(
-                            enabled: true,
-                            onTap: () {
-                              context.appNavigatorPush(const Vaccines());
-                            },
-                            title: Text("Vaccinces".toUpperCase(),
+                            title: Text("assign Jobs".toUpperCase(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
