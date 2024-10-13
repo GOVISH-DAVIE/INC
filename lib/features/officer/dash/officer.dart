@@ -157,7 +157,7 @@ class _OfficerDashState extends State<OfficerDash> {
                             name: "EDUCATION",
                             to: const Modular(
                               title: "Education",
-                              length: 4,
+                              length: 3,
                             ),
                             isactive: true),
                       ],
