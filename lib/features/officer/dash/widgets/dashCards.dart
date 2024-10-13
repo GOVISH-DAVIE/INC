@@ -9,7 +9,7 @@ Widget dashCard(
     required bool isactive}) {
   return SizedBox(
       height: 80,
-      width: 155,
+      width: 185,
       child: InkWell(
         onTap: () {
           !isactive ? null : context.appNavigatorPush(to);
@@ -18,12 +18,16 @@ Widget dashCard(
             borderOnForeground: true,
             color: isactive ? mainColor : mainColorCard.withOpacity(.2),
             child: Center(
-                child: Text(
-              name,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge
-                  ?.copyWith(color: isactive ? Colors.white : Colors.black),
+                child: Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge
+                    ?.copyWith(color: isactive ? Colors.white : Colors.black),
+              ),
             ))),
       ));
 }
@@ -44,12 +48,16 @@ Widget dashCardOfficerAdmin(
             borderOnForeground: true,
             color: isactive ? mainColor : mainColorCard.withOpacity(.2),
             child: Center(
-                child: Text(
-              name,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge
-                  ?.copyWith(color: isactive ? Colors.white : Colors.black),
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge
+                    ?.copyWith(color: isactive ? Colors.white : Colors.black),
+              ),
             ))),
       ));
 }

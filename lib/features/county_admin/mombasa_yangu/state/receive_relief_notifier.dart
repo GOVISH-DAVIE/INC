@@ -81,13 +81,7 @@ class MombasaYanguNotifier extends ChangeNotifier {
       _wardResponseModel = (jsonDecode(response.body)['data'] as List)
           .map((e) => WardResponseModel.fromJson(e))
           .toList();
-
       _isBusy = false;
-      notifyListeners();
-
-      //  _reportsCategoryModel   .sort((a, b) => a.name!
-      //           .toLowerCase()
-      //           .compareTo(b.name!.toLowerCase()));
       notifyListeners();
     } else {
       _isBusy = false;

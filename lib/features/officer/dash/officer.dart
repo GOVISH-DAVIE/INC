@@ -18,6 +18,7 @@ import 'package:cais/features/officer/reports/reports.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../education/education_dash.dart';
 import '../mombasa_ni_yangu/mombasa_dash.dart';
 
 class OfficerDash extends StatefulWidget {
@@ -140,7 +141,7 @@ class _OfficerDashState extends State<OfficerDash> {
                         dashCard(
                             context: context,
                             name: "EDUCATION",
-                            to: const OfficerEducation(),
+                            to: const EducationDash(),
                             isactive: true),
                         dashCard(
                             context: context,
@@ -193,31 +194,6 @@ class _OfficerDashState extends State<OfficerDash> {
                         dashCard(
                             context: context,
                             name: "environment".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Economic",
-                            to: const Village(),
-                            isactive: false),
-                        dashCard(
-                            context: context,
-                            name: "Dashboard".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        dashCard(
-                            context: context,
-                            name: "Demographic",
                             to: const Village(),
                             isactive: false),
                       ],

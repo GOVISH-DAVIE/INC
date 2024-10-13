@@ -101,36 +101,23 @@ class _AdminDashState extends State<AdminDash> {
                             EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
                         child: SizedBox(),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.only(left: 18.0, right: 18),
-                        child: Card(
-                          child: ListTile(
-                            onTap: () {
-                              context.appNavigatorPush(const Relief());
-                            },
-                            title: Text("RELIEF",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall
-                                    ?.copyWith(fontWeight: FontWeight.w400)),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18.0, right: 18),
-                        child: Card(
-                          child: ListTile(
-                            enabled: true,
-                            onTap: () {
-                              context.appNavigatorPush(const Applicaitons());
-                            },
-                            title: Text("CITIZEN APPLICATIONS".toUpperCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall
-                                    ?.copyWith(fontWeight: FontWeight.w400)),
-                          ),
+                        padding: const EdgeInsets.only(
+                            left: 25.0, right: 10, bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            dashCard(
+                                context: context,
+                                name: "RELIEF  ".toUpperCase(),
+                                to: const Relief(),
+                                isactive: true),
+                            dashCard(
+                                context: context,
+                                name: "CITIZEN APPLICATIONS  ".toUpperCase(),
+                                to: const Applicaitons(),
+                                isactive: true),
+                          ],
                         ),
                       ),
 

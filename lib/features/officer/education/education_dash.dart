@@ -1,27 +1,22 @@
 import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
-import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
-import 'package:cais/features/officer/health/presentation/births/births.dart';
-import 'package:cais/features/officer/health/presentation/pregnant_moms/pregnant_moms.dart';
 import 'package:cais/features/officer/mombasa_ni_yangu/mombasa_dash.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'vaccines/vaccines.dart';
-
-class Health extends StatefulWidget {
-  const Health({super.key});
+class EducationDash extends StatefulWidget {
+  const EducationDash({super.key});
 
   @override
-  State<Health> createState() => _HealthState();
+  State<EducationDash> createState() => _EducationDashState();
 }
 
-class _HealthState extends State<Health> {
+class _EducationDashState extends State<EducationDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,19 +94,57 @@ class _HealthState extends State<Health> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 30.0, right: 30, bottom: 20),
+                            left: 10.0, right: 10, bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             dashCard(
                                 context: context,
-                                name: "Mombasa care ".toUpperCase(),
+                                name: "Schools".toUpperCase(),
+                                to: const OfficerEducation(),
+                                isactive: true),
+                            dashCard(
+                                context: context,
+                                name: "Feeding Programme".toUpperCase(),
                                 to: const MombasaNiYangu(),
                                 // to: const MombasaYanguUsers(),
                                 isactive: false),
-                            Expanded(
-                              child: Container(),
-                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10, bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            dashCard(
+                                context: context,
+                                name:
+                                    "Sanitary Pad Distribution ".toUpperCase(),
+                                to: const OfficerEducation(),
+                                isactive: false),
+                            dashCard(
+                                context: context,
+                                name: "Children With Disability and autism"
+                                    .toUpperCase(),
+                                to: const MombasaNiYangu(),
+                                // to: const MombasaYanguUsers(),
+                                isactive: false),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 25.0, right: 10, bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            dashCard(
+                                context: context,
+                                name: "Elimu/Scholarship Fund  ".toUpperCase(),
+                                to: const OfficerEducation(),
+                                isactive: false),
                           ],
                         ),
                       ),
