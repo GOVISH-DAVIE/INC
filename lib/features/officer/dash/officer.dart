@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/admin/Village/village.dart';
+import 'package:cais/features/county_admin/country_dashboard/dashboard.dart';
 import 'package:cais/features/county_admin/home.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_assign_jobs.dart';
 import 'package:cais/features/county_admin/mombasa_yangu/mombasa_yangu_users.dart';
@@ -12,6 +13,7 @@ import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
+import 'package:cais/features/officer/example/modular.dart';
 import 'package:cais/features/officer/health/presentation/health.dart';
 import 'package:cais/features/officer/projects/projects.dart';
 import 'package:cais/features/officer/reports/reports.dart';
@@ -73,16 +75,6 @@ class _OfficerDashState extends State<OfficerDash> {
                       "assets/logo2.png",
                       width: 300,
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 18.0, top: 20),
-                    //   child: Text(
-                    //     "Welcome Back",
-                    //     style: Theme.of(context)
-                    //         .textTheme
-                    //         .displaySmall
-                    //         ?.copyWith(fontWeight: FontWeight.w700),
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(left: 23.0, top: 10),
                       child: SizedBox(
@@ -134,19 +126,21 @@ class _OfficerDashState extends State<OfficerDash> {
                           EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
                       child: SizedBox(),
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         dashCard(
                             context: context,
-                            name: "EDUCATION",
-                            to: const EducationDash(),
+                            name: "Admin".toUpperCase(),
+                            to: const Modular(
+                              title: "Admin",
+                              length: 4,
+                            ),
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Security".toUpperCase(),
-                            to: const ReportsOfficer(),
+                            name: "Dashboard".toUpperCase(),
+                            to: const CountyDashboard(),
                             isactive: true),
                       ],
                     ),
@@ -160,42 +154,67 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Projects ".toUpperCase(),
-                            to: const Projects(),
+                            name: "EDUCATION",
+                            to: const Modular(
+                              title: "Education",
+                              length: 4,
+                            ),
                             isactive: true),
                       ],
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         dashCard(
                             context: context,
-                            name: "Admin".toUpperCase(),
-                            to: const AdminDash(),
+                            name: "environment".toUpperCase(),
+                            to: const Modular(
+                              title: "Environment",
+                              length: 6,
+                            ),
                             isactive: true),
                         dashCard(
                             context: context,
                             name: "Health".toUpperCase(),
-                            to: const Health(),
+                            to: const Modular(
+                              title: "Health",
+                              length: 4,
+                            ),
                             isactive: true),
                       ],
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         dashCard(
                             context: context,
-                            name: "Mombasa Yangu".toUpperCase(),
-                            to: const MombasaNiYangu(),
-                            // to: const MombasaYanguUsers(),
+                            name: "Projects ".toUpperCase(),
+                            to: const Projects(),
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "environment".capitalizeFirstofEach,
-                            to: const Village(),
-                            isactive: false),
+                            name: "Relief".toUpperCase(),
+                            to: const Modular(
+                              title: "Relief",
+                              length: 5,
+                            ),
+                            isactive: true),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: dashCard(
+                              context: context,
+                              name: "Projects ".toUpperCase(),
+                              to: const Projects(),
+                              isactive: true),
+                        ),
+                        Expanded(
+                          child: Container(),
+                        )
                       ],
                     ),
                   ],

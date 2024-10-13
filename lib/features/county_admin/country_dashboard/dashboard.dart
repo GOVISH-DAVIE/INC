@@ -49,7 +49,7 @@ class _CountyDashboardState extends State<CountyDashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "County Dashboard ",
+          " Dashboard ",
           style: Theme.of(context)
               .textTheme
               .headlineMedium
@@ -60,7 +60,7 @@ class _CountyDashboardState extends State<CountyDashboard> {
         children: [
           _progress < 100
               ? LinearProgressIndicator(value: _progress / 100)
-              : SizedBox.shrink(),
+              : const SizedBox.shrink(),
           Expanded(child: WebViewWidget(controller: controller)),
         ],
       ),
