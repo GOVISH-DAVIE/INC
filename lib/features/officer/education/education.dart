@@ -111,7 +111,7 @@ class _OfficerDashState extends State<OfficerEducation> {
                       ),
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 180,
                       width: MediaQuery.of(context).size.width * .9,
                       child: Card(
                         color: const Color.fromARGB(255, 229, 227, 227),
@@ -132,13 +132,50 @@ class _OfficerDashState extends State<OfficerEducation> {
                                     .headlineSmall
                                     ?.copyWith(fontWeight: FontWeight.w700),
                               ),
+                              const Divider(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Male"),
+                                      Text(
+                                        "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element).schoolTeachers!.isEmpty) ? 0 : (element).schoolTeachers!.fold(0, (previousValue, element) => previousValue + element.male!)))}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Female"),
+                                      Text(
+                                        "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element).schoolTeachers!.isEmpty) ? 0 : (element).schoolTeachers!.fold(0, (previousValue, element) => previousValue + element.female!)))}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 180,
                       width: MediaQuery.of(context).size.width * .9,
                       child: Card(
                         color: const Color.fromARGB(255, 229, 227, 227),
@@ -159,6 +196,43 @@ class _OfficerDashState extends State<OfficerEducation> {
                                     .headlineSmall
                                     ?.copyWith(fontWeight: FontWeight.w700),
                               ),
+                              const Divider(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Male"),
+                                      Text(
+                                        "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element).schoolStudents!.isEmpty) ? 0 : (element).schoolStudents!.fold(0, (previousValue, element) => previousValue + element.male!)))}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Female"),
+                                      Text(
+                                        "${context.watch<EducationNotifier>().schools.where((element) => element.wardId == user.village?.wardId).fold<int>(0, (value, element) => value + (((element).schoolStudents!.isEmpty) ? 0 : (element).schoolStudents!.fold(0, (previousValue, element) => previousValue + element.female!)))}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
