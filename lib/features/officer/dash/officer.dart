@@ -132,10 +132,7 @@ class _OfficerDashState extends State<OfficerDash> {
                         dashCard(
                             context: context,
                             name: "Admin".toUpperCase(),
-                            to: const Modular(
-                              title: "Admin",
-                              length: 4,
-                            ),
+                            to: const AdminDash(),
                             isactive: true),
                         dashCard(
                             context: context,
@@ -155,10 +152,7 @@ class _OfficerDashState extends State<OfficerDash> {
                         dashCard(
                             context: context,
                             name: "EDUCATION",
-                            to: const Modular(
-                              title: "Education",
-                              length: 3,
-                            ),
+                            to: const EducationDash(),
                             isactive: true),
                       ],
                     ),
@@ -193,28 +187,9 @@ class _OfficerDashState extends State<OfficerDash> {
                             isactive: true),
                         dashCard(
                             context: context,
-                            name: "Relief".toUpperCase(),
-                            to: const Modular(
-                              title: "Relief",
-                              length: 5,
-                            ),
+                            name: "Security ".toUpperCase(),
+                            to: const ReportsOfficer(),
                             isactive: true),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
-                          child: dashCard(
-                              context: context,
-                              name: "Projects ".toUpperCase(),
-                              to: const Projects(),
-                              isactive: true),
-                        ),
-                        Expanded(
-                          child: Container(),
-                        )
                       ],
                     ),
                   ],

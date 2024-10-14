@@ -101,25 +101,25 @@ class _AddTeacherState extends State<AddTeacher> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    const Text(
-                                      "Other",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color: mainColor, fontSize: 17),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    FormBuilderTextField(
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      name: "other",
-                                      onChanged: (val) {
-                                        print(
-                                            val); // Print the text value write into TextField
-                                      },
-                                    ),
+                                    // const Text(
+                                    //   "Other",
+                                    //   textAlign: TextAlign.left,
+                                    //   style: TextStyle(
+                                    //       color: mainColor, fontSize: 17),
+                                    // ),
+                                    // const SizedBox(
+                                    //   height: 10,
+                                    // ),
+                                    // FormBuilderTextField(
+                                    //   decoration: const InputDecoration(
+                                    //     border: OutlineInputBorder(),
+                                    //   ),
+                                    //   name: "other",
+                                    //   onChanged: (val) {
+                                    //     print(
+                                    //         val); // Print the text value write into TextField
+                                    //   },
+                                    // ),
                                     const SizedBox(
                                       height: 20,
                                     ),
@@ -138,6 +138,7 @@ class _AddTeacherState extends State<AddTeacher> {
                                         Map.from(_formKey.currentState!.value);
                                     payload["schoolId"] = (widget.school.id);
                                     payload["teacherDesignationId"] = (2);
+                                    payload["other"] = 0;
                                     print(payload);
                                     context
                                         .read<EducationNotifier>()

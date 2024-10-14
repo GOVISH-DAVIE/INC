@@ -7,7 +7,7 @@ import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
-import 'package:cais/features/officer/reports/reports.dart';
+import 'package:cais/features/officer/example/modular.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,9 @@ class _AdminDashState extends State<AdminDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text("Admin"),
+        ),
         body: SafeArea(
           child: FutureBuilder(
               future: getData("auth"),
@@ -39,96 +41,62 @@ class _AdminDashState extends State<AdminDash> {
                   return const OfficerAuth();
                 }
 
-                AuthUserOfficerModel user =
-                    AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
                 return SingleChildScrollView(
+                    child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18.0, right: 18, top: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/logo2.png",
-                        width: 300,
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 18.0, top: 20),
-                      //   child: Text(
-                      //     "Welcome Back",
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .displaySmall
-                      //         ?.copyWith(fontWeight: FontWeight.w700),
-                      //   ),
-                      // ),
-
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 23.0, right: 30, bottom: 20),
-                        child: Divider(),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 23.0, right: 30, bottom: 20),
-                        child: Container(
-                          height: 40,
-                          width: double.infinity,
-                          padding: const EdgeInsets.only(left: 20),
-                          decoration: BoxDecoration(
-                              color: textThemeGrey.withOpacity(.1),
-                              border: Border.all(color: textThemeGrey),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.location_on_outlined),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 18.0),
-                                child: Text(
-                                  "${user.village?.name}".toUpperCase(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
+                      Card(
+                        color: mainColorCard,
+                        child: ListTile(
+                          onTap: () {
+                            context.appNavigatorPush(const Relief());
+                          },
+                          title: Text("RELIEF",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.w400)),
+                          subtitle: const Text("Manage received relief"),
                         ),
                       ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
-                        child: SizedBox(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 25.0, right: 10, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            dashCard(
-                                context: context,
-                                name: "RELIEF  ".toUpperCase(),
-                                to: const Relief(),
-                                isactive: true),
-                            dashCard(
-                                context: context,
-                                name: "CITIZEN APPLICATIONS  ".toUpperCase(),
-                                to: const Applicaitons(),
-                                isactive: true),
-                          ],
+                      Card(
+                        color: mainColorCard,
+                        child: ListTile(
+                          onTap: () {
+                            context.appNavigatorPush(const Relief());
+                          },
+                          title: Text("CITIZEN APPLICATIONS",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.w400)),
+                          subtitle: const Text(
+                              "Manage citizen applications(IDS, referals etc)"),
                         ),
                       ),
-
-                      dashCardOfficerAdmin(
-                          context: context,
-                          name: "BARAZA",
-                          to: const OfficerEducation(),
-                          isactive: false),
+                      Card(
+                        color: mainColorCard,
+                        child: ListTile(
+                          onTap: () {
+                            context.appNavigatorPush(const Modular(
+                              title: "BARAZA",
+                              length: 6,
+                            ));
+                          },
+                          title: Text("BARAZA",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.w400)),
+                          subtitle: const Text("BARAZA"),
+                        ),
+                      ),
                     ],
                   ),
-                );
+                ));
               }),
         ));
   }

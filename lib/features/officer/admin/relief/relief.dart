@@ -5,11 +5,9 @@ import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/logging_utils.dart';
 import 'package:cais/core/utilities/utilities.dart';
-import 'package:cais/features/officer/admin/applications/state/relief_notifier.dart';
 import 'package:cais/features/officer/admin/relief/relief_list.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
-import 'package:cais/features/officer/disaster/state/reports_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -80,7 +78,7 @@ class _ReliefState extends State<Relief> {
                             ),
                             FormBuilderDropdown<String>(
                               name: "type_of_relief",
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'Choose an Option',
                               ),
                               items: reliefChoices
@@ -91,13 +89,14 @@ class _ReliefState extends State<Relief> {
                                       ))
                                   .toList(),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Text(
                               "number of people given".capitalizeFirstofEach,
                               textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
+                              style: const TextStyle(
+                                  color: mainColor, fontSize: 17),
                             ),
                             FormBuilderTextField(
                               keyboardType: TextInputType.number,
@@ -176,7 +175,7 @@ class _ReliefState extends State<Relief> {
                           // initialTime: const TimeOfDay(hour: 8, minute: 0),
                           // locale: const Locale.fromSubtags(languageCode: 'fr'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         SizedBox(

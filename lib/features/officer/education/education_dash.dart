@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:cais/core/data/datasources/local_storage_data_source.dart';
+import 'package:cais/core/utilities/utilities.dart';
 import 'package:cais/features/officer/auth/login.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
 import 'package:cais/features/officer/dash/widgets/dashCards.dart';
 import 'package:cais/features/officer/education/education.dart';
+import 'package:cais/features/officer/example/modular.dart';
 import 'package:cais/features/officer/mombasa_ni_yangu/mombasa_dash.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,9 @@ class _EducationDashState extends State<EducationDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text("Education"),
+        ),
         body: SafeArea(
           child: FutureBuilder(
               future: getData("auth"),
@@ -41,110 +45,102 @@ class _EducationDashState extends State<EducationDash> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/logo2.png",
-                        width: 300,
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 18.0, top: 20),
-                      //   child: Text(
-                      //     "Welcome Back",
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .displaySmall
-                      //         ?.copyWith(fontWeight: FontWeight.w700),
-                      //   ),
-                      // ),
-
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 23.0, right: 30, bottom: 20),
-                        child: Divider(),
-                      ),
-
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 23.0, right: 30, bottom: 20),
-                        child: Container(
-                          height: 40,
-                          width: double.infinity,
-                          padding: const EdgeInsets.only(left: 20),
-                          decoration: BoxDecoration(
-                              color: textThemeGrey.withOpacity(.1),
-                              border: Border.all(color: textThemeGrey),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.location_on_outlined),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 18.0),
-                                child: Text(
-                                  "${user.village?.name}".toUpperCase(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                ),
+                            left: 18.0, right: 18, top: 20),
+                        child: Column(
+                          children: [
+                            Card(
+                              color: mainColorCard,
+                              child: ListTile(
+                                onTap: () {
+                                  context.appNavigatorPush(
+                                      const OfficerEducation());
+                                },
+                                title: Text("School Demographics",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w400)),
+                                subtitle: const Text(
+                                    "Manage students and teachers data"),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, right: 10, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            dashCard(
-                                context: context,
-                                name: "Schools".toUpperCase(),
-                                to: const OfficerEducation(),
-                                isactive: true),
-                            dashCard(
-                                context: context,
-                                name: "Feeding Programme".toUpperCase(),
-                                to: const MombasaNiYangu(),
-                                // to: const MombasaYanguUsers(),
-                                isactive: false),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, right: 10, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            dashCard(
-                                context: context,
-                                name:
-                                    "Sanitary Pad Distribution ".toUpperCase(),
-                                to: const OfficerEducation(),
-                                isactive: false),
-                            dashCard(
-                                context: context,
-                                name: "Children With Disability and autism"
-                                    .toUpperCase(),
-                                to: const MombasaNiYangu(),
-                                // to: const MombasaYanguUsers(),
-                                isactive: false),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 25.0, right: 10, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            dashCard(
-                                context: context,
-                                name: "Elimu/Scholarship Fund  ".toUpperCase(),
-                                to: const OfficerEducation(),
-                                isactive: false),
+                            ),
+                            Card(
+                              color: mainColorCard,
+                              child: ListTile(
+                                onTap: () {
+                                  context.appNavigatorPush(const Modular(
+                                    title:
+                                        "Children With Disability and autism",
+                                    length: 6,
+                                  ));
+                                },
+                                title: Text(
+                                    "Children With Disability and autism",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w400)),
+                                subtitle: const Text(""),
+                              ),
+                            ),
+                            Card(
+                              color: mainColorCard,
+                              child: ListTile(
+                                onTap: () {
+                                  context.appNavigatorPush(const Modular(
+                                    title: "Elimu/Scholarship Fund ",
+                                    length: 4,
+                                  ));
+                                },
+                                title: Text("Elimu/Scholarship Fund ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w400)),
+                                subtitle: const Text(""),
+                              ),
+                            ),
+                            Card(
+                              color: mainColorCard,
+                              child: ListTile(
+                                onTap: () {
+                                  context.appNavigatorPush(const Modular(
+                                    title: "Feeding Programme",
+                                    length: 4,
+                                  ));
+                                },
+                                title: Text("Feeding Programme",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w400)),
+                                subtitle: const Text(""),
+                              ),
+                            ),
+                            Card(
+                              color: mainColorCard,
+                              child: ListTile(
+                                onTap: () {
+                                  context.appNavigatorPush(const Modular(
+                                    title: "Sanitary Pad Distribution",
+                                    length: 4,
+                                  ));
+                                },
+                                title: Text("Sanitary Pad Distribution",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w400)),
+                                subtitle: const Text(""),
+                              ),
+                            ),
                           ],
                         ),
                       ),
