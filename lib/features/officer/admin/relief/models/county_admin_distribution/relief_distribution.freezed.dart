@@ -30,10 +30,6 @@ mixin _$ReliefDistribution {
   @JsonKey(name: 'relief_date')
   String? get reliefDate => throw _privateConstructorUsedError;
   int? get villageId => throw _privateConstructorUsedError;
-  Area? get area => throw _privateConstructorUsedError;
-  @JsonKey(name: 'DistributionRecipients')
-  List<DistributionRecipient>? get distributionRecipients =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,12 +49,7 @@ abstract class $ReliefDistributionCopyWith<$Res> {
       @JsonKey(name: 'quantity_distributed') String? quantityDistributed,
       @JsonKey(name: 'number_of_people_given') String? numberOfPeopleGiven,
       @JsonKey(name: 'relief_date') String? reliefDate,
-      int? villageId,
-      Area? area,
-      @JsonKey(name: 'DistributionRecipients')
-      List<DistributionRecipient>? distributionRecipients});
-
-  $AreaCopyWith<$Res>? get area;
+      int? villageId});
 }
 
 /// @nodoc
@@ -80,8 +71,6 @@ class _$ReliefDistributionCopyWithImpl<$Res, $Val extends ReliefDistribution>
     Object? numberOfPeopleGiven = freezed,
     Object? reliefDate = freezed,
     Object? villageId = freezed,
-    Object? area = freezed,
-    Object? distributionRecipients = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -108,27 +97,7 @@ class _$ReliefDistributionCopyWithImpl<$Res, $Val extends ReliefDistribution>
           ? _value.villageId
           : villageId // ignore: cast_nullable_to_non_nullable
               as int?,
-      area: freezed == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      distributionRecipients: freezed == distributionRecipients
-          ? _value.distributionRecipients
-          : distributionRecipients // ignore: cast_nullable_to_non_nullable
-              as List<DistributionRecipient>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AreaCopyWith<$Res>? get area {
-    if (_value.area == null) {
-      return null;
-    }
-
-    return $AreaCopyWith<$Res>(_value.area!, (value) {
-      return _then(_value.copyWith(area: value) as $Val);
-    });
   }
 }
 
@@ -146,13 +115,7 @@ abstract class _$$ReliefDistributionImplCopyWith<$Res>
       @JsonKey(name: 'quantity_distributed') String? quantityDistributed,
       @JsonKey(name: 'number_of_people_given') String? numberOfPeopleGiven,
       @JsonKey(name: 'relief_date') String? reliefDate,
-      int? villageId,
-      Area? area,
-      @JsonKey(name: 'DistributionRecipients')
-      List<DistributionRecipient>? distributionRecipients});
-
-  @override
-  $AreaCopyWith<$Res>? get area;
+      int? villageId});
 }
 
 /// @nodoc
@@ -172,8 +135,6 @@ class __$$ReliefDistributionImplCopyWithImpl<$Res>
     Object? numberOfPeopleGiven = freezed,
     Object? reliefDate = freezed,
     Object? villageId = freezed,
-    Object? area = freezed,
-    Object? distributionRecipients = freezed,
   }) {
     return _then(_$ReliefDistributionImpl(
       id: freezed == id
@@ -200,14 +161,6 @@ class __$$ReliefDistributionImplCopyWithImpl<$Res>
           ? _value.villageId
           : villageId // ignore: cast_nullable_to_non_nullable
               as int?,
-      area: freezed == area
-          ? _value.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      distributionRecipients: freezed == distributionRecipients
-          ? _value._distributionRecipients
-          : distributionRecipients // ignore: cast_nullable_to_non_nullable
-              as List<DistributionRecipient>?,
     ));
   }
 }
@@ -221,11 +174,7 @@ class _$ReliefDistributionImpl implements _ReliefDistribution {
       @JsonKey(name: 'quantity_distributed') this.quantityDistributed,
       @JsonKey(name: 'number_of_people_given') this.numberOfPeopleGiven,
       @JsonKey(name: 'relief_date') this.reliefDate,
-      this.villageId,
-      this.area,
-      @JsonKey(name: 'DistributionRecipients')
-      final List<DistributionRecipient>? distributionRecipients})
-      : _distributionRecipients = distributionRecipients;
+      this.villageId});
 
   factory _$ReliefDistributionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReliefDistributionImplFromJson(json);
@@ -246,23 +195,10 @@ class _$ReliefDistributionImpl implements _ReliefDistribution {
   final String? reliefDate;
   @override
   final int? villageId;
-  @override
-  final Area? area;
-  final List<DistributionRecipient>? _distributionRecipients;
-  @override
-  @JsonKey(name: 'DistributionRecipients')
-  List<DistributionRecipient>? get distributionRecipients {
-    final value = _distributionRecipients;
-    if (value == null) return null;
-    if (_distributionRecipients is EqualUnmodifiableListView)
-      return _distributionRecipients;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'ReliefDistribution(id: $id, typeOfRelief: $typeOfRelief, quantityDistributed: $quantityDistributed, numberOfPeopleGiven: $numberOfPeopleGiven, reliefDate: $reliefDate, villageId: $villageId, area: $area, distributionRecipients: $distributionRecipients)';
+    return 'ReliefDistribution(id: $id, typeOfRelief: $typeOfRelief, quantityDistributed: $quantityDistributed, numberOfPeopleGiven: $numberOfPeopleGiven, reliefDate: $reliefDate, villageId: $villageId)';
   }
 
   @override
@@ -280,24 +216,13 @@ class _$ReliefDistributionImpl implements _ReliefDistribution {
             (identical(other.reliefDate, reliefDate) ||
                 other.reliefDate == reliefDate) &&
             (identical(other.villageId, villageId) ||
-                other.villageId == villageId) &&
-            (identical(other.area, area) || other.area == area) &&
-            const DeepCollectionEquality().equals(
-                other._distributionRecipients, _distributionRecipients));
+                other.villageId == villageId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      typeOfRelief,
-      quantityDistributed,
-      numberOfPeopleGiven,
-      reliefDate,
-      villageId,
-      area,
-      const DeepCollectionEquality().hash(_distributionRecipients));
+  int get hashCode => Object.hash(runtimeType, id, typeOfRelief,
+      quantityDistributed, numberOfPeopleGiven, reliefDate, villageId);
 
   @JsonKey(ignore: true)
   @override
@@ -322,11 +247,7 @@ abstract class _ReliefDistribution implements ReliefDistribution {
       @JsonKey(name: 'number_of_people_given')
       final String? numberOfPeopleGiven,
       @JsonKey(name: 'relief_date') final String? reliefDate,
-      final int? villageId,
-      final Area? area,
-      @JsonKey(name: 'DistributionRecipients')
-      final List<DistributionRecipient>?
-          distributionRecipients}) = _$ReliefDistributionImpl;
+      final int? villageId}) = _$ReliefDistributionImpl;
 
   factory _ReliefDistribution.fromJson(Map<String, dynamic> json) =
       _$ReliefDistributionImpl.fromJson;
@@ -347,11 +268,6 @@ abstract class _ReliefDistribution implements ReliefDistribution {
   String? get reliefDate;
   @override
   int? get villageId;
-  @override
-  Area? get area;
-  @override
-  @JsonKey(name: 'DistributionRecipients')
-  List<DistributionRecipient>? get distributionRecipients;
   @override
   @JsonKey(ignore: true)
   _$$ReliefDistributionImplCopyWith<_$ReliefDistributionImpl> get copyWith =>

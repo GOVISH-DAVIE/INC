@@ -1,3 +1,4 @@
+import 'package:cais/core/platform/app_cards.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _ReliefListState extends State<ReliefList> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Divider(),
+                          const Divider(),
                           Text.rich(
                             TextSpan(children: [
                               TextSpan(
@@ -67,11 +68,32 @@ class _ReliefListState extends State<ReliefList> {
                                       .headlineSmall
                                       ?.copyWith(fontSize: 18)),
                               TextSpan(
-                                  text: "${e.relief_date ?? "-"}",
+                                  text: e.reliefDate ?? "-",
                                   style:
                                       Theme.of(context).textTheme.headlineSmall)
                             ]),
                           ),
+                          if (e.distributionRecipients!.isNotEmpty)
+                            ExpansionTile(
+                              title: const Text("Recpients"),
+                              children: [
+                                ...e.distributionRecipients!.first.recipients!
+                                    .keys
+                                    .map(
+                                  (ef) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      if (ef != "type_of_relief")
+                                        Text(
+                                          "${e.distributionRecipients!.first.recipients![ef]}",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                         ],
                       ),
                     ),

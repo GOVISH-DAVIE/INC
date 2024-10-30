@@ -6,11 +6,41 @@ import 'package:cais/features/officer/admin/relief/models/relief_distribution/re
 import 'package:cais/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../models/county_admin_distribution/county_admin_distribution.dart';
+
 class ReliefNotifier extends ChangeNotifier {
   bool _isBusy = false;
   bool get isBusy => _isBusy;
   List<ReliefDistribution> _relief = [];
   List<ReliefDistribution> get relief => _relief;
+  List<CountyAdminDistribution> _countyAdminDistributionModel = [];
+  List<CountyAdminDistribution> get countyAdminDistributionModel =>
+      _countyAdminDistributionModel;
+
+  Future getstoreData() async {
+    _isBusy = true;
+    notifyListeners();
+    final response = await intercepted_client
+        .get(Uri.parse('${SERVERURL}county_admin/distribution'));
+    if (response.statusCode == 200) {
+      _countyAdminDistributionModel =
+          (jsonDecode(response.body)['data'] as List)
+              .map((e) => CountyAdminDistribution.fromJson(e))
+              .toList();
+
+      _isBusy = false;
+      notifyListeners();
+
+      //  _reportsCategoryModel   .sort((a, b) => a.name!
+      //           .toLowerCase()
+      //           .compareTo(b.name!.toLowerCase()));
+      notifyListeners();
+    } else {
+      _isBusy = false;
+      notifyListeners();
+      throw Exception('Failed to load Disaster');
+    }
+  }
 
   Future getDistributions() async {
     _isBusy = true;
@@ -38,7 +68,9 @@ class ReliefNotifier extends ChangeNotifier {
     }
   }
 
-  Future createApplications({required Map payload}) async {
+  Future createApplications({
+    required Map payload,
+  }) async {
     _isBusy = true;
     notifyListeners();
 
@@ -57,7 +89,8 @@ class ReliefNotifier extends ChangeNotifier {
     }
   }
 
-  Future createRelief({required Map payload}) async {
+  Future createRelief({required Map payload, required Map recipients}) async {
+    payload["recipients"] = (recipients);
     _isBusy = true;
     notifyListeners();
 

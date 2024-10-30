@@ -54,7 +54,7 @@ class _AdminDashState extends State<AdminDash> {
                           onTap: () {
                             context.appNavigatorPush(const Relief());
                           },
-                          title: Text("RELIEF",
+                          title: Text("Relief",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
@@ -68,30 +68,16 @@ class _AdminDashState extends State<AdminDash> {
                           onTap: () {
                             context.appNavigatorPush(const Relief());
                           },
-                          title: Text("CITIZEN APPLICATIONS",
+                          title: Text(
+                              "Citizen Applications"
+                                  .toLowerCase()
+                                  .capitalizeFirstofEach,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
                                   ?.copyWith(fontWeight: FontWeight.w400)),
                           subtitle: const Text(
                               "Manage citizen applications(IDS, referals etc)"),
-                        ),
-                      ),
-                      Card(
-                        color: mainColorCard,
-                        child: ListTile(
-                          onTap: () {
-                            context.appNavigatorPush(const Modular(
-                              title: "BARAZA",
-                              length: 6,
-                            ));
-                          },
-                          title: Text("BARAZA",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(fontWeight: FontWeight.w400)),
-                          subtitle: const Text("BARAZA"),
                         ),
                       ),
                     ],

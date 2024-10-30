@@ -15,13 +15,6 @@ _$ReliefDistributionImpl _$$ReliefDistributionImplFromJson(
       numberOfPeopleGiven: json['number_of_people_given'] as String?,
       reliefDate: json['relief_date'] as String?,
       villageId: (json['villageId'] as num?)?.toInt(),
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(json['area'] as Map<String, dynamic>),
-      distributionRecipients: (json['DistributionRecipients'] as List<dynamic>?)
-          ?.map(
-              (e) => DistributionRecipient.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
 Map<String, dynamic> _$$ReliefDistributionImplToJson(
@@ -33,6 +26,4 @@ Map<String, dynamic> _$$ReliefDistributionImplToJson(
       'number_of_people_given': instance.numberOfPeopleGiven,
       'relief_date': instance.reliefDate,
       'villageId': instance.villageId,
-      'area': instance.area,
-      'DistributionRecipients': instance.distributionRecipients,
     };

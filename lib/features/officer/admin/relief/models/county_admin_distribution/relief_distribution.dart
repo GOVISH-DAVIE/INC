@@ -1,8 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'area.dart';
-import 'distribution_recipient.dart';
-
 part 'relief_distribution.freezed.dart';
 part 'relief_distribution.g.dart';
 
@@ -15,9 +12,6 @@ class ReliefDistribution with _$ReliefDistribution {
     @JsonKey(name: 'number_of_people_given') String? numberOfPeopleGiven,
     @JsonKey(name: 'relief_date') String? reliefDate,
     int? villageId,
-    Area? area,
-    @JsonKey(name: 'DistributionRecipients')
-    List<DistributionRecipient>? distributionRecipients,
   }) = _ReliefDistribution;
 
   factory ReliefDistribution.fromJson(Map<String, dynamic> json) =>

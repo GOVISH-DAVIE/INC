@@ -5,6 +5,7 @@ import 'package:cais/core/data/datasources/local_storage_data_source.dart';
 import 'package:cais/core/utilities/app_common_extentions.dart';
 import 'package:cais/core/utilities/logging_utils.dart';
 import 'package:cais/core/utilities/utilities.dart';
+import 'package:cais/features/officer/admin/relief/relief_form.dart';
 import 'package:cais/features/officer/admin/relief/relief_list.dart';
 import 'package:cais/features/officer/admin/relief/state/relief_notifier.dart';
 import 'package:cais/features/officer/auth/model/auth_user_officer_model/auth_user_officer_model.dart';
@@ -24,6 +25,13 @@ class Relief extends StatefulWidget {
 class _ReliefState extends State<Relief> {
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   final _formKey = GlobalKey<FormBuilderState>();
+
+  @override
+  void initState() {
+    context.read<ReliefNotifier>().getstoreData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,188 +54,248 @@ class _ReliefState extends State<Relief> {
                 icon: const Icon(Icons.list))
           ],
         ),
-        body: FutureBuilder(
-            future: getData("auth"),
-            builder: (context, snap) {
-              if (snap.hasError) {
-                return Text("${snap.error}");
-              }
-              AuthUserOfficerModel user =
-                  AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
+        body: context.watch<ReliefNotifier>().isBusy
+            ? const Center(child: CircularProgressIndicator())
+            : FutureBuilder(
+                future: getData("auth"),
+                builder: (context, snap) {
+                  if (snap.hasError) {
+                    return Text("${snap.error}");
+                  }
+                  AuthUserOfficerModel user =
+                      AuthUserOfficerModel.fromJson(jsonDecode(snap.data!));
 
-              return Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 10, right: 20),
-                child: FormBuilder(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Divider(),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Column(
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, top: 10, right: 20),
+                    child: FormBuilder(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Type of Relief",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderDropdown<String>(
-                              name: "type_of_relief",
-                              decoration: const InputDecoration(
-                                hintText: 'Choose an Option',
-                              ),
-                              items: reliefChoices
-                                  .map((gender) => DropdownMenuItem(
-                                        alignment: AlignmentDirectional.center,
-                                        value: gender,
-                                        child: Text(gender),
-                                      ))
-                                  .toList(),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "number of people given".capitalizeFirstofEach,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                  color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderTextField(
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: "number_of_people_given",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              "Quantity Distributed",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: mainColor, fontSize: 17),
-                            ),
-                            FormBuilderTextField(
-                              // keyboardType: TextInputType.,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                              name: "quantity_distributed",
-                              onChanged: (val) {
-                                print(
-                                    val); // Print the text value write into TextField
-                              },
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                          children: <Widget>[
+                            ...context
+                                .watch<ReliefNotifier>()
+                                .countyAdminDistributionModel
+                                .where((element) =>
+                                    element.wardId == user.village!.wardId)
+                                .map((e) => Card(
+                                      child: ListTile(
+                                        // contentPadding: EdgeInsets.only(top: ),
+                                        onTap: () {
+                                          context.appNavigatorPush(ReliefForm(
+                                            reliefType: e.reliefType!,
+                                          ));
+                                        },
+                                        title: Text(
+                                          "${e.reliefType}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w400),
+                                        ),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            if (e.ward!.village!
+                                                .firstWhere((village) =>
+                                                    village.id ==
+                                                    user.villageId)
+                                                .reliefDistribution!
+                                                .isEmpty)
+                                              Text(
+                                                  ("Quantity in store: \t${e.quantity! - 0}")),
+                                            if (e.ward!.village!
+                                                .firstWhere((village) =>
+                                                    village.id ==
+                                                    user.villageId)
+                                                .reliefDistribution!
+                                                .isNotEmpty)
+                                              Text(
+                                                  ("Quantity in store: \t${e.quantity! - e.ward!.village!.firstWhere((village) => village.id == user.villageId).reliefDistribution!.map((relief) => int.parse(relief.quantityDistributed!)).reduce((sum, quantity) => sum + quantity)}")),
+                                            if (e.ward!.village!
+                                                .firstWhere((village) =>
+                                                    village.id ==
+                                                    user.villageId)
+                                                .reliefDistribution!
+                                                .isNotEmpty)
+                                              Text(
+                                                  ("Quantity in Distributed: \t${e.ward!.village!.firstWhere((village) => village.id == user.villageId).reliefDistribution!.map((relief) => int.parse(relief.quantityDistributed!)).reduce((sum, quantity) => sum + quantity)}")),
+                                          ],
+                                        ),
+                                      ),
+                                    )),
+                            // const Divider(),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // Column(
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   children: [
+                            //     const Text(
+                            //       "Type of Relief",
+                            //       textAlign: TextAlign.left,
+                            //       style:
+                            //           TextStyle(color: mainColor, fontSize: 17),
+                            //     ),
+                            //     FormBuilderDropdown<String>(
+                            //       name: "type_of_relief",
+                            //       decoration: const InputDecoration(
+                            //         hintText: 'Choose an Option',
+                            //       ),
+                            //       items: reliefChoices
+                            //           .map((gender) => DropdownMenuItem(
+                            //                 alignment:
+                            //                     AlignmentDirectional.center,
+                            //                 value: gender,
+                            //                 child: Text(gender),
+                            //               ))
+                            //           .toList(),
+                            //     ),
+                            //     const SizedBox(
+                            //       height: 20,
+                            //     ),
+                            //     Text(
+                            //       "number of people given"
+                            //           .capitalizeFirstofEach,
+                            //       textAlign: TextAlign.left,
+                            //       style: const TextStyle(
+                            //           color: mainColor, fontSize: 17),
+                            //     ),
+                            //     FormBuilderTextField(
+                            //       keyboardType: TextInputType.number,
+                            //       decoration: const InputDecoration(
+                            //         border: OutlineInputBorder(),
+                            //       ),
+                            //       name: "number_of_people_given",
+                            //       onChanged: (val) {
+                            //         print(
+                            //             val); // Print the text value write into TextField
+                            //       },
+                            //     ),
+                            //     const SizedBox(
+                            //       height: 20,
+                            //     ),
+                            //     const Text(
+                            //       "Quantity Distributed",
+                            //       textAlign: TextAlign.left,
+                            //       style:
+                            //           TextStyle(color: mainColor, fontSize: 17),
+                            //     ),
+                            //     FormBuilderTextField(
+                            //       // keyboardType: TextInputType.,
+                            //       decoration: const InputDecoration(
+                            //         border: OutlineInputBorder(),
+                            //       ),
+                            //       name: "quantity_distributed",
+                            //       onChanged: (val) {
+                            //         print(
+                            //             val); // Print the text value write into TextField
+                            //       },
+                            //     ),
+                            //     const SizedBox(
+                            //       height: 20,
+                            //     ),
+                            //   ],
+                            // ),
+                            // FormBuilderDateTimePicker(
+                            //   name: "relief_date",
+                            //   format: dateFormat,
+                            //   lastDate: DateTime.now(),
+
+                            //   // controller: dateFormat,
+
+                            //   valueTransformer: (value) {
+                            //     if (value == null) {
+                            //       return null;
+                            //     } else {
+                            //       return DateFormat('yyyy-MM-dd').format(value);
+                            //     }
+                            //   },
+                            //   initialEntryMode: DatePickerEntryMode.calendar,
+                            //   // initialValue: DateTime.now(),
+                            //   inputType: InputType.date,
+
+                            //   onChanged: (value) {
+                            //     if (value == null) {
+                            //       return;
+                            //     }
+                            //     // value?.toIso8601String();
+                            //     String string = dateFormat.format(value);
+                            //   },
+                            //   // controller: string,
+                            //   decoration: InputDecoration(
+                            //     border: const OutlineInputBorder(),
+                            //     suffixIcon: IconButton(
+                            //       icon: const Icon(Icons.close),
+                            //       onPressed: () {
+                            //         // print(_formKey
+                            //         //     .currentState!.value);
+                            //         // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
+                            //         _formKey.currentState!.fields["start_date"]
+                            //             ?.didChange(null);
+                            //       },
+                            //     ),
+                            //   ),
+                            //   // initialTime: const TimeOfDay(hour: 8, minute: 0),
+                            //   // locale: const Locale.fromSubtags(languageCode: 'fr'),
+                            // ),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            // SizedBox(
+                            //   height: 50,
+                            //   width: double.infinity,
+                            //   child: ElevatedButton(
+                            //     onPressed: () {
+                            //       // Validate and save the form values
+                            //       _formKey.currentState?.saveAndValidate();
+                            //       debugPrint(
+                            //           _formKey.currentState?.value.toString());
+
+                            //       // On another side, can access all field values without saving form with instantValues
+                            //       _formKey.currentState?.validate();
+                            //       var payload =
+                            //           Map.from(_formKey.currentState!.value);
+                            //       payload["area"] = (user.villageId);
+                            //       context
+                            //           .read<ReliefNotifier>()
+                            //           .createRelief(
+                            //             payload: payload,
+                            //           )
+                            //           .then((value) {
+                            //         _formKey.currentState?.reset();
+                            //         Navigator.of(context).pop();
+                            //         context.showCustomSnackBar(
+                            //             "Disaster Reported successfully");
+
+                            //         // Navigator.of(widget.cxn).pop();
+                            //       }).catchError((onError) {
+                            //         logger.wtf(onError);
+                            //         context.showCustomSnackBar(
+                            //             "[Relief Distribution] An Error Occured",
+                            //             isError: true);
+                            //       });
+                            //     },
+                            //     child: context.watch<ReliefNotifier>().isBusy
+                            //         ? const CircularProgressIndicator(
+                            //             color: white,
+                            //           )
+                            //         : const Text(
+                            //             'Submit',
+                            //             style: TextStyle(
+                            //                 color: white, fontSize: 30),
+                            //           ),
+                            //   ),
+                            // )
                           ],
                         ),
-                        FormBuilderDateTimePicker(
-                          name: "relief_date",
-                          format: dateFormat,
-                          lastDate: DateTime.now(),
-
-                          // controller: dateFormat,
-
-                          valueTransformer: (value) {
-                            if (value == null) {
-                              return null;
-                            } else {
-                              return DateFormat('yyyy-MM-dd').format(value);
-                            }
-                          },
-                          initialEntryMode: DatePickerEntryMode.calendar,
-                          // initialValue: DateTime.now(),
-                          inputType: InputType.date,
-
-                          onChanged: (value) {
-                            if (value == null) {
-                              return;
-                            }
-                            // value?.toIso8601String();
-                            String string = dateFormat.format(value);
-                          },
-                          // controller: string,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () {
-                                // print(_formKey
-                                //     .currentState!.value);
-                                // return DateTimeField.convert(await _showTimePicker(context, currentValue) ?? TimeOfDay.fromDateTime(currentValue));
-                                _formKey.currentState!.fields["start_date"]
-                                    ?.didChange(null);
-                              },
-                            ),
-                          ),
-                          // initialTime: const TimeOfDay(hour: 8, minute: 0),
-                          // locale: const Locale.fromSubtags(languageCode: 'fr'),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Validate and save the form values
-                              _formKey.currentState?.saveAndValidate();
-                              debugPrint(
-                                  _formKey.currentState?.value.toString());
-
-                              // On another side, can access all field values without saving form with instantValues
-                              _formKey.currentState?.validate();
-                              var payload =
-                                  Map.from(_formKey.currentState!.value);
-                              payload["area"] = (user.villageId);
-                              context
-                                  .read<ReliefNotifier>()
-                                  .createRelief(
-                                    payload: payload,
-                                  )
-                                  .then((value) {
-                                _formKey.currentState?.reset();
-                                Navigator.of(context).pop();
-                                context.showCustomSnackBar(
-                                    "Disaster Reported successfully");
-
-                                // Navigator.of(widget.cxn).pop();
-                              }).catchError((onError) {
-                                logger.wtf(onError);
-                                context.showCustomSnackBar(
-                                    "[Relief Distribution] An Error Occured",
-                                    isError: true);
-                              });
-                            },
-                            child: context.watch<ReliefNotifier>().isBusy
-                                ? const CircularProgressIndicator(
-                                    color: white,
-                                  )
-                                : const Text(
-                                    'Submit',
-                                    style:
-                                        TextStyle(color: white, fontSize: 30),
-                                  ),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }));
+                  );
+                }));
   }
 }
